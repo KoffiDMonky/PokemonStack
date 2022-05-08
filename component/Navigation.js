@@ -3,7 +3,7 @@ import Pokematos from "./component/Pokematos";
 import IdCard from "./component/IdCard";
 import Carte from "./component/Carte";
 
-import { StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -13,7 +13,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function App() {
+function Navigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -33,30 +33,18 @@ function App() {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "black",
+          tabBarActiveTintColor: "white",
           tabBarInactiveTintColor: "darkred",
         })}
       >
-        <Tab.Screen
-          name="Pokedex"
-          children={() => <ListePokemon />}
-          options={{ headerShown: false }}
-        />
+        <Tab.Screen name="Pokedex" children={() => <ListePokemon />} />
         <Tab.Screen
           name="Pokematos"
           children={() => <Pokematos />}
-          options={{ tabBarBadge: "!", headerShown: false }}
+          options={{ tabBarBadge: "!" }}
         />
-        <Tab.Screen
-          name="Carte de dresseur"
-          children={() => <IdCard />}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="Carte"
-          children={() => <Carte />}
-          options={{ headerShown: false }}
-        />
+        <Tab.Screen name="Carte de dresseur" children={() => <IdCard />} />
+        <Tab.Screen name="Carte" children={() => <Carte />} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -64,4 +52,4 @@ function App() {
 
 const styles = StyleSheet.create({});
 
-export default App;
+export default Navigation;
