@@ -18,6 +18,7 @@ function ListePokemon() {
   let tableauFin = [];
   const [affichePokemon, setAffichePokemon] = useState(false);
   const [listePokemon, setListePokemon] = useState([]);
+  const [selectedId, setSelectedId] = useState();
   const [isLoading, setLoading] = useState(true);
 
   //Méthode permettant de récupérer la liste des +1000 pokémons
@@ -43,17 +44,19 @@ function ListePokemon() {
     let url = pokemon.url;
     let nameP = pokemon.name;
 
+    //Récupération des détails d'un pokémon pour la fiche Pokémon: identifiant, image, type, poids, taille, abilités et stats
     await fetch(url)
       .then(res => res.json())
       .then(pokeData => {
         objPokemonFull.id = pokeData.id;
         objPokemonFull.pic = pokeData.sprites.front_default;
         objPokemonFull.types = pokeData.types[0].type;
-        objPokemonFull.weight = pokeData.weight;
-        objPokemonFull.height = pokeData.height;
+        objPokemonFull.weight = Math.round(pokeData.weight * 0.1 * 100) / 100;
+        objPokemonFull.height = Math.round(pokeData.height * 0.1 * 100) / 100;
         objPokemonFull.abilities = pokeData.abilities;
         objPokemonFull.stats = pokeData.stats;
 
+        //Récupération des détails d'un pokémon pour la fiche Pokémon traduit en français: nom et description
         fetch(`https://pokeapi.co/api/v2/pokemon-species/${nameP}`)
           .then(res => res.json())
           .then(pokeDataFr => {
@@ -77,7 +80,6 @@ function ListePokemon() {
               'There has been a problem with your fetch operation: ' +
                 error.message,
             );
-            // ADD THIS THROW error
             throw error;
           });
       })
@@ -86,7 +88,6 @@ function ListePokemon() {
           'There has been a problem with your fetch operation: ' +
             error.message,
         );
-        // ADD THIS THROW error
         throw error;
       });
   };
@@ -95,10 +96,13 @@ function ListePokemon() {
     getPokemons();
   }, []);
 
+  // console.log(listePokemon[selectedId]);
+
   if (affichePokemon == true) {
     return (
       <>
         <FichePokemon
+          pokemon={listePokemon[selectedId - 1]}
           affichePokemon={affichePokemon}
           setAffichePokemon={setAffichePokemon}
         />
@@ -108,6 +112,12 @@ function ListePokemon() {
     return (
       <View style={styles.background}>
         <StatusBar />
+        <View style={styles.topTitle}>
+          <Image
+            style={styles.logo}
+            source={require('../assets/logopokeball.png')}></Image>
+          <Text style={styles.nameSection}> Pokestack</Text>
+        </View>
         <FlatList
           style={styles.flatlist}
           numColumns={2}
@@ -119,6 +129,7 @@ function ListePokemon() {
               img={item.pic}
               type={item.types}
               affichePokemon={affichePokemon}
+              setSelectedId={setSelectedId}
               setAffichePokemon={setAffichePokemon}
             />
           )}
@@ -141,9 +152,19 @@ const styles = StyleSheet.create({
     color: '#20232a',
     margin: 5,
     height: 200,
-    // borderColor: '#F57D31',
     borderWidth: 2,
     borderRadius: 15,
+  },
+  topTitle: {
+    flexDirection: 'row',
+    height: '10%',
+    alignItems: 'center'
+  },
+  logo: {
+    resizeMode: 'contain',
+    height: '80%',
+    width: '20%',
+    marginLeft: 20
   },
 
   head: {
@@ -154,21 +175,16 @@ const styles = StyleSheet.create({
 
   body: {
     flex: 3,
-    //position: "absolute",
-    // flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  buttom: {
-    flex: 1.5,
-    // backgroundColor: '#F57D31',
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  nameSection: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#212121',
 
+  },
   title: {
     fontSize: 20,
     color: 'white',
@@ -183,33 +199,7 @@ const styles = StyleSheet.create({
     height: '95%',
     width: '95%',
     resizeMode: 'contain',
-    //alignSelf: "center",
   },
-
-  //TYPE COLOR
-
-  grass: {
-    backgroundColor: '#74CB48',
-  },
-  fire: {
-    backgroundColor: '#F57D31',
-  },
-  water: {
-    backgroundColor: '#6493EB',
-  },
-  //FICHE POKEMON
-  info: {
-    flex: 6,
-    flexDirection: 'column',
-    paddingLeft: 10,
-  },
-
-  image: {
-    flex: 4,
-    alignContent: 'center',
-  },
-
-  topButton: {},
 });
 
 export default ListePokemon;

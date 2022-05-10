@@ -5,6 +5,7 @@ function Item(props) {
 
   const affichePokemon = props.affichePokemon;
   const setAffichePokemon = props.setAffichePokemon;
+  const setSelectedId = props.setSelectedId;
 
   const id = props.id;
   const nom = props.nom;
@@ -36,12 +37,19 @@ function Item(props) {
 
   const color = typesColor[type.name];
 
+
+
+//   const showSpecificPokemon = () => {
+//     setAffichePokemon(!affichePokemon)
+//     // setSelectedId(id);
+// }
+
   return (
     <TouchableOpacity
       style={[styles.card, {borderColor: color}]}
-      onPress={() => setAffichePokemon(!affichePokemon)}>
+      onPress={() => {setSelectedId(id); setAffichePokemon(!affichePokemon)} }>
       <View style={styles.head}>
-        <Text style={styles.num}># {id}</Text>
+        <Text style={[styles.num, {color: color}]}>#{id}</Text>
       </View>
       <View style={styles.body}>
         {/* <Text>{type}</Text> */}
@@ -62,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F6',
     color: '#20232a',
     margin: 5,
-    height: 200,
+    height: 170,
     // borderColor: '#F57D31',
     borderWidth: 2,
     borderRadius: 15,
@@ -98,8 +106,7 @@ const styles = StyleSheet.create({
   },
 
   num: {
-    fontSize: 20,
-    color: 'black',
+    fontSize: 20
   },
   imgList: {
     height: '95%',
