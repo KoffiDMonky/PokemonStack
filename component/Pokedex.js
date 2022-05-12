@@ -14,17 +14,16 @@ import Item from './item';
 import FichePokemon from './FichePokemon';
 
 function ListePokemon() {
-  let allPokemon = [];
-  let tableauFin = [];
-  const [affichePokemon, setAffichePokemon] = useState(false);
-  const [listePokemon, setListePokemon] = useState([]);
-  const [selectedId, setSelectedId] = useState();
-  const [isLoading, setLoading] = useState(true);
+  let allPokemon = []; //Tableau dans lequel nous allons stocker nos 151 pokémons
+  const [affichePokemon, setAffichePokemon] = useState(false); //Variable d'état permettant d'afficher ou non la fiche d'un pokemon
+  const [listePokemon, setListePokemon] = useState([]); //Variable d'état contenant notre liste de pokémon
+  const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant du pokémon sélectionner pour afficher les bonnes données dans la fiche
+  const [isLoading, setLoading] = useState(true); //Variable d'état permettant de définir si la liste de pokémon est chargé pour l'afficher
 
   //Méthode permettant de récupérer la liste des +1000 pokémons
   const getPokemons = async () => {
     try {
-      await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+      await fetch('https://pokeapi.co/api/v2/pokemon?limit=151') //Appel des 151 pokémons sur PokeAPI
         .then(res => res.json())
         .then(allPoke => {
           allPoke.results.forEach(pokemon => {
@@ -45,7 +44,7 @@ function ListePokemon() {
     let nameP = pokemon.name;
 
     //Récupération des détails d'un pokémon pour la fiche Pokémon: identifiant, image, type, poids, taille, abilités et stats
-    await fetch(url)
+    await fetch(url) //Appel à PokeAPI pour récupérer les détails de chaque pokémon
       .then(res => res.json())
       .then(pokeData => {
         objPokemonFull.id = pokeData.id;
@@ -57,7 +56,7 @@ function ListePokemon() {
         objPokemonFull.stats = pokeData.stats;
 
         //Récupération des détails d'un pokémon pour la fiche Pokémon traduit en français: nom et description
-        fetch(`https://pokeapi.co/api/v2/pokemon-species/${nameP}`)
+        fetch(`https://pokeapi.co/api/v2/pokemon-species/${nameP}`) 
           .then(res => res.json())
           .then(pokeDataFr => {
             objPokemonFull.name = pokeDataFr.names[4].name;
@@ -68,11 +67,11 @@ function ListePokemon() {
 
             if (allPokemon.length === 151) {
               let tableauFin;
-              tableauFin = allPokemon.sort((a, b) => {
+              tableauFin = allPokemon.sort((a, b) => { //On tri la liste de pokémon dans TableauFin
                 return a.id - b.id;
               });
 
-              setListePokemon(tableauFin);
+              setListePokemon(tableauFin); //On charge la liste trié dans la variable d'état ListePokemon
             }
           })
           .catch(function (error) {
@@ -96,8 +95,6 @@ function ListePokemon() {
     getPokemons();
   }, []);
 
-  // console.log(listePokemon[selectedId]);
-
   if (affichePokemon == true) {
     return (
       <>
@@ -111,30 +108,32 @@ function ListePokemon() {
   } else {
     return (
       <View style={styles.background}>
-        <StatusBar />
-        <View style={styles.topTitle}>
-          <Image
-            style={styles.logo}
-            source={require('../assets/logopokeball.png')}></Image>
-          <Text style={styles.nameSection}> Pokestack</Text>
+        <StatusBar style="auto" />
+        <View>
+          <View style={styles.topTitle}>
+            <Image
+              style={styles.logo}
+              source={require('../assets/logopokeball.png')}></Image>
+            <Text style={styles.nameSection}> Pokestack</Text>
+          </View>
+          <FlatList
+            style={styles.flatlist}
+            numColumns={2}
+            data={listePokemon}
+            renderItem={({item}) => (
+              <Item
+                id={item.id}
+                nom={item.name}
+                img={item.pic}
+                type={item.types}
+                affichePokemon={affichePokemon}
+                setSelectedId={setSelectedId}
+                setAffichePokemon={setAffichePokemon}
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
         </View>
-        <FlatList
-          style={styles.flatlist}
-          numColumns={2}
-          data={listePokemon}
-          renderItem={({item}) => (
-            <Item
-              id={item.id}
-              nom={item.name}
-              img={item.pic}
-              type={item.types}
-              affichePokemon={affichePokemon}
-              setSelectedId={setSelectedId}
-              setAffichePokemon={setAffichePokemon}
-            />
-          )}
-          keyExtractor={item => item.id}
-        />
       </View>
     );
   }
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: '#F7F7F7',
   },
-  flatlist: {},
+
   //LISTE CARTE POKEMON
   card: {
     flex: 1,
@@ -158,13 +157,13 @@ const styles = StyleSheet.create({
   topTitle: {
     flexDirection: 'row',
     height: '10%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   logo: {
     resizeMode: 'contain',
     height: '80%',
     width: '20%',
-    marginLeft: 20
+    marginLeft: 20,
   },
 
   head: {
@@ -183,7 +182,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: '#212121',
-
   },
   title: {
     fontSize: 20,

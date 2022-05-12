@@ -1,12 +1,32 @@
 import {openDatabase} from 'react-native-sqlite-storage';
 
-const tableName = 'users';
-var db = openDatabase({ name: 'pokestackDataBase.db' });
+// const tableName = 'users';
+const getDBConnection = () => {
+  return openDatabase({name: 'pokestackDataBase.db', location: 'default'});
+};
+
+//https://infinitbility.com/react-native-sqlite-storage-examples-of-query#select-query
+const executeQuery = (sql, params = []) =>
+  new Promise((resolve, reject) => {
+    const db = getDBConnection();
+    db.transaction(trans => {
+      trans.executeSql(
+        sql,
+        params,
+        (trans, results) => {
+          resolve(results);
+        },
+        error => {
+          reject(error);
+        },
+      );
+    });
+  });
 
 export const createTable = () => {
   db.transaction(txn => {
     txn.executeSql(
-      `CREATE TABLE IF NOT EXISTS ${tableName}(
+      `CREATE TABLE IF NOT EXISTS users(
       id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30), first_name VARCHAR(30), adress VARCHAR(120), phone_number INTEGER, mail VARCHAR(120), avatar VARCHAR(120)
       );`,
       [],
@@ -20,46 +40,20 @@ export const createTable = () => {
   });
 };
 
-
-export const getUsers = () => {
-  db.transaction(txn => {
-    txn.executeSql(
-      `SELECT * FROM ${tableName}`,
-      [],
-      (sqlTxn, res) => {
-        console.log('users retrived successfully');
-
-        let len = res.rows.length;
-
-        if (len > 0) {
-          let results = [];
-          for (let i = 0; i < len; i++) {
-            let user = res.rows.item(i);
-            results.push({
-              id: user.id,
-              name: user.name,
-              firstName: user.first_name,
-              adress: user.adress,
-              phone: user.phone_number,
-              email: user.mail,
-              avatar: user.avatar,
-            });
-          }
-          setUsers(results);
-          console.log(results);
-        }
-      },
-      error => {
-        console.log('error on getting user' + error.message);
-      },
-    );
-  });
+export const getUsers = async () => {
+  let selectQuery = await executeQuery('SELECT * FROM users', []);
+  var rows = selectQuery.rows;
+  return rows.raw();
 };
 
-
-export const addUser = () => {
-  console.log('press add');
-
+export const addUser = async (
+  nameUser,
+  firstName,
+  adress,
+  phone,
+  email,
+  avatar,
+) => {
   if (!nameUser) {
     alert('Entrer un Nom !');
     return false;
@@ -81,40 +75,21 @@ export const addUser = () => {
     return false;
   }
 
-  db.transaction(txn => {
-    txn.executeSql(
-      `INSERT INTO ${tableName} (name, first_name, adress, phone_number, mail, avatar) VALUES (?,?,?,?,?,?)`,
-      [nameUser, firstName, adress, phone, email, avatar],
-      (sqlTxn, res) => {
-        console.log('User added successfully');
-        getUsers();
-        setNameUser('');
-        setFirstName('');
-        setAdress('');
-        setPhone('');
-        setEmail('');
-        setAvatar('');
-      },
-      error => {
-        console.log('error on adding user' + error.message);
-      },
-    );
-  });
+  console.log('press add');
+  let selectQuery = await executeQuery(
+    `INSERT INTO users (name, first_name, adress, phone_number, mail, avatar) VALUES (?,?,?,?,?,?)`,
+    [nameUser, firstName, adress, phone, email, avatar],
+  );
+  var rows = selectQuery.rows;
+  return rows.raw();
 };
 
+export const deleteUser = async () => {
 
-export const deleteUser = e => {
-  console.log(e);
-  db.transaction(txn => {
-    txn.executeSql(
-      `DELETE FROM ${tableName} where id=?`[id],
-      (sqlTxn, res) => {
-        console.log('users delete successfully');
-      },
-      error => {
-        console.log('error on deleting user' + error.message);
-      },
-    );
-  });
+  let selectQuery = await executeQuery(
+    `DELETE FROM users where id=?`[id],
+  );
+  var rows = selectQuery.rows;
+  return rows.raw();
+
 };
-

@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 3,
-    // backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
@@ -159,9 +158,7 @@ const styles = StyleSheet.create({
   pic: {
     height: '100%',
     width: '100%',
-    resizeMode: 'contain',
-    // backgroundColor: 'blue',
-    // top: 30,
+    resizeMode: 'contain'
   },
   info: {
     flex: 6,
@@ -173,9 +170,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     color: 'black',
     alignItems: 'center',
-    padding: 15,
-    //   flexDirection: 'column',
-    //   paddingLeft: 10,
+    padding: 15
   },
   type: {
     flex: 0.5,

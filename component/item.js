@@ -7,12 +7,14 @@ function Item(props) {
   const setAffichePokemon = props.setAffichePokemon;
   const setSelectedId = props.setSelectedId;
 
+  // console.log('props items', props);
+
   const id = props.id;
   const nom = props.nom;
   const img = props.img;
   const type = props.type;
-  const typeName = type.name;
-  const [typeColor, setTypeColor] = useState('');
+  // const typeName = type.name;
+  // const [typeColor, setTypeColor] = useState('');
 
   const typesColor = {
     grass: '#74CB48',
