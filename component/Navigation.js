@@ -1,16 +1,16 @@
-import ListePokemon from "./component/Pokedex";
-import Pokematos from "./component/Pokematos";
-import IdCard from "./component/IdCard";
-import Carte from "./component/Carte";
+import ListePokemon from "./Pokedex";
+import Pokematos from "./Pokematos";
+import IdCard from "./IdCard";
+import Carte from "./Carte";
 
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+//import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const Stack = createNativeStackNavigator();
+//const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function Navigation() {
@@ -41,7 +41,6 @@ function Navigation() {
         <Tab.Screen
           name="Pokematos"
           children={() => <Pokematos />}
-          options={{ tabBarBadge: "!" }}
         />
         <Tab.Screen name="Carte de dresseur" children={() => <IdCard />} />
         <Tab.Screen name="Carte" children={() => <Carte />} />
