@@ -11,32 +11,34 @@ import {
 } from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import FicheContact from './FicheContact';
-import Item from './item';
 import * as dataBase from '../db/db-service';
+import ItemUser from './itemUser';
 
-var contact = [
-  {title: 'A', data: ['Annaeg', 'Agénor', 'Antoine']},
-  {title: 'B', data: ['Benoit']},
-  {title: 'D', data: ['David']},
-  {title: 'E', data: ['Etienne']},
-  {title: 'G', data: ["Gwenc'hlan"]}, //ATTENTION POUR LA DB METTRE DES " ... " et pas des ' ... '
-  {title: 'R', data: ['Ronan']},
-  {title: 'V', data: ['Vanessa']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-];
+// var contact = [
+//   {title: 'A', data: ['Annaeg', 'Agénor', 'Antoine']},
+//   {title: 'B', data: ['Benoit']},
+//   {title: 'D', data: ['David']},
+//   {title: 'E', data: ['Etienne']},
+//   {title: 'G', data: ["Gwenc'hlan"]}, //ATTENTION POUR LA DB METTRE DES " ... " et pas des ' ... '
+//   {title: 'R', data: ['Ronan']},
+//   {title: 'V', data: ['Vanessa']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+//   {title: 'T', data: ['Test']},
+// ];
 
 function Pokematos() {
-  const [afficheContact, setAfficheContact] = useState(false);
   const [users, setUsers] = useState();
+  const [afficheContact, setAfficheContact] = useState(false);
+  const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant de l'utilisateur sélectionner pour afficher les bonnes données dans la fiche
+
 
   // console.log('setUsers', users);
   console.log(users);
@@ -89,7 +91,7 @@ function Pokematos() {
   if (afficheContact == true) {
     return (
       <>
-        <StatusBar />
+        {/* <StatusBar />
         <View style={styles.topButton}>
           <Button
             title="🔙"
@@ -123,56 +125,45 @@ function Pokematos() {
             </Text>
           </View>
         </View>
-        <Button title="📞" />
+        <Button title="📞" />*/}
+        <FicheContact
+        contact = {users[selectedId - 1]}
+        afficheContact={afficheContact}
+        setAfficheContact={setAfficheContact}
+        />
       </>
-      //<FicheContact/>
     );
   } else {
     return (
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        {/* <SectionList
-          sections={contact}
-          keyExtractor={(item, index) => item + index}
-          renderItem={({item}) => <Item title={item} />}
-          renderSectionHeader={({section: {title}}) => (
-            <Text style={styles.header}>{title}</Text>
-          )}
-        /> */}
-        <View style={styles.topTitle}>
-          <Image
-            style={styles.logo}
-            source={require('../assets/logopokeball.png')}></Image>
-          <Text style={styles.nameSection}> Pokematos</Text>
-        </View>
+      <View style={styles.background}>
+        <View>
+          <StatusBar style="auto" />
+          <View style={styles.topTitle}>
+            <Image
+              style={styles.logo}
+              source={require('../assets/logopokeball.png')}></Image>
+            <Text style={styles.nameSection}> Pokematos</Text>
+          </View>
 
-        <FlatList
-          style={styles.flatlist}
-          numColumns={2}
-          data={users}
-          renderItem={({item}) => (
-            <Item
-              id={item.id}
-              nom={item.name}
-              img={item.pic}
-              // type={item.types}
-              // affichePokemon={affichePokemon}
-              // setSelectedId={setSelectedId}
-              // setAffichePokemon={setAffichePokemon}
-            />
-          )}
-          keyExtractor={item => item.id}
-        />
+          <FlatList
+            style={styles.flatlist}
+            numColumns={2}
+            data={users}
+            renderItem={({item}) => (
+              <ItemUser id={item.id} nom={item.name} prenom={item.first_Name} img={item.avatar} adresse={item.adress} mail={item.mail} phone={item.phone_number} setSelectedId={setSelectedId} afficheContact={afficheContact} setAfficheContact={setAfficheContact} />
+            )}
+            keyExtractor={item => item.id}
+          />
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  background: {
+    backgroundColor: '#F7F7F7',
   },
-
   item: {
     padding: 10,
     fontSize: 18,

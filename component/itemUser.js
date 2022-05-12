@@ -1,61 +1,33 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-function Item(props) {
+function ItemUser(props) {
 
-  const affichePokemon = props.affichePokemon;
-  const setAffichePokemon = props.setAffichePokemon;
+  const afficheContact = props.afficheContact;
+  const setAfficheContact = props.setAfficheContact;
   const setSelectedId = props.setSelectedId;
-  
+
+  console.log('props items', props);
+
   const id = props.id;
   const nom = props.nom;
-  const img = props.img;
-  const type = props.type;
-  // const typeName = type.name;
-  // const [typeColor, setTypeColor] = useState('');
-
-  const typesColor = {
-    grass: '#74CB48',
-    ground: '#DEC16B',
-    dragon: '#7037FF',
-    fire: '#F57D31',
-    electric: '#F9CF30',
-    fairy: '#E69EAC',
-    poison: '#A43E9E',
-    bug: '#A7B723',
-    water: '#6493EB',
-    normal: '#AAA67F',
-    psychic: '#FB5584',
-    flying: '#7B61FF',
-    fighting: '#D90D43',
-    rock: '#B69E31',
-    ghost: '#70559B',
-    ice: '#9AD6DF',
-    dark: '#75574C',
-    steel: '#B7B9D0',
-  };
-
-  const color = typesColor[type.name];
-
-
-
-//   const showSpecificPokemon = () => {
-//     setAffichePokemon(!affichePokemon)
-//     // setSelectedId(id);
-// }
+  const prenom = props.prenom;
+  const adresse = props.adresse;
+  const mail = props.mail;
+  const phone = props.phone;
 
   return (
     <TouchableOpacity
-      style={[styles.card, {borderColor: color}]}
-      onPress={() => {setSelectedId(id); setAffichePokemon(!affichePokemon)} }>
+      style={[styles.card, {borderColor: 'black'}]}
+      onPress={() => {setSelectedId(id); setAfficheContact(!afficheContact)} }>
       <View style={styles.head}>
-        <Text style={[styles.num, {color: color}]}>#{id}</Text>
+        <Text style={[styles.num, {color: 'black'}]}>#{id}</Text>
       </View>
       <View style={styles.body}>
         {/* <Text>{type}</Text> */}
-        <Image style={styles.imgList} source={{uri: img}} />
+        <Image style={styles.imgList} source={require('../assets/Red_profile.webp')} />
       </View>
-      <View style={[styles.buttom, {backgroundColor: color}]}>
+      <View style={[styles.buttom, {backgroundColor: 'black'}]}>
         <Text style={styles.title}>{nom}</Text>
       </View>
     </TouchableOpacity>
@@ -63,7 +35,7 @@ function Item(props) {
 }
 
 const styles = StyleSheet.create({
-  flatlist: {},
+  flatlist: {flex: 1},
   //LISTE CARTE POKEMON
   card: {
     flex: 1,
@@ -116,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Item;
+export default ItemUser;

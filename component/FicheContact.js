@@ -1,99 +1,189 @@
+import React from 'react';
 import {
-  Image,
   Text,
   View,
-  SectionList,
   StyleSheet,
-  Button,
-} from "react-native";
-import React, { useState } from "react";
+  Image,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 
-function FicheContact() {
+function FicheContact(props) {
+  const contact = props.contact;
+    const nom = props.nom;
+  const prenom = props.prenom;
+  const adresse = props.adresse;
+  const mail = props.mail;
+  const phone = props.phone;
+  const afficheContact = props.afficheContact;
+  const setAfficheContact = props.setAfficheContact;
+  
+
   return (
-    <>
-      <View style={styles.topButton}>
-        <Button title="🔙" onPress={() => setAfficheContact(!afficheContact)} />
-        <Button title="Modifier contact" />
+    <View style={[styles.body, {backgroundColor: 'red'}]}>
+      <StatusBar />
+      <View style={styles.top}>
+        <TouchableOpacity onPress={() => setAfficheContact(!afficheContact)}>
+          <Text style={styles.name}>←{contact.name}</Text>
+        </TouchableOpacity>
+        <Text style={styles.id}>#{contact.id}</Text>
       </View>
-      <View style={styles.contact}>
-        <Image
-          style={styles.image}
-          source={require("../assets/Red_profile.webp")}
-        />
-        <View style={styles.info}>
-          <Text style={{ flex: 1 }}>Prénom: Annaeg</Text>
-          <Text style={{ flex: 1 }}>Nom: Lelièvre</Text>
-          <Text style={{ flex: 1 }}>Téléphone: 0642060906</Text>
-          <Text style={{ flex: 1 }}>Date de naissance: 07/05/1998</Text>
-          <Text style={{ flex: 1 }}>Adresse: 19 La Ruaudaie</Text>
-          <Text style={{ flex: 1 }}>Ville: St-Nicolas-du-Tertre</Text>
-          <Text style={{ flex: 1 }}>Pays: France</Text>
-          <Text style={{ flex: 1 }}>ID: 64930464</Text>
-          <View style={styles.pkmPref}>
-            <Text>Pokémon préféré: Mimikqui</Text>
-            <Image
-              style={styles.prefImg}
-              source={require("../assets/Mimiqui.png")}
-            />
-          </View>
-          <Text style={{ flex: 1 }}>
-            Citation: Connexion Wi-Fi Tous heureux
+      <View style={styles.image}>
+        <Image style={styles.pic} source={require('../assets/Red_profile.webp')} />
+      </View>
+      <View style={styles.info}>
+        <View style={styles.type}>
+          <Text style={[styles.typeColor, {backgroundColor: 'red'}]}>
+            TEST
           </Text>
         </View>
+        <View>
+          <Text style={{color: 'black'}}>
+            Nom : {contact.name}
+          </Text>
+          <Text style={{color: 'black'}}>
+            Prenom : {contact.prenom}
+          </Text>
+          <Text style={{color: 'black'}}>
+            Telephone : {contact.phone}
+          </Text>
+          <Text style={{color: 'black'}}>
+            Email : {contact.mail}
+          </Text>
+          <Text style={{color: 'black'}}>
+            Adresse postal : {contact.adresse}
+          </Text>
+        </View>
+        {/* <View style={styles.propos}>
+          <Text style={[styles.titre, {color: 'red'}]}>A propos</Text>
+          <View style={styles.caracteristique}>
+            <View style={styles.details}>
+              <Text style={styles.darkTitle}>Nom</Text>
+              <Text style={styles.darkText}> {contact.name}</Text>
+            </View>
+            <View style={styles.detailsMiddle}>
+              <Text style={styles.darkTitle}>Prenom</Text>
+              <Text style={styles.darkText}> {contact.name}</Text>
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.darkTitle}>Abilités</Text>
+            </View>
+          </View>
+          <Text style={styles.description}>{pokemon.description}</Text>
+        </View> */}
+        {/* <View style={styles.stats}>
+          <Text style={[styles.titre, {color: 'red'}]}>Statistiques</Text>
+        </View> */}
       </View>
-      <Button title="📞" />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  //FICHE POKEMON
+  body: {
+    height: '100%',
+  },
+  top: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
-
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-    backgroundColor: "#333333",
+  name: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
-
-  header: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: "bold",
-    backgroundColor: "black",
+  id: {
+    fontSize: 15,
+    fontWeight: 'bold',
   },
-
-  topButton: {
-    flexDirection: "row",
-  },
-
-  contact: {
-    flexDirection: "row",
-    flex: 9,
-  },
-
   image: {
-    flex: 4,
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 5,
   },
-
+  pic: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain'
+  },
   info: {
-    flexDirection: "column",
     flex: 6,
+    backgroundColor: '#F6F6F6',
+    marginBottom: 8,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 8,
+    zIndex: 2,
+    color: 'black',
+    alignItems: 'center',
+    padding: 15
   },
-
-  pkmPref: {
-    flexDirection: "row",
-    flex: 1,
+  type: {
+    flex: 0.5,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
-  prefImg: {
-    width: 30,
-    height: 50,
+  typeColor: {
+    padding: 5,
+    borderRadius: 99,
+    width: 80,
+    textAlign: 'center',
+    lineHeight: 18,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+  propos: {
+    flex: 3,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titre: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    padding: 8,
+  },
+  caracteristique: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '80%',
+    padding: 5,
+  },
+  details: {
+    paddingHorizontal: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailsMiddle: {
+    paddingHorizontal: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+  },
+  description: {
+    width: '85%',
+    textAlign: 'center',
+    padding: 5,
+    color: '#212121',
+  },
+  stats: {
+    flex: 3,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  darkText: {
+    color: '#212121',
+  },
+  darkTitle: {
+    color: '#212121',
+    fontWeight: 'bold',
   },
 });
 
