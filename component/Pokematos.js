@@ -20,16 +20,36 @@ var contact = [
   {title: 'G', data: ["Gwenc'hlan"]}, //ATTENTION POUR LA DB METTRE DES " ... " et pas des ' ... '
   {title: 'R', data: ['Ronan']},
   {title: 'V', data: ['Vanessa']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
-  {title: 'T', data: ['Test']},
+  {
+    title: 'T',
+    data: [
+      'Test',
+      'Test',
+      'Test',
+      'Test',
+      'Test',
+      'Test',
+      'Test',
+      'Test',
+      'Test',
+    ],
+  },
+  {
+    title: '?',
+    data: [
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+      '?Test',
+    ],
+  },
 ];
 
 function Pokematos() {
@@ -72,7 +92,9 @@ function Pokematos() {
               <Text style={{flex: 1}}>Nom: Lelièvre</Text>
               <Text style={{flex: 1}}>Téléphone: 0642060906</Text>
               <Text style={{flex: 1}}>Email: annaeg@hotmail.fr</Text>
-              <Text style={{flex: 1}}>Adresse: 19 La Ruaudaie St-Nicolas-du-Tertre</Text>
+              <Text style={{flex: 1}}>
+                Adresse: 19 La Ruaudaie St-Nicolas-du-Tertre
+              </Text>
             </View>
           </View>
           <Button title="📞" />
@@ -85,11 +107,11 @@ function Pokematos() {
           <Text style={{fontSize: 30}}>Modifier contact</Text>
           <View style={styles.contact}>
             <View>
-            <Image
-              style={styles.image}
-              source={require('../assets/Red_profile.webp')}
-            />
-            <Button title='Charger image' />
+              <Image
+                style={styles.image}
+                source={require('../assets/Red_profile.webp')}
+              />
+              <Button title="Charger image" />
             </View>
             <View style={styles.info}>
               <View style={styles.ligne}>
