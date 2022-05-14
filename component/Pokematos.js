@@ -1,16 +1,13 @@
 import {
-  Image,
   Text,
   View,
   SectionList,
   StyleSheet,
-  Button,
   TouchableOpacity,
   StatusBar,
-  TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
-//import FicheContact from "./FicheContact";
+import FicheContact from './FicheContact';
 
 var contact = [
   {title: 'A', data: ['Annaeg', 'Agénor', 'Antoine']},
@@ -54,9 +51,6 @@ var contact = [
 
 function Pokematos() {
   const [afficheContact, setAfficheContact] = useState(false);
-  const [modifierContact, setModifierContact] = useState(false);
-  const [testPrenom, setTestPrenom] = useState('');
-  const [testNom, setTestNom] = useState('test');
 
   function Item({title}) {
     return (
@@ -67,99 +61,14 @@ function Pokematos() {
       </TouchableOpacity>
     );
   }
-  if (afficheContact == true) {
-    if (modifierContact == false) {
-      return (
-        <>
-          <StatusBar />
-          <View style={styles.topButton}>
-            <Button
-              title="🔙"
-              onPress={() => setAfficheContact(!afficheContact)}
-            />
-            <Button
-              title="Modifier contact"
-              onPress={() => setModifierContact(!modifierContact)}
-            />
-          </View>
-          <View style={styles.contact}>
-            <Image
-              style={styles.image}
-              source={require('../assets/Red_profile.webp')}
-            />
-            <View style={styles.info}>
-              <Text style={{flex: 1}}>Prénom: Annaeg</Text>
-              <Text style={{flex: 1}}>Nom: Lelièvre</Text>
-              <Text style={{flex: 1}}>Téléphone: 0642060906</Text>
-              <Text style={{flex: 1}}>Email: annaeg@hotmail.fr</Text>
-              <Text style={{flex: 1}}>
-                Adresse: 19 La Ruaudaie St-Nicolas-du-Tertre
-              </Text>
-            </View>
-          </View>
-          <Button title="📞" />
-        </>
-        //<FicheContact/>
-      );
-    } else {
-      return (
-        <>
-          <Text style={{fontSize: 30}}>Modifier contact</Text>
-          <View style={styles.contact}>
-            <View>
-              <Image
-                style={styles.image}
-                source={require('../assets/Red_profile.webp')}
-              />
-              <Button title="Charger image" />
-            </View>
-            <View style={styles.info}>
-              <View style={styles.ligne}>
-                <Text>Prénom: </Text>
-                <TextInput
-                  placeholder="Sacha"
-                  onChangeText={setTestPrenom}
-                  value={testPrenom}
-                />
-              </View>
-              <View style={styles.ligne}>
-                <Text>Nom: </Text>
-                <TextInput
-                  placeholder="Ketchum"
-                  onChangeText={setTestNom}
-                  value={testNom}
-                />
-              </View>
-              <View style={styles.ligne}>
-                <Text>Téléphone: </Text>
-                <TextInput placeholder="0123456789" onChangeText="" value="" />
-              </View>
-              <View style={styles.ligne}>
-                <Text>Email: </Text>
-                <TextInput
-                  placeholder="sacha.ktcm@kanto.com"
-                  onChangeText=""
-                  value=""
-                />
-              </View>
-              <View style={styles.ligne}>
-                <Text>Adresse: </Text>
-                <TextInput
-                  placeholder="10 rue du Chen Bourg Palette"
-                  onChangeText=""
-                  value=""
-                />
-              </View>
-            </View>
-          </View>
-          <Button title="Sauvegarder" />
-          <Button
-            title="Annuer"
-            onPress={() => setModifierContact(!modifierContact)}
-          />
-        </>
-      );
-    }
+
+  if (afficheContact) {
+    return (
+      <FicheContact
+        afficheContact={afficheContact}
+        setAfficheContact={setAfficheContact}
+      />
+    );
   } else {
     return (
       <View style={styles.container}>
@@ -197,39 +106,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     backgroundColor: 'black',
-  },
-
-  topButton: {
-    flexDirection: 'row',
-  },
-
-  contact: {
-    flexDirection: 'row',
-    flex: 9,
-  },
-
-  ligne: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-
-  image: {
-    flex: 4,
-  },
-
-  info: {
-    flexDirection: 'column',
-    flex: 6,
-  },
-
-  pkmPref: {
-    flexDirection: 'row',
-    flex: 1,
-  },
-
-  prefImg: {
-    width: 30,
-    height: 50,
   },
 });
 
