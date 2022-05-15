@@ -1,70 +1,169 @@
-import { Text, View, Image, StyleSheet, Button, StatusBar } from "react-native";
+import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
 import * as React from "react";
 
 function IdCard() {
   return (
-    <>
-      <StatusBar />
-      <View style={styles.idCard}>
+    <View style={styles.body}>
+      <StatusBar style="auto"/>
+      <View style={styles.image}>
         <Image
-          style={styles.image}
-          source={require("../assets/Red_profile.webp")}
+          style={styles.pic}
+          source={require('../assets/Red_profile.webp')}
         />
-        <View style={styles.info}>
-          <Text style={{ flex: 1 }}>Prénom: Annaeg</Text>
-          <Text style={{ flex: 1 }}>Nom: Lelièvre</Text>
-          <Text style={{ flex: 1 }}>Téléphone: 0642060906</Text>
-          <Text style={{ flex: 1 }}>Date de naissance: 07/05/1998</Text>
-          <Text style={{ flex: 1 }}>Adresse: 19 La Ruaudaie</Text>
-          <Text style={{ flex: 1 }}>Ville: St-Nicolas-du-Tertre</Text>
-          <Text style={{ flex: 1 }}>Pays: France</Text>
-          <Text style={{ flex: 1 }}>ID: 64930464</Text>
-          <View style={styles.pkmPref}>
-            <Text>Pokémon préféré: Mimikqui</Text>
-            <Image
-              style={styles.prefImg}
-              source={require("../assets/Mimiqui.png")}
-            />
+      </View>
+      <View style={styles.info}>
+        <Text style={styles.titre}>
+          PRENOM NOM
+        </Text>
+        <View style={styles.detail}>
+          <View style={styles.option}>
+            <TouchableOpacity
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
+            </TouchableOpacity>
           </View>
-          <Text style={{ flex: 1 }}>
-            Citation: Connexion Wi-Fi Tous heureux
-          </Text>
+          <View style={styles.coordonnees}>
+            <Text style={{color: 'black', fontSize: 15}}>
+              Telephone : PHONE
+            </Text>
+          </View>
+          <View style={styles.coordonnees}>
+            <Text style={{color: 'black', fontSize: 15}}>Email : MAIL</Text>
+          </View>
+          <View style={styles.coordonnees}>
+            <Text style={{color: 'black', fontSize: 15}}>
+              Adresse : ADRESSE
+            </Text>
+          </View>
         </View>
       </View>
-      <Button style={styles.share} title="Partager contact" />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  idCard: {
-    flexDirection: "row",
-    flex: 9,
+  //FICHE POKEMON
+  body: {
+    height: '100%',
+    backgroundColor: '#F9CF30',
   },
-
-  image: {
-    flex: 4,
-    alignContent: "center",
+  top: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
-
-  info: {
-    flexDirection: "column",
-    flex: 6,
+  topName: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  titre: {
+    flex: 1,
+    width: '100%',
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingTop: 20,
     paddingLeft: 10,
+    paddingBottom: 20,
+    color: '#D90D43',
+    textTransform: 'uppercase',
+    textAlign: 'center',
   },
-
-  pkmPref: {
-    flexDirection: "row",
-    flex: 1,
+  detail: {
+    flex: 8,
+    alignItems: 'center',
   },
-
-  prefImg: {
-    width: 30,
-    height: 50,
+  info: {
+    flex: 6,
+    backgroundColor: '#F6F6F6',
+    marginBottom: 8,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 8,
+    zIndex: 2,
+    color: 'black',
+    alignItems: 'center',
+    padding: 15,
   },
-
-  share: {
-    flex: 1,
+  option: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '85%',
+    paddingVertical: 25,
+    borderTopWidth: 1,
+    borderTopColor: 'black',
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
+  },
+  coordonnees: {
+    flex: 2,
+    justifyContent: 'center',
+  },
+  id: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  image: {
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 5,
+  },
+  pic: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
+  },
+  propos: {
+    flex: 3,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  caracteristique: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '80%',
+    padding: 5,
+  },
+  details: {
+    paddingHorizontal: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailsMiddle: {
+    paddingHorizontal: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  description: {
+    width: '85%',
+    textAlign: 'center',
+    padding: 5,
+    color: '#212121',
+  },
+  stats: {
+    flex: 3,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  darkText: {
+    color: '#212121',
+  },
+  darkTitle: {
+    color: '#212121',
+    fontWeight: 'bold',
   },
 });
 

@@ -1,17 +1,13 @@
 import {
   FlatList,
-  Text,
   View,
   StyleSheet,
-  TouchableOpacity,
-  Button,
-  Image,
-  Dimensions,
   StatusBar,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Item from './item';
 import FichePokemon from './FichePokemon';
+import LoaderPage from './LoaderPage';
 
 function ListePokemon() {
   let allPokemon = []; //Tableau dans lequel nous allons stocker nos 151 pokémons
@@ -110,12 +106,7 @@ function ListePokemon() {
       <View style={styles.background}>
         <StatusBar style="auto" />
         <View>
-          <View style={styles.topTitle}>
-            <Image
-              style={styles.logo}
-              source={require('../assets/logopokeball.png')}></Image>
-            <Text style={styles.nameSection}> Pokestack</Text>
-          </View>
+        {isLoading ? <LoaderPage /> : (
           <FlatList
             style={styles.flatlist}
             numColumns={2}
@@ -132,8 +123,10 @@ function ListePokemon() {
               />
             )}
             keyExtractor={item => item.id}
-          />
+          />)
+        }
         </View>
+
       </View>
     );
   }

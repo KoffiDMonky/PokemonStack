@@ -27,7 +27,7 @@ export const createTable = () => {
   db.transaction(txn => {
     txn.executeSql(
       `CREATE TABLE IF NOT EXISTS users(
-      id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30), first_name VARCHAR(30), adress VARCHAR(120), phone_number INTEGER, mail VARCHAR(120), avatar VARCHAR(120)
+      id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30), first_name VARCHAR(30), adress VARCHAR(120), phone_number VARCHAR(10), mail VARCHAR(120), avatar BLOB
       );`,
       [],
       (sqlTxn, res) => {

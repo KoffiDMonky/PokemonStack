@@ -4,76 +4,67 @@ import {
   View,
   StyleSheet,
   Image,
-  StatusBar,
   TouchableOpacity,
 } from 'react-native';
 
 function FicheContact(props) {
   const contact = props.contact;
-    const nom = props.nom;
-  const prenom = props.prenom;
-  const adresse = props.adresse;
-  const mail = props.mail;
-  const phone = props.phone;
+  const nom = contact.name;
+  const prenom = contact.first_name;
+  const adresse = contact.adress;
+  const mail = contact.mail;
+  const phone = contact.phone_number;
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
-  
+
 
   return (
-    <View style={[styles.body, {backgroundColor: 'red'}]}>
-      <StatusBar />
+    <View style={styles.body}>
       <View style={styles.top}>
         <TouchableOpacity onPress={() => setAfficheContact(!afficheContact)}>
-          <Text style={styles.name}>←{contact.name}</Text>
+          <Text style={styles.topName}>←{contact.name}</Text>
         </TouchableOpacity>
-        <Text style={styles.id}>#{contact.id}</Text>
+        <Text style={styles.id}>#</Text>
       </View>
       <View style={styles.image}>
-        <Image style={styles.pic} source={require('../assets/Red_profile.webp')} />
+        <Image
+          style={styles.pic}
+          source={require('../assets/Red_profile.webp')}
+        />
       </View>
       <View style={styles.info}>
-        <View style={styles.type}>
-          <Text style={[styles.typeColor, {backgroundColor: 'red'}]}>
-            TEST
-          </Text>
-        </View>
-        <View>
-          <Text style={{color: 'black'}}>
-            Nom : {contact.name}
-          </Text>
-          <Text style={{color: 'black'}}>
-            Prenom : {contact.prenom}
-          </Text>
-          <Text style={{color: 'black'}}>
-            Telephone : {contact.phone}
-          </Text>
-          <Text style={{color: 'black'}}>
-            Email : {contact.mail}
-          </Text>
-          <Text style={{color: 'black'}}>
-            Adresse postal : {contact.adresse}
-          </Text>
-        </View>
-        {/* <View style={styles.propos}>
-          <Text style={[styles.titre, {color: 'red'}]}>A propos</Text>
-          <View style={styles.caracteristique}>
-            <View style={styles.details}>
-              <Text style={styles.darkTitle}>Nom</Text>
-              <Text style={styles.darkText}> {contact.name}</Text>
-            </View>
-            <View style={styles.detailsMiddle}>
-              <Text style={styles.darkTitle}>Prenom</Text>
-              <Text style={styles.darkText}> {contact.name}</Text>
-            </View>
-            <View style={styles.details}>
-              <Text style={styles.darkTitle}>Abilités</Text>
-            </View>
+        <Text style={styles.titre}>
+          {prenom} {nom}
+        </Text>
+        <View style={styles.detail}>
+          <View style={styles.option}>
+            <TouchableOpacity
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
+            </TouchableOpacity>
           </View>
-          <Text style={styles.description}>{pokemon.description}</Text>
-        </View> */}
-        {/* <View style={styles.stats}>
-          <Text style={[styles.titre, {color: 'red'}]}>Statistiques</Text>
-        </View> */}
+          <View style={styles.coordonnees}>
+            <Text style={{color: 'black', fontSize: 15}}>
+              Telephone : {phone}
+            </Text>
+          </View>
+          <View style={styles.coordonnees}>
+            <Text style={{color: 'black', fontSize: 15}}>Email : {mail}</Text>
+          </View>
+          <View style={styles.coordonnees}>
+            <Text style={{color: 'black', fontSize: 15}}>
+              Adresse : {adresse}
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -83,6 +74,7 @@ const styles = StyleSheet.create({
   //FICHE POKEMON
   body: {
     height: '100%',
+    backgroundColor: '#D90D43',
   },
   top: {
     flex: 1,
@@ -91,9 +83,52 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
-  name: {
+  topName: {
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  titre: {
+    flex: 1,
+    width: '100%',
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingTop: 20,
+    paddingLeft: 10,
+    paddingBottom: 20,
+    color: '#D90D43',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+  },
+  detail: {
+    flex: 8,
+    alignItems: 'center',
+  },
+  info: {
+    flex: 6,
+    backgroundColor: '#F6F6F6',
+    marginBottom: 8,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 8,
+    zIndex: 2,
+    color: 'black',
+    alignItems: 'center',
+    padding: 15,
+  },
+  option: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '85%',
+    paddingVertical: 25,
+    borderTopWidth: 1,
+    borderTopColor: 'black',
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
+  },
+  coordonnees: {
+    flex: 2,
+    justifyContent: 'center',
   },
   id: {
     fontSize: 15,
@@ -108,45 +143,13 @@ const styles = StyleSheet.create({
   pic: {
     height: '100%',
     width: '100%',
-    resizeMode: 'contain'
-  },
-  info: {
-    flex: 6,
-    backgroundColor: '#F6F6F6',
-    marginBottom: 8,
-    marginLeft: 5,
-    marginRight: 5,
-    borderRadius: 8,
-    zIndex: 2,
-    color: 'black',
-    alignItems: 'center',
-    padding: 15
-  },
-  type: {
-    flex: 0.5,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  typeColor: {
-    padding: 5,
-    borderRadius: 99,
-    width: 80,
-    textAlign: 'center',
-    lineHeight: 18,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
+    resizeMode: 'contain',
   },
   propos: {
     flex: 3,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  titre: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    padding: 8,
   },
   caracteristique: {
     flexDirection: 'row',
@@ -163,8 +166,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
   },
   description: {
     width: '85%',
