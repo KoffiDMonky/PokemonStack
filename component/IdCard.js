@@ -1,8 +1,52 @@
-import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
-import * as React from "react";
+import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar, Button } from "react-native";
+import React, {useState} from 'react';
+import QRCode from 'react-native-qrcode-svg';
+import ModifContact from './ModifContact';
 
 function IdCard() {
-  return (
+  const [afficheQrCode, setAfficheQrCode] = useState(false);
+  const [modifierContact, setModifierContact] = useState(false);
+
+  let profil = "https://google.com";
+    /*{
+    "name": userName,
+    "first_name": firstName,
+    "adress": adress,
+    "phone_number": phoneNumber,
+    "mail": mail,
+    "avatar": avatar,
+}*/
+
+  if (afficheQrCode) {
+    return (
+      <>
+        <StatusBar />
+        <View>
+          <Text>GOTTA FLASH THEM ALL</Text>
+          <QRCode
+            value={profil}
+            size={250}
+            color="black"
+            logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
+            logoSize={90}
+            logoMargin={2}
+            logoBorderRadius={15}
+          />
+        </View>
+        <Button title="❌" onPress={() => setAfficheQrCode(!afficheQrCode)} />
+        <StatusBar />
+      </>
+    );
+  } else {
+    if (modifierContact) {
+      return (
+        <ModifContact
+          modifierContact={modifierContact}
+          setModifierContact={setModifierContact}
+        />
+      );
+    } else {
+      return (
     <View style={styles.body}>
       <StatusBar style="auto"/>
       <View style={styles.image}>
@@ -18,15 +62,15 @@ function IdCard() {
         <View style={styles.detail}>
           <View style={styles.option}>
             <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
+              /*</View>onPress={() => setAfficheContact(!afficheContact)}*/>
               <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
+              onPress={() => setModifierContact(!modifierContact)}>
               <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
+              onPress={() => setAfficheQrCode(!afficheQrCode)}>
               <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
             </TouchableOpacity>
           </View>
@@ -47,7 +91,7 @@ function IdCard() {
       </View>
     </View>
   );
-}
+}}}
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
@@ -164,7 +208,7 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: '#212121',
     fontWeight: 'bold',
-  },
-});
+  }
+})
 
 export default IdCard;

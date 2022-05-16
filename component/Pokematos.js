@@ -2,6 +2,7 @@ import {
   Text,
   View,
   FlatList,
+  SectionList,
   StyleSheet,
   TouchableOpacity,
   StatusBar,
@@ -30,8 +31,9 @@ function Pokematos() {
   }, []);
 
   const onPressAddUser = () => {
+    dataBase.createTable()
     dataBase
-      .addUser('houessou', 'agénor', 'adress', 'phone', 'email', 'avatar')
+      .addUser('lelievre', 'annaeg', 'une adresse au pif', '0123456789', 'azerty@azerty.com', '')
       .then(async () => {
         const storedUsers = await dataBase.getUsers();
         console.log('store', storedUsers);
@@ -43,6 +45,7 @@ function Pokematos() {
 
   useEffect(() => {
     loadDataCallback();
+    //onPressAddUser();
   }, [loadDataCallback]);
 
   function Item({title}) {
@@ -137,16 +140,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 6,
   },
-
-  pkmPref: {
-    flexDirection: 'row',
-    flex: 1,
-  },
-
-  prefImg: {
-    width: 30,
-    height: 50,
-  },
-});
+})
 
 export default Pokematos;

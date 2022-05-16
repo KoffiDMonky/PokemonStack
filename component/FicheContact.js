@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Text,
   View,
@@ -6,18 +5,22 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import React, {useState} from 'react';
+import ModifContact from './ModifContact';
 
 function FicheContact(props) {
+  const [modifierContact, setModifierContact] = useState(false);
+  const afficheContact = props.afficheContact;
+  const setAfficheContact = props.setAfficheContact;
   const contact = props.contact;
+
   const nom = contact.name;
   const prenom = contact.first_name;
   const adresse = contact.adress;
   const mail = contact.mail;
   const phone = contact.phone_number;
-  const afficheContact = props.afficheContact;
-  const setAfficheContact = props.setAfficheContact;
 
-
+  if (modifierContact == false) {
   return (
     <View style={styles.body}>
       <View style={styles.top}>
@@ -68,7 +71,18 @@ function FicheContact(props) {
       </View>
     </View>
   );
+} else {
+  return (
+    <>
+      <ModifContact
+        modifierContact={modifierContact}
+        setModifierContact={setModifierContact}
+      />
+    </>
+  );
 }
+}
+
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
@@ -185,7 +199,7 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: '#212121',
     fontWeight: 'bold',
-  },
-});
+  }
+})
 
 export default FicheContact;
