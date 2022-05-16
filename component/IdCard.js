@@ -6,18 +6,26 @@ import ModifContact from './ModifContact';
 function IdCard() {
   const [afficheQrCode, setAfficheQrCode] = useState(false);
   const [modifierContact, setModifierContact] = useState(false);
+  let profil = {
+    "name": userName,
+    "first_name": firstName,
+    "adress": adress,
+    "phone_number": phoneNumber,
+    "mail": mail,
+    "avatar": avatar,
+  }
 
   if (afficheQrCode) {
     return (
       <>
         <StatusBar />
         <View>
-          <Text>FLASH THEM ALL</Text>
+          <Text>GOTTA FLASH THEM ALL</Text>
           <QRCode
-            value={'https://pornhub.com'}
+            value={profil}
             size={250}
             color="black"
-            logo={require('../assets/logo_qrcode_ball.jpg')} // ici mettre un logo pokeball
+            logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
             logoSize={90}
             logoMargin={2}
             logoBorderRadius={15}
