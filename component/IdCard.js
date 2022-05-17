@@ -1,13 +1,18 @@
 import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar, Button } from "react-native";
 import React, {useState} from 'react';
-import QRCode from 'react-native-qrcode-svg';
+
 import ModifContact from './ModifContact';
+import QrCode from "./QrCode";
 
 function IdCard() {
   const [afficheQrCode, setAfficheQrCode] = useState(false);
   const [modifierContact, setModifierContact] = useState(false);
 
-  let profil = "https://google.com";
+  const stateQrCode = (bool) =>{
+    setAfficheQrCode(bool)
+  }
+
+
     /*{
     "name": userName,
     "first_name": firstName,
@@ -19,23 +24,7 @@ function IdCard() {
 
   if (afficheQrCode) {
     return (
-      <>
-        <StatusBar />
-        <View>
-          <Text>GOTTA FLASH THEM ALL</Text>
-          <QRCode
-            value={profil}
-            size={250}
-            color="black"
-            logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
-            logoSize={90}
-            logoMargin={2}
-            logoBorderRadius={15}
-          />
-        </View>
-        <Button title="❌" onPress={() => setAfficheQrCode(!afficheQrCode)} />
-        <StatusBar />
-      </>
+      <QrCode afficheQrCode={afficheQrCode} setAfficheQrCode={stateQrCode} />
     );
   } else {
     if (modifierContact) {
