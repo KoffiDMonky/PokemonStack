@@ -8,19 +8,11 @@ function IdCard() {
   const [afficheQrCode, setAfficheQrCode] = useState(false);
   const [modifierContact, setModifierContact] = useState(false);
 
+  //Méthode pour passer setAfficheQrCode en props au composant QrCode
   const stateQrCode = (bool) =>{
     setAfficheQrCode(bool)
   }
 
-
-    /*{
-    "name": userName,
-    "first_name": firstName,
-    "adress": adress,
-    "phone_number": phoneNumber,
-    "mail": mail,
-    "avatar": avatar,
-}*/
 
   if (afficheQrCode) {
     return (

@@ -22,6 +22,11 @@ function ListePokemon() {
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant du pokémon sélectionner pour afficher les bonnes données dans la fiche
   const [isLoading, setLoading] = useState(true); //Variable d'état permettant de définir si la liste de pokémon est chargé pour l'afficher
 
+  //Méthode pour passer setAffichePokemon en props au composant FichePokemon
+  const stateAffichagePokemon = (bool) =>{
+    setAffichePokemon(bool)
+  }
+
   //Méthode permettant de récupérer la liste des +1000 pokémons
   const getPokemons = async () => {
     try {
@@ -77,7 +82,7 @@ function ListePokemon() {
           })
           .catch(function (error) {
             console.log(
-              'There has been a problem with your fetch operation: ' +
+              'Il y a eu un problème avec votre opération de récupération : ' +
                 error.message,
             );
             throw error;
@@ -85,7 +90,7 @@ function ListePokemon() {
       })
       .catch(function (error) {
         console.log(
-          'There has been a problem with your fetch operation: ' +
+          'Il y a eu un problème avec votre opération de récupération : ' +
             error.message,
         );
         throw error;
@@ -104,7 +109,7 @@ function ListePokemon() {
         <FichePokemon
           pokemon={listePokemon[selectedId - 1]}
           affichePokemon={affichePokemon}
-          setAffichePokemon={setAffichePokemon}
+          setAffichePokemon={stateAffichagePokemon}
         />
       </>
     );
@@ -115,7 +120,6 @@ function ListePokemon() {
         <View>
         {isLoading ? <LoaderPage /> : (
           <FlatList
-            style={styles.flatlist}
             numColumns={2}
             data={listePokemon}
             renderItem={({item}) => (
@@ -142,62 +146,8 @@ function ListePokemon() {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#F7F7F7',
-  },
-  
-  //LISTE CARTE POKEMON
-  card: {
-    flex: 1,
-    backgroundColor: '#F6F6F6',
-    color: '#20232a',
-    margin: 5,
-    height: 200,
-    borderWidth: 2,
-    borderRadius: 15,
-  },
-  topTitle: {
-    flexDirection: 'row',
-    height: '10%',
-    alignItems: 'center',
-  },
-  logo: {
-    resizeMode: 'contain',
-    height: '80%',
-    width: '20%',
-    marginLeft: 20,
-  },
+  }
 
-  head: {
-    flex: 0.8,
-    alignItems: 'flex-end',
-    paddingRight: 10,
-  },
-
-  body: {
-    flex: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  nameSection: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#212121',
-  },
-  title: {
-    fontSize: 20,
-    color: 'white',
-    borderColor: 'black',
-  },
-
-  num: {
-    fontSize: 20,
-    color: 'black',
-  },
-  imgList: {
-    height: '95%',
-    width: '95%',
-    resizeMode: 'contain',
-  },
 });
 
 export default ListePokemon;
