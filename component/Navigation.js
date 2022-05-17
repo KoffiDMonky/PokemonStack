@@ -8,7 +8,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 //const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,16 +23,16 @@ function Navigation() {
             let iconName;
 
             if (route.name === 'Pokedex') {
-              iconName = focused ? 'ios-paw' : 'ios-paw-outline';
+              iconName = 'paw';
             } else if (route.name === 'Pokematos') {
-              iconName = focused ? 'ios-call' : 'ios-call-outline';
+              iconName = 'phone';
             } else if (route.name === 'Carte de dresseur') {
-              iconName = focused ? 'ios-card' : 'ios-card-outline';
+              iconName = 'address-card';
             } else if (route.name === 'Carte') {
-              iconName = focused ? 'ios-map' : 'ios-map-outline';
+              iconName = 'map-pin';
             }
 
-            // return <Icon name={iconName} size={size} color={color} />;
+            return <Icon name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: '#F9CF30',
           tabBarInactiveTintColor: '#D90D43',
@@ -43,7 +43,7 @@ function Navigation() {
           options={{
             headerRight: () => (
               <TouchableOpacity style={styles.addButton}>
-                <Icon name='rowing' size={20} color='dark' />
+                <Icon name='plus' size={30} color='dark' />
               </TouchableOpacity>
             ),
           }}
@@ -59,11 +59,11 @@ function Navigation() {
 
 const styles = StyleSheet.create({
   addButton: {
-    backgroundColor: 'red',
     right: 20,
     width: 40,
     height: 40,
-    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
 
