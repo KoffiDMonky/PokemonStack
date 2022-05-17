@@ -87,7 +87,6 @@ function ModifContact(props) {
 }
 
 const styles = StyleSheet.create({
-  //FICHE POKEMON
   body: {
     height: '100%',
     backgroundColor: '#F9CF30',
@@ -111,17 +110,6 @@ const styles = StyleSheet.create({
     width: 300,
     padding: 10,
   },
-  top: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-  },
-  topName: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
   titre: {
     flex: 1,
     width: '100%',
@@ -134,10 +122,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center',
   },
-  detail: {
-    flex: 8,
-    alignItems: 'center',
-  },
   info: {
     height:'70%',
     backgroundColor: '#F6F6F6',
@@ -149,25 +133,6 @@ const styles = StyleSheet.create({
     color: 'black',
     padding: 15,
   },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: '85%',
-    paddingVertical: 25,
-    borderTopWidth: 1,
-    borderTopColor: 'black',
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
-  },
-  coordonnees: {
-    flex: 2,
-    justifyContent: 'center',
-  },
-  id: {
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
   image: {
     flex: 3,
     alignItems: 'center',
@@ -178,48 +143,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     resizeMode: 'contain',
-  },
-  propos: {
-    flex: 3,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  caracteristique: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '80%',
-    padding: 5,
-  },
-  details: {
-    paddingHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  detailsMiddle: {
-    paddingHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  description: {
-    width: '85%',
-    textAlign: 'center',
-    padding: 5,
-    color: '#212121',
-  },
-  stats: {
-    flex: 3,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  darkText: {
-    color: '#212121',
-  },
-  darkTitle: {
-    color: '#212121',
-    fontWeight: 'bold',
-  },
+  }
 });
 
 export default ModifContact;
