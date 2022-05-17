@@ -22,6 +22,8 @@ const executeQuery = (sql, params = []) =>
       );
     });
   });
+const tableName = 'users';
+var db = openDatabase({ name: 'pokestackDataBase.db' });
 
 export const createTable = () => {
   db.transaction(txn => {
@@ -93,3 +95,4 @@ export const deleteUser = async () => {
   return rows.raw();
 
 };
+
