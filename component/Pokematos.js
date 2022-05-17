@@ -11,7 +11,6 @@ import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 import ItemUser from './itemUser';
 
-
 function Pokematos() {
   const [users, setUsers] = useState();
   const [afficheContact, setAfficheContact] = useState(false);
@@ -58,9 +57,9 @@ function Pokematos() {
     return (
       <>
         <FicheContact
-        contact = {users[selectedId - 1]}
-        afficheContact={afficheContact}
-        setAfficheContact={setAfficheContact}
+          contact={users[selectedId - 1]}
+          afficheContact={afficheContact}
+          setAfficheContact={setAfficheContact}
         />
       </>
     );
@@ -68,13 +67,23 @@ function Pokematos() {
     return (
       <View style={styles.background}>
         <View>
-          <StatusBar style="auto" />
           <FlatList
             style={styles.flatlist}
             numColumns={2}
             data={users}
             renderItem={({item}) => (
-              <ItemUser id={item.id} nom={item.name} prenom={item.first_Name} img={item.avatar} adresse={item.adress} mail={item.mail} phone={item.phone_number} setSelectedId={setSelectedId} afficheContact={afficheContact} setAfficheContact={setAfficheContact} />
+              <ItemUser
+              id={item.id}
+              nom={item.name}
+              prenom={item.first_Name}
+              img={item.avatar}
+              adresse={item.adress}
+              mail={item.mail}
+              phone={item.phone_number}
+              setSelectedId={setSelectedId}
+              afficheContact={afficheContact}
+              setAfficheContact={setAfficheContact}
+              />
             )}
             keyExtractor={item => item.id}
           />
@@ -87,6 +96,10 @@ function Pokematos() {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#F7F7F7',
+  },
+  flatlist: {
+    zIndex: 1,
+    background: 'yellow'
   },
   item: {
     padding: 10,
@@ -118,34 +131,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     // backgroundColor: 'black',
-  },
-
-  topButton: {
-    flexDirection: 'row',
-  },
-
-  contact: {
-    flexDirection: 'row',
-    flex: 9,
-  },
-
-  image: {
-    flex: 4,
-  },
-
-  info: {
-    flexDirection: 'column',
-    flex: 6,
-  },
-
-  pkmPref: {
-    flexDirection: 'row',
-    flex: 1,
-  },
-
-  prefImg: {
-    width: 30,
-    height: 50,
   },
 });
 

@@ -28,9 +28,7 @@ function ListePokemon() {
         });
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   //Méthode définissant les caractéristiques complète d'un pokemon
@@ -68,6 +66,7 @@ function ListePokemon() {
               });
 
               setListePokemon(tableauFin); //On charge la liste trié dans la variable d'état ListePokemon
+              setLoading(false);
             }
           })
           .catch(function (error) {
