@@ -1,12 +1,7 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import ModifContact from './ModifContact';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function FicheContact(props) {
   const [modifierContact, setModifierContact] = useState(false);
@@ -21,68 +16,68 @@ function FicheContact(props) {
   const phone = contact.phone_number;
 
   if (modifierContact == false) {
-  return (
-    <View style={styles.body}>
-      <View style={styles.top}>
-        <TouchableOpacity onPress={() => setAfficheContact(!afficheContact)}>
-          <Text style={styles.topName}>←{contact.name}</Text>
-        </TouchableOpacity>
-        <Text style={styles.id}>#</Text>
-      </View>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
-      <View style={styles.info}>
-        <Text style={styles.titre}>
-          {prenom} {nom}
-        </Text>
-        <View style={styles.detail}>
-          <View style={styles.option}>
-            <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Telephone : {phone}
-            </Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>Email : {mail}</Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Adresse : {adresse}
-            </Text>
+    return (
+      <View style={styles.body}>
+        <View style={styles.top}>
+          <TouchableOpacity style={styles.topTouchable} onPress={() => setAfficheContact(!afficheContact)}>
+            <Icon name="arrow-left" size={20} color={'dark'} />
+            <Text style={styles.topName}> {contact.name}</Text>
+          </TouchableOpacity>
+          <Text style={styles.id}>#</Text>
+        </View>
+        <View style={styles.image}>
+          <Image
+            style={styles.pic}
+            source={require('../assets/Red_profile.webp')}
+          />
+        </View>
+        <View style={styles.info}>
+          <Text style={styles.titre}>
+            {prenom} {nom}
+          </Text>
+          <View style={styles.detail}>
+            <View style={styles.option}>
+              <TouchableOpacity
+                onPress={() => setAfficheContact(!afficheContact)}>
+                <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setAfficheContact(!afficheContact)}>
+                <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setAfficheContact(!afficheContact)}>
+                <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Telephone : {phone}
+              </Text>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>Email : {mail}</Text>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Adresse : {adresse}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
-  );
-} else {
-  return (
-    <>
-      <ModifContact
-        modifierContact={modifierContact}
-        setModifierContact={setModifierContact}
-      />
-    </>
-  );
+    );
+  } else {
+    return (
+      <>
+        <ModifContact
+          modifierContact={modifierContact}
+          setModifierContact={setModifierContact}
+        />
+      </>
+    );
+  }
 }
-}
-
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
@@ -97,8 +92,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
+  topTouchable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   topName: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   titre: {
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: '#212121',
     fontWeight: 'bold',
-  }
-})
+  },
+});
 
 export default FicheContact;

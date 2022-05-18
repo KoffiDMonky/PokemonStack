@@ -3,7 +3,7 @@ import Pokematos from './Pokematos';
 import IdCard from './IdCard';
 import Carte from './Carte';
 
-import {StatusBar, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -19,7 +19,7 @@ function Navigation() {
       <StatusBar style="auto" />
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({ color, size}) => {
             let iconName;
 
             if (route.name === 'Pokedex') {
@@ -43,7 +43,7 @@ function Navigation() {
           options={{
             headerRight: () => (
               <TouchableOpacity style={styles.addButton}>
-                <Icon name='plus' size={30} color='dark' />
+                <Icon name='plus' size={30} color='#000000' />
               </TouchableOpacity>
             ),
           }}
