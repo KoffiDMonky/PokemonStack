@@ -1,41 +1,30 @@
-import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar, Button } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+  Button,
+} from 'react-native';
 import React, {useState} from 'react';
-import QRCode from 'react-native-qrcode-svg';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import ModifContact from './ModifContact';
+import QrCode from './QrCode';
 
 function IdCard() {
   const [afficheQrCode, setAfficheQrCode] = useState(false);
   const [modifierContact, setModifierContact] = useState(false);
 
-  let profil = "https://google.com";
-    /*{
-    "name": userName,
-    "first_name": firstName,
-    "adress": adress,
-    "phone_number": phoneNumber,
-    "mail": mail,
-    "avatar": avatar,
-}*/
+  //Méthode pour passer setAfficheQrCode en props au composant QrCode
+  const stateQrCode = bool => {
+    setAfficheQrCode(bool);
+  };
 
   if (afficheQrCode) {
     return (
-      <>
-        <StatusBar />
-        <View>
-          <Text>GOTTA FLASH THEM ALL</Text>
-          <QRCode
-            value={profil}
-            size={250}
-            color="black"
-            logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
-            logoSize={90}
-            logoMargin={2}
-            logoBorderRadius={15}
-          />
-        </View>
-        <Button title="❌" onPress={() => setAfficheQrCode(!afficheQrCode)} />
-        <StatusBar />
-      </>
+      <QrCode afficheQrCode={afficheQrCode} setAfficheQrCode={stateQrCode} />
     );
   } else {
     if (modifierContact) {
@@ -47,51 +36,57 @@ function IdCard() {
       );
     } else {
       return (
-    <View style={styles.body}>
-      <StatusBar style="auto"/>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
-      <View style={styles.info}>
-        <Text style={styles.titre}>
-          PRENOM NOM
-        </Text>
-        <View style={styles.detail}>
-          <View style={styles.option}>
-            <TouchableOpacity
-              /*</View>onPress={() => setAfficheContact(!afficheContact)}*/>
-              <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setModifierContact(!modifierContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setAfficheQrCode(!afficheQrCode)}>
-              <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
-            </TouchableOpacity>
+        <View style={styles.body}>
+          <StatusBar style="auto" />
+          <View style={styles.image}>
+            <Image
+              style={styles.pic}
+              source={require('../assets/Red_profile.webp')}
+            />
           </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Telephone : PHONE
-            </Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>Email : MAIL</Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Adresse : ADRESSE
-            </Text>
+          <View style={styles.info}>
+            <Text style={styles.titre}>PRENOM NOM</Text>
+            <View style={styles.detail}>
+              <View style={styles.option}>
+                <TouchableOpacity
+                  style={styles.optionTouchable}
+                  onPress={() => setAfficheContact(!afficheContact)}>
+                  <Icon name="phone" size={40} color="#000000" />
+                  <Text style={styles.textTouchable}>Appel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.optionTouchable}
+                  onPress={() => setModifierContact(!modifierContact)}>
+                  <Icon name="pencil" size={35} color="#000000" />
+                  <Text style={styles.textTouchable}>Modifier</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.optionTouchable}
+                  onPress={() => setAfficheQrCode(!afficheQrCode)}>
+                  <Icon name="share" size={35} color="#000000" />
+                  <Text style={styles.textTouchable}>Partager</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.coordonnees}>
+                <Text style={{color: 'black', fontSize: 15}}>
+                  Telephone : PHONE
+                </Text>
+              </View>
+              <View style={styles.coordonnees}>
+                <Text style={{color: 'black', fontSize: 15}}>Email : MAIL</Text>
+              </View>
+              <View style={styles.coordonnees}>
+                <Text style={{color: 'black', fontSize: 15}}>
+                  Adresse : ADRESSE
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-    </View>
-  );
-}}}
+      );
+    }
+  }
+}
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
@@ -143,11 +138,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '85%',
-    paddingVertical: 25,
+    paddingVertical: 15,
     borderTopWidth: 1,
     borderTopColor: 'black',
     borderBottomWidth: 1,
     borderBottomColor: 'black',
+
+  },
+  optionTouchable: {
+    alignItems: 'center',
+    width: 90
+  },
+  textTouchable:{
+    color: 'black', 
+    fontSize: 15,
+    marginTop: 5
   },
   coordonnees: {
     flex: 2,
@@ -208,7 +213,7 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: '#212121',
     fontWeight: 'bold',
-  }
-})
+  },
+});
 
 export default IdCard;

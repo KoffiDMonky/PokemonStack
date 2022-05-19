@@ -12,12 +12,16 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
         \_.-'       |__|    `-._ |              '-.|     '-.| |   |
                                 `'                            '-._|
 */
-import Navigation from "./component/Navigation";
-import * as React from "react";
+
+import * as React from 'react';
+import Navigation from './component/Navigation';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 function App() {
   return (
-    <Navigation />
+    <SafeAreaProvider>
+      <Navigation />
+    </SafeAreaProvider>
   );
 }
 

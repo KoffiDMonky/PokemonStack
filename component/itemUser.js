@@ -7,14 +7,9 @@ function ItemUser(props) {
   const setAfficheContact = props.setAfficheContact;
   const setSelectedId = props.setSelectedId;
 
-  console.log('props items', props);
-
   const id = props.id;
   const nom = props.nom;
-  const prenom = props.prenom;
-  const adresse = props.adresse;
-  const mail = props.mail;
-  const phone = props.phone;
+
 
   return (
     <TouchableOpacity

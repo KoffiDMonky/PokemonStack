@@ -7,6 +7,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function FichePokemon(props) {
   const pokemon = props.pokemon;
@@ -57,10 +58,24 @@ function FichePokemon(props) {
     <View
       key={index}
       style={{width: '95%', flexDirection: 'row', justifyContent: 'center'}}>
-      <View style={{flex: 1, borderRightColor: 'black', borderRightWidth: 2, paddingRight: 10}}>
-        <Text style={[styles.darkText, {textAlign: 'right'}]}>{aliasStat[stat.stat.name]}</Text>
+      <View
+        style={{
+          flex: 1,
+          borderRightColor: 'black',
+          borderRightWidth: 2,
+          paddingRight: 10,
+        }}>
+        <Text style={[styles.darkText, {textAlign: 'right'}]}>
+          {aliasStat[stat.stat.name]}
+        </Text>
       </View>
-      <View style={{flex: 4, paddingLeft: 10, flexDirection: 'row', alignItems: 'center'}}>
+      <View
+        style={{
+          flex: 4,
+          paddingLeft: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
         <Text style={[styles.darkText, {flex: 1}]}>{stat.base_stat}</Text>
         <View style={{flex: 5}}>
           <View
@@ -87,8 +102,11 @@ function FichePokemon(props) {
     <View style={[styles.body, {backgroundColor: color}]}>
       <StatusBar />
       <View style={styles.top}>
-        <TouchableOpacity onPress={() => setAffichePokemon(!affichePokemon)}>
-          <Text style={styles.name}>←{pokemon.name}</Text>
+        <TouchableOpacity
+          style={styles.topTouchable}
+          onPress={() => setAffichePokemon(!affichePokemon)}>
+          <Icon name="arrow-left" size={20} color={'dark'} />
+          <Text style={styles.name}> {pokemon.name}</Text>
         </TouchableOpacity>
         <Text style={styles.id}>#{pokemon.id}</Text>
       </View>
@@ -130,7 +148,6 @@ function FichePokemon(props) {
 }
 
 const styles = StyleSheet.create({
-  //FICHE POKEMON
   body: {
     height: '100%',
   },
@@ -141,17 +158,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
+  topTouchable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   name: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
   },
   id: {
-    fontSize: 15,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   image: {
     flex: 3,
-    // backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
@@ -160,8 +180,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     resizeMode: 'contain',
-    // backgroundColor: 'blue',
-    // top: 30,
   },
   info: {
     flex: 6,
@@ -174,8 +192,6 @@ const styles = StyleSheet.create({
     color: 'black',
     alignItems: 'center',
     padding: 15,
-    //   flexDirection: 'column',
-    //   paddingLeft: 10,
   },
   type: {
     flex: 0.5,
@@ -235,6 +251,7 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: '#212121',
+    fontSize: 11
   },
   darkTitle: {
     color: '#212121',

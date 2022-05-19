@@ -1,12 +1,7 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import ModifContact from './ModifContact';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function FicheContact(props) {
   const [modifierContact, setModifierContact] = useState(false);
@@ -24,8 +19,9 @@ function FicheContact(props) {
   return (
     <View style={styles.body}>
       <View style={styles.top}>
-        <TouchableOpacity onPress={() => setAfficheContact(!afficheContact)}>
-          <Text style={styles.topName}>←{contact.name}</Text>
+      <TouchableOpacity style={styles.topTouchable} onPress={() => setAfficheContact(!afficheContact)}>
+            <Icon name="arrow-left" size={20} color={'dark'} />
+            <Text style={styles.topName}> {contact.name}</Text>
         </TouchableOpacity>
         <Text style={styles.id}>#</Text>
       </View>
@@ -69,20 +65,19 @@ function FicheContact(props) {
           </View>
         </View>
       </View>
-    </View>
-  );
-} else {
-  return (
-    <>
-      <ModifContact
-        modifierContact={modifierContact}
-        setModifierContact={setModifierContact}
-      />
-    </>
-  );
+      </View>
+    );
+  } else {
+    return (
+      <>
+        <ModifContact
+          modifierContact={modifierContact}
+          setModifierContact={setModifierContact}
+        />
+      </>
+    );
+  }
 }
-}
-
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
@@ -97,8 +92,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
+  topTouchable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   topName: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   titre: {
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: '#212121',
     fontWeight: 'bold',
-  }
-})
+  },
+});
 
 export default FicheContact;
