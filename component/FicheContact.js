@@ -46,7 +46,7 @@ function FicheContact(props) {
               <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
+              onPress={() => setModifierContact(!modifierContact)}>
               <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
             </TouchableOpacity>
             <TouchableOpacity

@@ -12,7 +12,6 @@ import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 import ItemUser from './itemUser';
 
-
 function Pokematos() {
   const [users, setUsers] = useState();
   const [afficheContact, setAfficheContact] = useState(false);
@@ -33,7 +32,7 @@ function Pokematos() {
   const onPressAddUser = () => {
     dataBase.createTable()
     dataBase
-      .addUser('lelievre', 'annaeg', 'une adresse au pif', '0123456789', 'azerty@azerty.com', '')
+      .addUser('Atest', 'Btest', 'adresse test', '0671495592', 'azerty@azerty.com', '')
       .then(async () => {
         const storedUsers = await dataBase.getUsers();
         console.log('store', storedUsers);
@@ -48,7 +47,7 @@ function Pokematos() {
     //onPressAddUser();
   }, [loadDataCallback]);
 
-  function Item({title}) {
+  /*function Item({title}) {
     return (
       <TouchableOpacity
         style={styles.item}
@@ -56,7 +55,7 @@ function Pokematos() {
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     );
-  }
+  }*/
   if (afficheContact == true) {
     return (
       <>
