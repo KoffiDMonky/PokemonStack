@@ -43,7 +43,13 @@ export const createTable = () => {
 };
 
 export const getUsers = async () => {
-  let selectQuery = await executeQuery('SELECT * FROM users', []);
+  let selectQuery = await executeQuery('SELECT * FROM users ORDER BY first_name', []);
+  var rows = selectQuery.rows;
+  return rows.raw();
+};
+
+export const getMainUser = async () => {
+  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 1 ', []);
   var rows = selectQuery.rows;
   return rows.raw();
 };
@@ -125,10 +131,10 @@ export const updateContact = async (
 };
 
 
-export const deleteUser = async () => {
+export const deleteContact = async (id) => {
 
-  let selectQuery = await executeQuery(
-    `DELETE FROM users where id=?`[id],
+   let selectQuery = await executeQuery(
+    `DELETE FROM users where id=?`, [id]
   );
   var rows = selectQuery.rows;
   return rows.raw();

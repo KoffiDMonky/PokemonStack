@@ -1,6 +1,6 @@
 import ListePokemon from './Pokedex';
 import Pokematos from './Pokematos';
-import IdCard from './IdCard';
+import CarteDresseur from './CarteDresseur';
 import Carte from './Carte';
 
 import {StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
@@ -49,16 +49,9 @@ function Navigation() {
         <Tab.Screen name="Pokedex" children={() => <ListePokemon />} />
         <Tab.Screen
           name="Pokematos"
-          // options={{
-          //   headerRight: () => (
-          //     <TouchableOpacity style={styles.addButton}>
-          //       <Icon name='plus' size={30} color='#000000' />
-          //     </TouchableOpacity>
-          //   ),
-          // }}
           children={() => <Pokematos afficheContact={afficheContact} setAffichageContact={setAffichageContact} />}
         />
-        <Tab.Screen name="Carte de dresseur" children={() => <IdCard />} />
+        <Tab.Screen name="Carte de dresseur" children={() => <CarteDresseur />} />
         <Tab.Screen name="Carte" children={() => <Carte />} />
       </Tab.Navigator>
     </NavigationContainer>

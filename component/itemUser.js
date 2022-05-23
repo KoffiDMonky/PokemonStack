@@ -8,22 +8,22 @@ function ItemUser(props) {
   const setSelectedId = props.setSelectedId;
 
   const id = props.id;
+  const rowId = props.rowId;
   const nom = props.nom;
   const prenom = props.prenom;
 
   return (
     <TouchableOpacity
       style={[styles.card, {borderColor: 'black'}]}
-      onPress={() => {setSelectedId(id); setAfficheContact(!afficheContact)} }>
+      onPress={() => { setSelectedId(rowId); setAfficheContact(!afficheContact)} }>
       <View style={styles.head}>
-        <Text style={[styles.num, {color: 'black'}]}>#{id}</Text>
+        {/* <Text style={[styles.num, {color: 'black'}]}>#{id}</Text> */}
       </View>
       <View style={styles.body}>
-        {/* <Text>{type}</Text> */}
         <Image style={styles.imgList} source={require('../assets/Red_profile.webp')} />
       </View>
       <View style={[styles.buttom, {backgroundColor: 'black'}]}>
-        <Text style={styles.title}>{nom} {prenom}</Text>
+        <Text style={styles.title}> {prenom} {nom}</Text>
       </View>
     </TouchableOpacity>
   );
