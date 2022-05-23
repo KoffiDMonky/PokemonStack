@@ -10,125 +10,113 @@ import {
 
 import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import LaunchCall from './LaunchCall';
+import ModifContact from './ModifContact';
 
 function CarteMainUser(props) {
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
-  const [user, setUser] = useState();
+  const user = props.user;
+  // const objetUser = true;
+  const objetUser = user[0];
 
-  console.log(user);
 
-    //Méthode permettant d'ajouter un utilisateur en base de donnée
-    const onPressAddUser = () => {
-        dataBase.createTable();
-        dataBase
-          .addContact(
-            'Houessou',
-            'Agenor',
-            'test',
-            '0606060606',
-            'test@test.com',
-            '',
-            '1',
-          )
-          .then(async () => {
-            const mainUser = await dataBase.getMainUser();
-            if (mainUser) {
-                setUser(mainUser);
-            //   setAjouterContact(!ajouterContact);
-            }
-          });
-      };
-    
+  //Méthode permettant d'ajouter un utilisateur en base de donnée
+  const onPressAddUser = () => {
+    dataBase.createTable();
+    dataBase
+      .addContact(
+        'Hallyday',
+        'Johnny',
+        'test',
+        '0606060606',
+        'test@test.com',
+        '',
+        '1',
+      )
+      .then(async () => {
+        const mainUser = await dataBase.getMainUser();
+        if (mainUser) {
+          setUser(mainUser);
+          //   setAjouterContact(!ajouterContact);
+        }
+      });
+  };
 
-//   const loadUserCallback = useCallback(async () => {
-//     try {
-//       const mainUser = await dataBase.getMainUser(); //Appel à la fonction mainUser pour récupérer l'utilisateur de l'appli
 
-//       if (mainUser.length) {
-//         //Si nous avons un utilisateur, on le stock dans la variable d'état User
-//         console.log(mainUser);
-//         // setUser(mainUser);
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }, []);
+  if (objetUser) {
+    return (
+      <View style={styles.body}>
+        <View style={styles.image}>
+          <Image
+            style={styles.pic}
+            source={require('../assets/Red_profile.webp')}
+          />
+        </View>
+        <View style={styles.info}>
+          <Text style={styles.titre}>
+            {objetUser.first_name} {objetUser.name}
+          </Text>
+          <View style={styles.detail}>
+            <View style={styles.option}>
+              <LaunchCall phone={objetUser.phone_number} />
 
-  useEffect(() => {
-    // loadUserCallback();
-    // onPressAddUser();
-  }, [/*loadUserCallback*/]);
-
-  return (
-    <View style={styles.body}>
-      <StatusBar style="auto" />
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
-      <View style={styles.info}>
-        <Text style={styles.titre}>PRENOM NOM</Text>
-        <View style={styles.detail}>
-          <View style={styles.option}>
-            <TouchableOpacity
-              style={styles.optionTouchable}
-              onPress={() => setAfficheContact(!afficheContact)}>
-              <Icon name="phone" size={40} color="#000000" />
-              <Text style={styles.textTouchable}>Appel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionTouchable}
-              onPress={() => setModifierContact(!modifierContact)}>
-              <Icon name="pencil" size={35} color="#000000" />
-              <Text style={styles.textTouchable}>Modifier</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionTouchable}
-              onPress={() => setAfficheQrCode(!afficheQrCode)}>
-              <Icon name="share" size={35} color="#000000" />
-              <Text style={styles.textTouchable}>Partager</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Telephone : PHONE
-            </Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>Email : MAIL</Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Adresse : ADRESSE
-            </Text>
+              <TouchableOpacity
+                style={styles.optionTouchable}
+                onPress={() => setModifierContact(!modifierContact)}>
+                <Icon name="pencil" size={35} color="#000000" />
+                <Text style={styles.textTouchable}>Modifier</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionTouchable}
+                onPress={() => setAfficheQrCode(!afficheQrCode)}>
+                <Icon name="share" size={35} color="#000000" />
+                <Text style={styles.textTouchable}>Partager</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Telephone : {objetUser.phone_number}
+              </Text>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Email : {user[0].mail}
+              </Text>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Adresse : {objetUser.adress}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  } else {
+    return (
+      <View
+        style={[styles.body, {alignItems: 'center', justifyContent: 'center'}]}>
+        <Text style={styles.titreText}>
+          Veuillez renseigner vos coordonnées !
+        </Text>
+        <TouchableOpacity
+          style={styles.add}
+          onPress={() => onPressUpdateContact()}>
+          <Icon name="plus" size={25} color="#000000" />
+          <Text style={styles.titreText}> Ajouter</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  //FICHE POKEMON
   body: {
     height: '100%',
     backgroundColor: '#F9CF30',
-  },
-  top: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-  },
-  topName: {
-    fontSize: 30,
-    fontWeight: 'bold',
   },
   titre: {
     flex: 1,
@@ -142,9 +130,20 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center',
   },
+  titreText: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#00000070',
+  },
   detail: {
     flex: 8,
     alignItems: 'center',
+  },
+  pic: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
   },
   info: {
     flex: 6,
@@ -182,61 +181,21 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
   },
-  id: {
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
   image: {
     flex: 3,
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 5,
+    zIndex: 5
   },
-  pic: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
-  },
-  propos: {
-    flex: 3,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  caracteristique: {
+  add: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    width: '80%',
-    padding: 5,
-  },
-  details: {
-    paddingHorizontal: 25,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  detailsMiddle: {
-    paddingHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  description: {
-    width: '85%',
-    textAlign: 'center',
-    padding: 5,
-    color: '#212121',
-  },
-  stats: {
-    flex: 3,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  darkText: {
-    color: '#212121',
-  },
-  darkTitle: {
-    color: '#212121',
-    fontWeight: 'bold',
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderColor: '#D90D43',
+    borderWidth: 1,
+    borderRadius: 10,
   },
 });
 

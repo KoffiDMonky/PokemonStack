@@ -3,24 +3,25 @@ import Pokematos from './Pokematos';
 import CarteDresseur from './CarteDresseur';
 import Carte from './Carte';
 
-import {StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
-import React,{ useState } from 'react';
+import {StatusBar, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 //const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function Navigation() {
-
   const [afficheContact, setAfficheContact] = useState(false);
 
-    //Méthode pour passer setAfficheContact en props au composant FicheContact
-    const setAffichageContact = bool => {
-      setAfficheContact(bool);
-    };
+
+  //Méthode pour passer setAfficheContact en props au composant FicheContact
+  const setAffichageContact = bool => {
+    setAfficheContact(bool);
+  };
 
 
   return (
@@ -28,7 +29,7 @@ function Navigation() {
       <StatusBar style="auto" />
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({ color, size}) => {
+          tabBarIcon: ({color, size}) => {
             let iconName;
 
             if (route.name === 'Pokedex') {
@@ -49,9 +50,17 @@ function Navigation() {
         <Tab.Screen name="Pokedex" children={() => <ListePokemon />} />
         <Tab.Screen
           name="Pokematos"
-          children={() => <Pokematos afficheContact={afficheContact} setAffichageContact={setAffichageContact} />}
+          children={() => (
+            <Pokematos
+              afficheContact={afficheContact}
+              setAffichageContact={setAffichageContact}
+            />
+          )}
         />
-        <Tab.Screen name="Carte de dresseur" children={() => <CarteDresseur />} />
+        <Tab.Screen
+          name="Carte de dresseur"
+          children={() => <CarteDresseur />}
+        />
         <Tab.Screen name="Carte" children={() => <Carte />} />
       </Tab.Navigator>
     </NavigationContainer>
@@ -64,7 +73,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 });
 

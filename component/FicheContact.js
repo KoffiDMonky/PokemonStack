@@ -7,7 +7,6 @@ import LaunchCall from './LaunchCall';
 
 function FicheContact(props) {
   const [modifierContact, setModifierContact] = useState(false);
-  const [popUp, setPopUp] = useState(true);
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
   const contact = props.contact;
@@ -77,12 +76,9 @@ function FicheContact(props) {
           </Text>
           <View style={styles.detail}>
             <View style={styles.option}>
+
             <LaunchCall phone={phone} />
-              {/* <TouchableOpacity style={styles.optionTouchable}
-                onPress={() => setAfficheContact(!afficheContact)}>
-                   <Icon name="phone" size={40} color="#000000" />
-                <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
-              </TouchableOpacity> */}
+
               <TouchableOpacity style={styles.optionTouchable}
                 onPress={() => setModifierContact(!modifierContact)}>
                   <Icon name="pencil" size={35} color="#000000" />

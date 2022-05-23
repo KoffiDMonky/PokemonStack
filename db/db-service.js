@@ -22,7 +22,7 @@ const executeQuery = (sql, params = []) =>
       );
     });
   });
-const tableName = 'users';
+
 var db = openDatabase({ name: 'pokestackDataBase.db' });
 
 export const createTable = () => {
@@ -43,13 +43,13 @@ export const createTable = () => {
 };
 
 export const getUsers = async () => {
-  let selectQuery = await executeQuery('SELECT * FROM users ORDER BY first_name', []);
+  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 0 ORDER BY first_name', []);
   var rows = selectQuery.rows;
   return rows.raw();
 };
 
 export const getMainUser = async () => {
-  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 1 ', []);
+  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 1', []);
   var rows = selectQuery.rows;
   return rows.raw();
 };
