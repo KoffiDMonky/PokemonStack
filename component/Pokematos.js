@@ -1,19 +1,15 @@
-import {Text, View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 
 import PokematosFlatlist from './PokematosFlatlist';
 
-function Pokematos() {
+function Pokematos(props) {
   const [users, setUsers] = useState();
-  const [afficheContact, setAfficheContact] = useState(false);
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant de l'utilisateur sélectionner pour afficher les bonnes données dans la fiche
+  const afficheContact = props.afficheContact;
+  const setAffichageContact = props.setAffichageContact;
 
-  //Méthode pour passer setAfficheContact en props au composant FicheContact
-  const setAffichageContact = bool => {
-    setAfficheContact(bool);
-  };
 
   //Méthode pour passer setSelectedId en props au composant PokematosFlatlist
   const idSelectedValue = value => {
@@ -27,7 +23,7 @@ function Pokematos() {
 
       if (storedUsers.length) {
         //Si nous avons des utilisateurs, on les stocks dans la variable d'état Users
-        setUsers(storedUsers); 
+        setUsers(storedUsers);
       }
     } catch (error) {
       console.error(error);
@@ -38,13 +34,14 @@ function Pokematos() {
   const onPressAddUser = () => {
     dataBase.createTable();
     dataBase
-      .addUser(
-        'lelievre',
-        'annaeg',
-        'une adresse au pif',
+      .addContact(
+        'Rival',
+        'Regis',
+        'Bourg palette',
         '0123456789',
         'azerty@azerty.com',
         '',
+        '1'
       )
       .then(async () => {
         const storedUsers = await dataBase.getUsers();
@@ -57,7 +54,7 @@ function Pokematos() {
 
   useEffect(() => {
     loadDataCallback();
-    //onPressAddUser();
+    // onPressAddUser();
   }, [loadDataCallback]);
 
   if (afficheContact == true) {
@@ -67,6 +64,7 @@ function Pokematos() {
           contact={users[selectedId - 1]}
           afficheContact={afficheContact}
           setAfficheContact={setAffichageContact}
+          setUsers={loadDataCallback}
         />
       </>
     );

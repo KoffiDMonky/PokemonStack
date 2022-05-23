@@ -8,22 +8,26 @@ function FicheContact(props) {
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
   const contact = props.contact;
+  const setUsers = props.setUsers
 
+  const id = contact.id;
   const nom = contact.name;
   const prenom = contact.first_name;
   const adresse = contact.adress;
   const mail = contact.mail;
   const phone = contact.phone_number;
+  const avatar = contact.avatar;
 
   if (modifierContact == false) {
     return (
       <View style={styles.body}>
         <View style={styles.top}>
-          <TouchableOpacity style={styles.topTouchable} onPress={() => setAfficheContact(!afficheContact)}>
+          <TouchableOpacity
+            style={styles.topTouchable}
+            onPress={() => setAfficheContact(!afficheContact)}>
             <Icon name="arrow-left" size={20} color={'dark'} />
             <Text style={styles.topName}> {contact.name}</Text>
           </TouchableOpacity>
-          <Text style={styles.id}>#</Text>
         </View>
         <View style={styles.image}>
           <Image
@@ -37,16 +41,19 @@ function FicheContact(props) {
           </Text>
           <View style={styles.detail}>
             <View style={styles.option}>
-              <TouchableOpacity
+              <TouchableOpacity style={styles.optionTouchable}
                 onPress={() => setAfficheContact(!afficheContact)}>
+                   <Icon name="phone" size={40} color="#000000" />
                 <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setAfficheContact(!afficheContact)}>
+              <TouchableOpacity style={styles.optionTouchable}
+                onPress={() => setModifierContact(!modifierContact)}>
+                  <Icon name="pencil" size={35} color="#000000" />
                 <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              <TouchableOpacity style={styles.optionTouchable}
                 onPress={() => setAfficheContact(!afficheContact)}>
+                  <Icon name="share" size={35} color="#000000" />
                 <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
               </TouchableOpacity>
             </View>
@@ -73,6 +80,9 @@ function FicheContact(props) {
         <ModifContact
           modifierContact={modifierContact}
           setModifierContact={setModifierContact}
+          setUsers={setUsers}
+          backgroundColor={'#D90D43'}
+          contact = {[id,nom, prenom, adresse, mail, phone, avatar]}
         />
       </>
     );
@@ -133,11 +143,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '85%',
-    paddingVertical: 25,
+    paddingVertical: 15,
     borderTopWidth: 1,
     borderTopColor: 'black',
     borderBottomWidth: 1,
     borderBottomColor: 'black',
+
+  },
+  optionTouchable: {
+    alignItems: 'center',
+    width: 90
   },
   coordonnees: {
     flex: 2,

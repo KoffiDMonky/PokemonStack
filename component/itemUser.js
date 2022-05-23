@@ -9,7 +9,7 @@ function ItemUser(props) {
 
   const id = props.id;
   const nom = props.nom;
-
+  const prenom = props.prenom;
 
   return (
     <TouchableOpacity
@@ -23,7 +23,7 @@ function ItemUser(props) {
         <Image style={styles.imgList} source={require('../assets/Red_profile.webp')} />
       </View>
       <View style={[styles.buttom, {backgroundColor: 'black'}]}>
-        <Text style={styles.title}>{nom}</Text>
+        <Text style={styles.title}>{nom} {prenom}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'white',
     borderColor: 'black',
+    textAlign: 'center'
   },
 
   num: {

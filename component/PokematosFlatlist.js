@@ -8,6 +8,7 @@ function PokematosFlatlist(props) {
   const setAfficheContact = props.setAfficheContact;
   const afficheContact = props.afficheContact;
 
+
   return (
     <View style={styles.background}>
       <View>
@@ -18,7 +19,7 @@ function PokematosFlatlist(props) {
             <ItemUser
               id={item.id}
               nom={item.name}
-              prenom={item.first_Name}
+              prenom={item.first_name}
               img={item.avatar}
               adresse={item.adress}
               mail={item.mail}

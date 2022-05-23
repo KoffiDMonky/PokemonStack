@@ -32,6 +32,7 @@ function IdCard() {
         <ModifContact
           modifierContact={modifierContact}
           setModifierContact={setModifierContact}
+          backgroundColor={'#F9CF30'}
         />
       );
     } else {
