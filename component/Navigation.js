@@ -2,11 +2,13 @@ import ListePokemon from './Pokedex';
 import Pokematos from './Pokematos';
 import IdCard from './IdCard';
 import Carte from './Carte';
+import LaunchQrScan from './LaunchQrScan';
 
-import {StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
-import * as React from 'react';
+
+import {StatusBar, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+//import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -14,6 +16,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Tab = createBottomTabNavigator();
 
 function Navigation() {
+  const [afficheQrScan, setAfficheQrScan] = useState(false);
+
+  if (afficheQrScan){
+    return (
+      <LaunchQrScan />
+    );
+  } else {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
@@ -42,7 +51,7 @@ function Navigation() {
           name="Pokematos"
           options={{
             headerRight: () => (
-              <TouchableOpacity style={styles.addButton}>
+              <TouchableOpacity style={styles.addButton} onPress={() => setAfficheQrScan(!afficheQrScan)}>
                 <Icon name='plus' size={30} color='#000000' />
               </TouchableOpacity>
             ),
@@ -54,7 +63,7 @@ function Navigation() {
         <Tab.Screen name="Carte" children={() => <Carte />} />
       </Tab.Navigator>
     </NavigationContainer>
-  );
+  );}
 }
 
 const styles = StyleSheet.create({
