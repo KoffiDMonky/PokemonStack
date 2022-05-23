@@ -2,9 +2,11 @@ import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import ModifContact from './ModifContact';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import LaunchCall from './LaunchCall';
 
 function FicheContact(props) {
   const [modifierContact, setModifierContact] = useState(false);
+  const [afficheCallModule, setAfficheCallModule] = useState(false);
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
   const contact = props.contact;
@@ -15,6 +17,11 @@ function FicheContact(props) {
   const mail = contact.mail;
   const phone = contact.phone_number;
 
+  if (afficheCallModule){
+    return(
+    <LaunchCall phone={('0612909535')}/>
+    );
+  }else{
   if (modifierContact == false) {
   return (
     <View style={styles.body}>
@@ -38,7 +45,7 @@ function FicheContact(props) {
         <View style={styles.detail}>
           <View style={styles.option}>
             <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
+              onPress={() => setAfficheCallModule(!afficheCallModule)}>
               <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -76,7 +83,7 @@ function FicheContact(props) {
         />
       </>
     );
-  }
+  }}
 }
 
 const styles = StyleSheet.create({
