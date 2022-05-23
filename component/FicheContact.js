@@ -17,60 +17,56 @@ function FicheContact(props) {
   const mail = contact.mail;
   const phone = contact.phone_number;
 
- /* if (afficheCallModule){
-    return(
-    <LaunchCall phone={('0612909535')} />
-    );
-  }else{*/
   if (modifierContact == false) {
-  return (
-    <View style={styles.body}>
-      <View style={styles.top}>
-      <TouchableOpacity style={styles.topTouchable} onPress={() => setAfficheContact(!afficheContact)}>
+    return (
+      <View style={styles.body}>
+        <View style={styles.top}>
+          <TouchableOpacity
+            style={styles.topTouchable}
+            onPress={() => setAfficheContact(!afficheContact)}>
             <Icon name="arrow-left" size={20} color={'dark'} />
             <Text style={styles.topName}> {contact.name}</Text>
-        </TouchableOpacity>
-        <Text style={styles.id}>#</Text>
-      </View>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
-      <View style={styles.info}>
-        <Text style={styles.titre}>
-          {prenom} {nom}
-        </Text>
-        <View style={styles.detail}>
-          <View style={styles.option}>
+          </TouchableOpacity>
+          <Text style={styles.id}>#</Text>
+        </View>
+        <View style={styles.image}>
+          <Image
+            style={styles.pic}
+            source={require('../assets/Red_profile.webp')}
+          />
+        </View>
+        <View style={styles.info}>
+          <Text style={styles.titre}>
+            {prenom} {nom}
+          </Text>
+          <View style={styles.detail}>
+            <View style={styles.option}>
+              <LaunchCall phone={'0612909535'} />
 
-            <LaunchCall phone={('0612909535')}/>
-            
-            <TouchableOpacity
-              onPress={() => setModifierContact(!modifierContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setAfficheContact(!afficheContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Telephone : {phone}
-            </Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>Email : {mail}</Text>
-          </View>
-          <View style={styles.coordonnees}>
-            <Text style={{color: 'black', fontSize: 15}}>
-              Adresse : {adresse}
-            </Text>
+              <TouchableOpacity
+                onPress={() => setModifierContact(!modifierContact)}>
+                <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setAfficheContact(!afficheContact)}>
+                <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Telephone : {phone}
+              </Text>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>Email : {mail}</Text>
+            </View>
+            <View style={styles.coordonnees}>
+              <Text style={{color: 'black', fontSize: 15}}>
+                Adresse : {adresse}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
       </View>
     );
   } else {
@@ -82,8 +78,8 @@ function FicheContact(props) {
         />
       </>
     );
-  }}
-//}
+  }
+}
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
