@@ -1,26 +1,3 @@
-/*import React from 'react';
-import { NativeModules, Button } from 'react-native';
-
-const LaunchCall = () => {
-  const onPress = () => {
-    console.log('We will invoke the native module here!');
-    CallModule.call('0612909535');
-    console.log('ça marche');
-
-  };
-  const { CallModule } = NativeModules;
-
-  return (
-    <Button
-      title="Click to invoke your native module!"
-      color="#841584"
-      onPress={onPress}
-    />
-  );
-};
-
-export default LaunchCall;*/
-
 import React from 'react';
 import {
   PermissionsAndroid,
@@ -28,13 +5,13 @@ import {
   View,
   NativeModules,
   PlatformColor,
-  Text
+  Text,
 } from 'react-native';
-//import Icon from 'react-native-ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const { CallModule } = NativeModules;
+const {CallModule} = NativeModules;
 
-export default function LaunchCall({ phone }) {
+function LaunchCall({phone}) {
   const requestCallPermission = async () => {
     if (Platform.OS === 'android') {
       try {
@@ -51,16 +28,27 @@ export default function LaunchCall({ phone }) {
         return false;
       }
     }
-  }
+  };
   const call = async () => {
     if (await requestCallPermission()) {
-      CallModule.call(phone)
+      CallModule.call(phone);
     }
-  }
+  };
 
-  return <TouchableNativeFeedback onPress={() => call()}>
-    <View style={{ alignItems: 'stretch', }} >
-      <Text>Appel</Text>
-    </View>
-  </TouchableNativeFeedback>
+  //   return <TouchableNativeFeedback onPress={() => call()}>
+  //     <View style={{ alignItems: 'stretch', }} >
+  //     <Icon name="phone" size={20} color={'white'} />
+  //     </View>
+  //   </TouchableNativeFeedback>
+
+  return (
+    <TouchableNativeFeedback onPress={() => call()}>
+      <View>
+        <Icon name="phone" size={40} color="#000000" />
+        <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
+      </View>
+    </TouchableNativeFeedback>
+  );
 }
+
+export default LaunchCall;

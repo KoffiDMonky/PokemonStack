@@ -17,11 +17,11 @@ function FicheContact(props) {
   const mail = contact.mail;
   const phone = contact.phone_number;
 
-  if (afficheCallModule){
+ /* if (afficheCallModule){
     return(
-    <LaunchCall phone={('0612909535')}/>
+    <LaunchCall phone={('0612909535')} />
     );
-  }else{
+  }else{*/
   if (modifierContact == false) {
   return (
     <View style={styles.body}>
@@ -44,10 +44,9 @@ function FicheContact(props) {
         </Text>
         <View style={styles.detail}>
           <View style={styles.option}>
-            <TouchableOpacity
-              onPress={() => setAfficheCallModule(!afficheCallModule)}>
-              <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
-            </TouchableOpacity>
+
+            <LaunchCall phone={('0612909535')}/>
+            
             <TouchableOpacity
               onPress={() => setModifierContact(!modifierContact)}>
               <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
@@ -84,7 +83,7 @@ function FicheContact(props) {
       </>
     );
   }}
-}
+//}
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
