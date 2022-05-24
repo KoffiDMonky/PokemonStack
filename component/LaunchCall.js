@@ -35,12 +35,6 @@ function LaunchCall({phone}) {
     }
   };
 
-  //   return <TouchableNativeFeedback onPress={() => call()}>
-  //     <View style={{ alignItems: 'stretch', }} >
-  //     <Icon name="phone" size={20} color={'white'} />
-  //     </View>
-  //   </TouchableNativeFeedback>
-
   return (
     <TouchableNativeFeedback onPress={() => call()}>
       <View>

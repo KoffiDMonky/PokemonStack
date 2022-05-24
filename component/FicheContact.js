@@ -6,7 +6,6 @@ import LaunchCall from './LaunchCall';
 
 function FicheContact(props) {
   const [modifierContact, setModifierContact] = useState(false);
-  const [afficheCallModule, setAfficheCallModule] = useState(false);
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
   const contact = props.contact;
@@ -27,7 +26,7 @@ function FicheContact(props) {
             <Icon name="arrow-left" size={20} color={'dark'} />
             <Text style={styles.topName}> {contact.name}</Text>
           </TouchableOpacity>
-          <Text style={styles.id}>#</Text>
+          {/* <Text style={styles.id}>#</Text> */}
         </View>
         <View style={styles.image}>
           <Image
