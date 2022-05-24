@@ -11,7 +11,7 @@ import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function CreerUser(props) {
+function CreerUser(props) { //Composant permettant la création de la "carte dresseur" de l'utilisateur de l'application 
   const ajouterUser = props.ajouterUser;
   const setAjouterUser = props.setAjouterUser;
   const backgroundColor = props.backgroundColor;
@@ -27,9 +27,9 @@ function CreerUser(props) {
 
   //Méthode permettant d'ajouter un utilisateur en base de donnée
   const onPressAddUser = () => {
-    dataBase.createTable();
+    dataBase.createTable(); //On créé une table Users si elle n'existe pas
     dataBase
-      .addContact(
+      .addContact( //On lance la méthode de création de contact (le dernier paramètre est à 1 car c'est l'utilisateur de l'application)
         nom,
         prenom,
         address,
@@ -38,7 +38,7 @@ function CreerUser(props) {
         '',
         '1',
       )
-      .then(async () => {
+      .then(async () => { //Ensuite on charge notre utilisateur pour afficher ses informations
         const mainUser = await dataBase.getMainUser();
         if (mainUser) {
           setUser(mainUser);

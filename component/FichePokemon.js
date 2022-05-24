@@ -9,11 +9,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function FichePokemon(props) {
+function FichePokemon(props) { //Composant qui affiche les informations détaillés sur un Pokémon
+ 
+  //Props provenant du composant parent
   const pokemon = props.pokemon;
   const affichePokemon = props.affichePokemon;
   const setAffichePokemon = props.setAffichePokemon;
 
+  //Permet d'associer un type de pokémon à un code hexadécimal pour afficher dynamiquement les couleurs
   const typesColor = {
     grass: '#74CB48',
     ground: '#DEC16B',
@@ -35,6 +38,10 @@ function FichePokemon(props) {
     steel: '#B7B9D0',
   };
 
+  //Définition dynamique de la couleurs en fonction du type
+  const color = typesColor[pokemon.types.name];
+
+  //Défini un alias aux labels 
   const aliasStat = {
     hp: 'HP',
     attack: 'ATK',
@@ -44,17 +51,17 @@ function FichePokemon(props) {
     speed: 'SPD',
   };
 
-  const color = typesColor[pokemon.types.name];
+  
 
-  const abilities = pokemon.abilities;
-  const abilitiesList = abilities.map((ability, index) => (
+  const abilities = pokemon.abilities; //On stock les abilités du pokémon
+  const abilitiesList = abilities.map((ability, index) => ( //On parcours le tableau d'abilité pour les afficher sous forme de liste
     <Text key={index} style={styles.darkText}>
       {ability.ability.name}
     </Text>
   ));
 
-  const stats = pokemon.stats;
-  const statsList = stats.map((stat, index) => (
+  const stats = pokemon.stats; //On stock les statistiques du pokémon
+  const statsList = stats.map((stat, index) => ( //On parcours le tableau de statistiques pour les afficher sous forme de liste
     <View
       key={index}
       style={{width: '95%', flexDirection: 'row', justifyContent: 'center'}}>
@@ -98,14 +105,14 @@ function FichePokemon(props) {
     </View>
   ));
 
-  return (
+  return ( //Affichage de la fiche du pokemon
     <View style={[styles.body, {backgroundColor: color}]}>
       <StatusBar />
       <View style={styles.top}>
         <TouchableOpacity
           style={styles.topTouchable}
           onPress={() => setAffichePokemon(!affichePokemon)}>
-          <Icon name="arrow-left" size={20} color={'dark'} />
+          <Icon name="arrow-left" size={20} color={'#000000'} />
           <Text style={styles.name}> {pokemon.name}</Text>
         </TouchableOpacity>
         <Text style={styles.id}>#{pokemon.id}</Text>

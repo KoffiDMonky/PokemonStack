@@ -11,7 +11,7 @@ import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function CreerContact(props) {
+function CreerContact(props) { //Composant permettant la création de contact
   const ajouterContact = props.ajouterContact;
   const setAjouterContact = props.setAjouterContact;
   const backgroundColor = props.backgroundColor;
@@ -25,11 +25,11 @@ function CreerContact(props) {
   const [avatar, setAvatar] = useState('');
 
 
-  //Méthode permettant d'ajouter un utilisateur en base de donnée
+  //Méthode permettant d'ajouter un contact en base de donnée 
   const onPressAddUser = () => {
-    dataBase.createTable();
+    dataBase.createTable(); //On créé une table Users si elle n'existe pas
     dataBase
-      .addContact(
+      .addContact( //On lance la méthode de création de contact (le dernier paramètre est à 0 car ce sont des contacts et non l'utilisateur de l'application)
         nom,
         prenom,
         address,
@@ -38,7 +38,7 @@ function CreerContact(props) {
         '',
         '0',
       )
-      .then(async () => {
+      .then(async () => { //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
         const storedUsers = await dataBase.getUsers();
         if (storedUsers.length) {
           setUsers(storedUsers);

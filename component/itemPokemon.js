@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-function Item(props) {
+function ItemPokemon(props) { //Composant permettant de définir les items de la liste des pokémons
 
   const affichePokemon = props.affichePokemon;
   const setAffichePokemon = props.setAffichePokemon;
@@ -11,9 +11,8 @@ function Item(props) {
   const nom = props.nom;
   const img = props.img;
   const type = props.type;
-  // const typeName = type.name;
-  // const [typeColor, setTypeColor] = useState('');
 
+  //Permet d'associer un type de pokémon à un code hexadécimal pour afficher dynamiquement les couleurs
   const typesColor = {
     grass: '#74CB48',
     ground: '#DEC16B',
@@ -35,16 +34,10 @@ function Item(props) {
     steel: '#B7B9D0',
   };
 
+    //Définition dynamique de la couleurs en fonction du type
   const color = typesColor[type.name];
 
-
-
-//   const showSpecificPokemon = () => {
-//     setAffichePokemon(!affichePokemon)
-//     // setSelectedId(id);
-// }
-
-  return (
+  return ( //Affichage de l'item
     <TouchableOpacity
       style={[styles.card, {borderColor: color}]}
       onPress={() => {setSelectedId(id); setAffichePokemon(!affichePokemon)} }>
@@ -52,7 +45,6 @@ function Item(props) {
         <Text style={[styles.num, {color: color}]}>#{id}</Text>
       </View>
       <View style={styles.body}>
-        {/* <Text>{type}</Text> */}
         <Image style={styles.imgList} source={{uri: img}} />
       </View>
       <View style={[styles.buttom, {backgroundColor: color}]}>
@@ -63,15 +55,13 @@ function Item(props) {
 }
 
 const styles = StyleSheet.create({
-  flatlist: {},
-  //LISTE CARTE POKEMON
+
   card: {
     flex: 1,
     backgroundColor: '#F6F6F6',
     color: '#20232a',
     margin: 5,
     height: 170,
-    // borderColor: '#F57D31',
     borderWidth: 2,
     borderRadius: 15,
   },
@@ -84,15 +74,12 @@ const styles = StyleSheet.create({
 
   body: {
     flex: 3,
-    //position: "absolute",
-    // flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   buttom: {
     flex: 1.5,
-    // backgroundColor: '#F57D31',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
     alignItems: 'center',
@@ -112,8 +99,7 @@ const styles = StyleSheet.create({
     height: '95%',
     width: '95%',
     resizeMode: 'contain',
-    //alignSelf: "center",
   },
 });
 
-export default Item;
+export default ItemPokemon;

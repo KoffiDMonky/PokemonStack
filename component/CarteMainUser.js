@@ -1,36 +1,32 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
   Image,
   StyleSheet,
   TouchableOpacity,
-  StatusBar,
 } from 'react-native';
 
-// import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import LaunchCall from './LaunchCall';
-// import ModifContact from './ModifContact';
 import CreerUser from './CreerUser';
 
-function CarteMainUser(props) {
+function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'ajouter les informations de l'utilisateur et de les afficher
+
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
   const user = props.user;
   const setUser = props.setUser;
-  // const objetUser = false;
   const objetUser = user[0];
   const [ajouterUser, setAjouterUser] = useState(false);
 
-
-  const toggleCreateUser = value => {
+  //Méthode pour passer stateCreateUser en props au composant ajouterUser
+  const stateCreateUser = value => {
     setAjouterUser(value);
   };
 
-  if (objetUser) {
+  if (objetUser) { //Si nous avons un objet contenant les informations de notre utilisateur, on les affiche
     return (
       <View style={styles.body}>
         <View style={styles.image}>
@@ -78,11 +74,11 @@ function CarteMainUser(props) {
       </View>
     );
   } else {
-    if (ajouterUser) {
+    if (ajouterUser) { //Si l'on appuye sur le bouton "+ ajouter , on affiche le composant de création de l'utilisateur
 
-      return <CreerUser ajouterUser={ajouterUser} setAjouterUser={toggleCreateUser} setUser={setUser} />;
+      return <CreerUser ajouterUser={ajouterUser} setAjouterUser={stateCreateUser} setUser={setUser} />;
 
-    } else {
+    } else { //Sinon on affiche la page d'accueil lors de la première connexion qui invite à créer son profil utilisateur
       return (
         <View
           style={[

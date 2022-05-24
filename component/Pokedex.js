@@ -1,22 +1,17 @@
 import {
   FlatList,
-  Text,
   View,
   StyleSheet,
-  TouchableOpacity,
-  Button,
-  Image,
-  Dimensions,
   StatusBar,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import Item from './item';
+import ItemPokemon from './itemPokemon';
 import FichePokemon from './FichePokemon';
 import LoaderPage from './LoaderPage';
 
 function ListePokemon() {
   let allPokemon = []; //Tableau dans lequel nous allons stocker nos 151 pokémons
-  let tableauFin = [];
+  // let tableauFin = [];
   const [affichePokemon, setAffichePokemon] = useState(false); //Variable d'état permettant d'afficher ou non la fiche d'un pokemon
   const [listePokemon, setListePokemon] = useState([]); //Variable d'état contenant notre liste de pokémon
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant du pokémon sélectionner pour afficher les bonnes données dans la fiche
@@ -55,8 +50,8 @@ function ListePokemon() {
         objPokemonFull.id = pokeData.id;
         objPokemonFull.pic = pokeData.sprites.front_default;
         objPokemonFull.types = pokeData.types[0].type;
-        objPokemonFull.weight = Math.round(pokeData.weight * 0.1 * 100) / 100;
-        objPokemonFull.height = Math.round(pokeData.height * 0.1 * 100) / 100;
+        objPokemonFull.weight = Math.round(pokeData.weight * 0.1 * 100) / 100; //On converti le poids dans la bonne unité
+        objPokemonFull.height = Math.round(pokeData.height * 0.1 * 100) / 100; //On converti la taille dans la bonne unité
         objPokemonFull.abilities = pokeData.abilities;
         objPokemonFull.stats = pokeData.stats;
 
@@ -101,9 +96,7 @@ function ListePokemon() {
     getPokemons();
   }, []);
 
-  // console.log(listePokemon[selectedId]);
-
-  if (affichePokemon == true) {
+  if (affichePokemon) {
     return (
       <>
         <FichePokemon
@@ -123,7 +116,7 @@ function ListePokemon() {
             numColumns={2}
             data={listePokemon}
             renderItem={({item}) => (
-              <Item
+              <ItemPokemon
                 id={item.id}
                 nom={item.name}
                 img={item.pic}
