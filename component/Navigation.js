@@ -3,11 +3,12 @@ import Pokematos from './Pokematos';
 import CarteDresseur from './CarteDresseur';
 import Carte from './Carte';
 
-import {StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 //const Stack = createNativeStackNavigator();

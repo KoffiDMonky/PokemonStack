@@ -40,7 +40,6 @@ function Pokematos(props) {
   useEffect(() => {
     dataBase.createTable();
     loadDataCallback();
-    // onPressAddUser();
   }, [loadDataCallback]);
 
   if (afficheContact) {

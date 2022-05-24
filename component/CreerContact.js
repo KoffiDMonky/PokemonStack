@@ -12,6 +12,7 @@ import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function CreerContact(props) {
+  //Composant permettant la création de contact
   const ajouterContact = props.ajouterContact;
   const setAjouterContact = props.setAjouterContact;
   const backgroundColor = props.backgroundColor;
@@ -24,12 +25,12 @@ function CreerContact(props) {
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
 
-
-  //Méthode permettant d'ajouter un utilisateur en base de donnée
+  //Méthode permettant d'ajouter un contact en base de donnée
   const onPressAddUser = () => {
-    dataBase.createTable();
+    dataBase.createTable(); //On créé une table Users si elle n'existe pas
     dataBase
       .addContact(
+        //On lance la méthode de création de contact (le dernier paramètre est à 0 car ce sont des contacts et non l'utilisateur de l'application)
         nom,
         prenom,
         address,
@@ -39,6 +40,7 @@ function CreerContact(props) {
         '0',
       )
       .then(async () => {
+        //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
         const storedUsers = await dataBase.getUsers();
         if (storedUsers.length) {
           setUsers(storedUsers);
@@ -46,7 +48,6 @@ function CreerContact(props) {
         }
       });
   };
-
 
   return (
     <View style={[styles.body, {backgroundColor: backgroundColor}]}>
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#D90D43',
     textTransform: 'uppercase',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   infoScrollView: {
     height: '75%',
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     color: 'black',
     padding: 15,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     flex: 3,
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00000070',
     width: 230,
-    height: 40
+    height: 40,
   },
 });
 

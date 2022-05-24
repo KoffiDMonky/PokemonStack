@@ -13,13 +13,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import LaunchCall from './LaunchCall';
 
 function FicheContact(props) {
-  const [modifierContact, setModifierContact] = useState(false);
-  const [popUp, setPopUp] = useState(true);
+  //Composant définissant la fiche contact
+
+  const [modifierContact, setModifierContact] = useState(false); //Variable d'état permettant de gérer l'affichage du composant ModifContact
+
+  //Props provenant du composant parent
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
-  const contact = props.contact;
   const setUsers = props.setUsers;
-
+  const contact = props.contact;
   const id = contact.id;
   const nom = contact.name;
   const prenom = contact.first_name;
@@ -29,6 +31,8 @@ function FicheContact(props) {
   const avatar = contact.avatar;
 
   const showConfirmDialog = () => {
+    //Méthode permettant d'afficher une alerte avant la suppression d'un contact
+
     Alert.alert(
       'Êtes vous sur de vouloir supprimer le contact ?',
       'message de confirmation',
@@ -50,6 +54,7 @@ function FicheContact(props) {
   };
 
   const onPressDeleteContact = () => {
+    //Méthode permettant la suppression d'un contact et recharge la liste de contact à jour
     dataBase.deleteContact(id).then(async () => {
       const storedUsers = await dataBase.getUsers();
       if (storedUsers.length) {
@@ -59,7 +64,20 @@ function FicheContact(props) {
     });
   };
 
-  if (modifierContact == false) {
+  if (modifierContact) {
+    //On affiche le composant de modification de contact si l'on appuye sur le buton modifier
+    return (
+      <>
+        <ModifContact
+          modifierContact={modifierContact}
+          setModifierContact={setModifierContact}
+          setUsers={setUsers}
+          backgroundColor={'#D90D43'}
+          contact={[id, nom, prenom, adresse, mail, phone, avatar]}
+        />
+      </>
+    );
+  } else {
     return (
       <View style={styles.body}>
         <View style={styles.top}>
@@ -82,11 +100,6 @@ function FicheContact(props) {
           <View style={styles.detail}>
             <View style={styles.option}>
               <LaunchCall phone={phone} />
-              {/* <TouchableOpacity style={styles.optionTouchable}
-                onPress={() => setAfficheContact(!afficheContact)}>
-                   <Icon name="phone" size={40} color="#000000" />
-                <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
-              </TouchableOpacity> */}
               <TouchableOpacity
                 style={styles.optionTouchable}
                 onPress={() => setModifierContact(!modifierContact)}>
@@ -117,23 +130,10 @@ function FicheContact(props) {
         </View>
       </View>
     );
-  } else {
-    return (
-      <>
-        <ModifContact
-          modifierContact={modifierContact}
-          setModifierContact={setModifierContact}
-          setUsers={setUsers}
-          backgroundColor={'#D90D43'}
-          contact={[id, nom, prenom, adresse, mail, phone, avatar]}
-        />
-      </>
-    );
   }
 }
 
 const styles = StyleSheet.create({
-  //FICHE POKEMON
   body: {
     height: '100%',
     backgroundColor: '#D90D43',
@@ -150,10 +150,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 30,
     width: 30,
-  },
-  topName: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
   titre: {
     flex: 1,
@@ -202,10 +198,6 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
   },
-  id: {
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
   image: {
     flex: 3,
     alignItems: 'center',
@@ -216,47 +208,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     resizeMode: 'contain',
-  },
-  propos: {
-    flex: 3,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  caracteristique: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '80%',
-    padding: 5,
-  },
-  details: {
-    paddingHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  detailsMiddle: {
-    paddingHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  description: {
-    width: '85%',
-    textAlign: 'center',
-    padding: 5,
-    color: '#212121',
-  },
-  stats: {
-    flex: 3,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  darkText: {
-    color: '#212121',
-  },
-  darkTitle: {
-    color: '#212121',
-    fontWeight: 'bold',
   },
 });
 

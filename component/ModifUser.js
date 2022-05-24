@@ -11,32 +11,28 @@ import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function ModifContact(props) {
+function ModifUser(props) {
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
   const backgroundColor = props.backgroundColor;
-  const arrayContact = props.contact;
-  const setUsers = props.setUsers;
+  const setUser = props.setUser;
 
-  console.log(arrayContact);
-
-  const idContact = arrayContact[0];
-  const [nom, setNom] = useState(arrayContact[1]);
-  const [prenom, setPrenom] = useState(arrayContact[2]);
-  const [address, setAddress] = useState(arrayContact[3]);
-  const [phone, setPhone] = useState(arrayContact[5]);
-  const [email, setEmail] = useState(arrayContact[4]);
-  const [avatar, setAvatar] = useState(arrayContact[5]);
-
-  console.log(props.contact);
+  const user = props.user[0];
+  const idUser = user.id;
+  const [nom, setNom] = useState(user.name);
+  const [prenom, setPrenom] = useState(user.first_name);
+  const [address, setAddress] = useState(user.adress);
+  const [phone, setPhone] = useState(user.phone_number);
+  const [email, setEmail] = useState(user.mail);
+  const [avatar, setAvatar] = useState(user.avatar);
 
   const onPressUpdateContact = () => {
     dataBase
-      .updateContact(idContact, nom, prenom, address, phone, email, avatar)
+      .updateContact(idUser, nom, prenom, address, phone, email, avatar)
       .then(async () => {
-        const storedUsers = await dataBase.getUsers();
-        if (storedUsers.length) {
-          setUsers(storedUsers);
+        const mainUser = await dataBase.getMainUser();
+        if (mainUser) {
+          setUser(mainUser);
           setModifierContact(!modifierContact);
         }
       });
@@ -209,11 +205,6 @@ const styles = StyleSheet.create({
     width: 230,
     height: 40,
   },
-  pic: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
-  },
 });
 
-export default ModifContact;
+export default ModifUser;

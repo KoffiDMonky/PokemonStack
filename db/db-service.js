@@ -22,8 +22,8 @@ const executeQuery = (sql, params = []) =>
       );
     });
   });
-const tableName = 'users';
-var db = openDatabase({ name: 'pokestackDataBase.db' });
+
+var db = openDatabase({name: 'pokestackDataBase.db'});
 
 export const createTable = () => {
   db.transaction(txn => {
@@ -43,13 +43,19 @@ export const createTable = () => {
 };
 
 export const getUsers = async () => {
-  let selectQuery = await executeQuery('SELECT * FROM users ORDER BY first_name', []);
+  let selectQuery = await executeQuery(
+    'SELECT * FROM users WHERE mainUser = 0 ORDER BY first_name',
+    [],
+  );
   var rows = selectQuery.rows;
   return rows.raw();
 };
 
 export const getMainUser = async () => {
-  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 1 ', []);
+  let selectQuery = await executeQuery(
+    'SELECT * FROM users WHERE mainUser = 1',
+    [],
+  );
   var rows = selectQuery.rows;
   return rows.raw();
 };
@@ -61,7 +67,7 @@ export const addContact = async (
   phone,
   email,
   avatar,
-  mainUser
+  mainUser,
 ) => {
   if (!nameUser) {
     alert('Entrer un Nom !');
@@ -99,7 +105,7 @@ export const updateContact = async (
   adress,
   phone,
   email,
-  avatar
+  avatar,
 ) => {
   if (!nameUser) {
     alert('Entrer un Nom !');
@@ -130,14 +136,8 @@ export const updateContact = async (
   return rows.raw();
 };
 
-
-export const deleteContact = async (id) => {
-
-   let selectQuery = await executeQuery(
-    `DELETE FROM users where id=?`, [id]
-  );
+export const deleteContact = async id => {
+  let selectQuery = await executeQuery(`DELETE FROM users where id=?`, [id]);
   var rows = selectQuery.rows;
   return rows.raw();
-
 };
-
