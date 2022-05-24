@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#00000070'
+    color: '#00000070',
+    width: '40%',
   },
   qrcode: {
     flex: 8,

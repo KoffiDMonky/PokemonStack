@@ -2,28 +2,36 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 function ItemUser(props) {
-
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
   const setSelectedId = props.setSelectedId;
 
   const id = props.id;
+  const rowId = props.rowId;
   const nom = props.nom;
-
+  const prenom = props.prenom;
 
   return (
     <TouchableOpacity
       style={[styles.card, {borderColor: 'black'}]}
-      onPress={() => {setSelectedId(id); setAfficheContact(!afficheContact)} }>
+      onPress={() => {
+        setSelectedId(rowId);
+        setAfficheContact(!afficheContact);
+      }}>
       <View style={styles.head}>
-        <Text style={[styles.num, {color: 'black'}]}>#{id}</Text>
+        {/* <Text style={[styles.num, {color: 'black'}]}>#{id}</Text> */}
       </View>
       <View style={styles.body}>
-        {/* <Text>{type}</Text> */}
-        <Image style={styles.imgList} source={require('../assets/Red_profile.webp')} />
+        <Image
+          style={styles.imgList}
+          source={require('../assets/Red_profile.webp')}
+        />
       </View>
       <View style={[styles.buttom, {backgroundColor: 'black'}]}>
-        <Text style={styles.title}>{nom}</Text>
+        <Text style={styles.title}>
+          {' '}
+          {prenom} {nom}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -67,13 +75,14 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'white',
     borderColor: 'black',
+    textAlign: 'center',
   },
 
   num: {
-    fontSize: 20
+    fontSize: 20,
   },
   imgList: {
     height: '95%',

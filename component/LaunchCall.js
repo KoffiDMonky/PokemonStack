@@ -2,10 +2,12 @@ import React from 'react';
 import {
   PermissionsAndroid,
   TouchableNativeFeedback,
+  TouchableOpacity,
   View,
   NativeModules,
   PlatformColor,
   Text,
+  StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -29,6 +31,7 @@ function LaunchCall({phone}) {
       }
     }
   };
+
   const call = async () => {
     if (await requestCallPermission()) {
       CallModule.call(phone);
@@ -36,13 +39,18 @@ function LaunchCall({phone}) {
   };
 
   return (
-    <TouchableNativeFeedback onPress={() => call()}>
-      <View>
-        <Icon name="phone" size={40} color="#000000" />
-        <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
-      </View>
-    </TouchableNativeFeedback>
+    <TouchableOpacity style={styles.optionTouchable} onPress={() => call()}>
+      <Icon name="phone" size={40} color="#000000" />
+      <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
+    </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  optionTouchable: {
+    alignItems: 'center',
+    width: 90,
+  },
+});
 
 export default LaunchCall;

@@ -11,43 +11,49 @@ import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function ModifContact(props) {
-  const modifierContact = props.modifierContact;
-  const setModifierContact = props.setModifierContact;
+function CreerContact(props) {
+  const ajouterContact = props.ajouterContact;
+  const setAjouterContact = props.setAjouterContact;
   const backgroundColor = props.backgroundColor;
-  const arrayContact = props.contact;
   const setUsers = props.setUsers;
 
-  console.log(arrayContact);
+  const [nom, setNom] = useState('');
+  const [prenom, setPrenom] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [avatar, setAvatar] = useState('');
 
-  const idContact = arrayContact[0];
-  const [nom, setNom] = useState(arrayContact[1]);
-  const [prenom, setPrenom] = useState(arrayContact[2]);
-  const [address, setAddress] = useState(arrayContact[3]);
-  const [phone, setPhone] = useState(arrayContact[5]);
-  const [email, setEmail] = useState(arrayContact[4]);
-  const [avatar, setAvatar] = useState(arrayContact[5]);
 
-  console.log(prenom);
-
-  const onPressUpdateContact = () => {
+  //Méthode permettant d'ajouter un utilisateur en base de donnée
+  const onPressAddUser = () => {
+    dataBase.createTable();
     dataBase
-      .updateContact(idContact, nom, prenom, address, phone, email, avatar)
+      .addContact(
+        nom,
+        prenom,
+        address,
+        phone,
+        email,
+        '',
+        '0',
+      )
       .then(async () => {
         const storedUsers = await dataBase.getUsers();
         if (storedUsers.length) {
           setUsers(storedUsers);
-          setModifierContact(!modifierContact);
+          setAjouterContact(!ajouterContact);
         }
       });
   };
+
 
   return (
     <View style={[styles.body, {backgroundColor: backgroundColor}]}>
       <View style={styles.top}>
         <TouchableOpacity
           style={styles.topTouchable}
-          onPress={() => setModifierContact(!modifierContact)}>
+          onPress={() => setAjouterContact(!ajouterContact)}>
           <Icon name="arrow-left" size={20} color={'#000000'} />
         </TouchableOpacity>
       </View>
@@ -107,7 +113,7 @@ function ModifContact(props) {
           </View>
           <TouchableOpacity
             style={styles.save}
-            onPress={() => onPressUpdateContact()}>
+            onPress={() => onPressAddUser()}>
             <Text style={styles.titreText}>Sauvegarder</Text>
           </TouchableOpacity>
         </View>
@@ -161,7 +167,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#D90D43',
     textTransform: 'uppercase',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   infoScrollView: {
     height: '75%',
@@ -184,7 +190,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     color: 'black',
     padding: 15,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   image: {
     flex: 3,
@@ -207,13 +213,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00000070',
     width: 230,
-    height: 40,
-  },
-  pic: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    height: 40
   },
 });
 
-export default ModifContact;
+export default CreerContact;

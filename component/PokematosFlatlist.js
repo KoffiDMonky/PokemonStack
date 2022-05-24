@@ -14,21 +14,18 @@ function PokematosFlatlist(props) {
         <FlatList
           numColumns={2}
           data={users}
-          renderItem={({item}) => (
+          renderItem={({item, index}) => (
             <ItemUser
+              rowId={index}
               id={item.id}
               nom={item.name}
-              prenom={item.first_Name}
+              prenom={item.first_name}
               img={item.avatar}
-              adresse={item.adress}
-              mail={item.mail}
-              phone={item.phone_number}
               setSelectedId={setSelectedId}
               afficheContact={afficheContact}
               setAfficheContact={setAfficheContact}
             />
           )}
-          keyExtractor={item => item.id}
         />
       </View>
     </View>
@@ -38,7 +35,7 @@ function PokematosFlatlist(props) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#F7F7F7',
-  }
+  },
 });
 
 export default PokematosFlatlist;
