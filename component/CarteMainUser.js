@@ -8,10 +8,11 @@ import {
   StatusBar,
 } from 'react-native';
 
-import * as dataBase from '../db/db-service';
+// import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import LaunchCall from './LaunchCall';
-import ModifContact from './ModifContact';
+// import LaunchCall from './LaunchCall';
+// import ModifContact from './ModifContact';
+import CreerUser from './CreerUser';
 
 function CarteMainUser(props) {
   const modifierContact = props.modifierContact;
@@ -19,32 +20,15 @@ function CarteMainUser(props) {
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
   const user = props.user;
-  // const objetUser = true;
+  const setUser = props.setUser;
+  // const objetUser = false;
   const objetUser = user[0];
+  const [ajouterUser, setAjouterUser] = useState(false);
 
 
-  //Méthode permettant d'ajouter un utilisateur en base de donnée
-  const onPressAddUser = () => {
-    dataBase.createTable();
-    dataBase
-      .addContact(
-        'Hallyday',
-        'Johnny',
-        'test',
-        '0606060606',
-        'test@test.com',
-        '',
-        '1',
-      )
-      .then(async () => {
-        const mainUser = await dataBase.getMainUser();
-        if (mainUser) {
-          setUser(mainUser);
-          //   setAjouterContact(!ajouterContact);
-        }
-      });
+  const toggleCreateUser = value => {
+    setAjouterUser(value);
   };
-
 
   if (objetUser) {
     return (
@@ -61,8 +45,6 @@ function CarteMainUser(props) {
           </Text>
           <View style={styles.detail}>
             <View style={styles.option}>
-              <LaunchCall phone={objetUser.phone_number} />
-
               <TouchableOpacity
                 style={styles.optionTouchable}
                 onPress={() => setModifierContact(!modifierContact)}>
@@ -96,20 +78,29 @@ function CarteMainUser(props) {
       </View>
     );
   } else {
-    return (
-      <View
-        style={[styles.body, {alignItems: 'center', justifyContent: 'center'}]}>
-        <Text style={styles.titreText}>
-          Veuillez renseigner vos coordonnées !
-        </Text>
-        <TouchableOpacity
-          style={styles.add}
-          onPress={() => onPressUpdateContact()}>
-          <Icon name="plus" size={25} color="#000000" />
-          <Text style={styles.titreText}> Ajouter</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if (ajouterUser) {
+
+      return <CreerUser ajouterUser={ajouterUser} setAjouterUser={toggleCreateUser} setUser={setUser} />;
+
+    } else {
+      return (
+        <View
+          style={[
+            styles.body,
+            {alignItems: 'center', justifyContent: 'center'},
+          ]}>
+          <Text style={styles.titreText}>
+            Veuillez renseigner vos coordonnées !
+          </Text>
+          <TouchableOpacity
+            style={styles.add}
+            onPress={() => setAjouterUser(true)}>
+            <Icon name="plus" size={25} color="#000000" />
+            <Text style={styles.titreText}> Ajouter</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
 }
 
@@ -185,7 +176,7 @@ const styles = StyleSheet.create({
     flex: 3,
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 5
+    zIndex: 5,
   },
   add: {
     flexDirection: 'row',

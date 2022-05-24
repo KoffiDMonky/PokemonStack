@@ -16,6 +16,12 @@ function CarteDresseur() {
   const stateQrCode = bool => {
     setAfficheQrCode(bool);
   };
+  //Méthode pour passer setAfficheQrCode en props au composant QrCode
+  const stateUser = bool => {
+    setUser(bool);
+  };
+
+
 
   //Méthode permettant de charger les informations de l'utilisateurs en base de données
   const loadUserCallback = useCallback(async () => {
@@ -49,7 +55,8 @@ function CarteDresseur() {
           setModifierContact={setModifierContact}
           user={user}
           backgroundColor={'#F9CF30'}
-          setUser={setUser}
+          setUser={stateUser}
+
         />
       );
     } else {
@@ -60,6 +67,7 @@ function CarteDresseur() {
           afficheQrCode={afficheQrCode}
           setAfficheQrCode={stateQrCode}
           user={user}
+          setUser={stateUser}
         />
       );
     }
