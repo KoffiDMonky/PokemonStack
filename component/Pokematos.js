@@ -1,27 +1,30 @@
-import {
-  Text,
-  View,
-  FlatList,
-  SectionList,
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
-import ItemUser from './itemUser';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import PokematosFlatlist from './PokematosFlatlist';
+import CreerContact from './CreerContact';
 
-function Pokematos() {
+function Pokematos(props) {
   const [users, setUsers] = useState();
-  const [afficheContact, setAfficheContact] = useState(false);
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant de l'utilisateur sélectionner pour afficher les bonnes données dans la fiche
+  const afficheContact = props.afficheContact;
+  const setAffichageContact = props.setAffichageContact;
+  const [ajouterContact, setAjouterContact] = useState(false);
 
+  //Méthode pour passer setSelectedId en props au composant PokematosFlatlist
+  const idSelectedValue = value => {
+    setSelectedId(value);
+  };
+
+  //Méthode permettant de récupérer les contacts enregister dans la base de données
   const loadDataCallback = useCallback(async () => {
     try {
-      const storedUsers = await dataBase.getUsers();
-      // console.log('store', storedUsers);
+      const storedUsers = await dataBase.getUsers(); //Appel à la fonction getUsers pour récupérer notre liste d'utilisateurs
+
       if (storedUsers.length) {
+        //Si nous avons des utilisateurs, on les stocks dans la variable d'état Users
         setUsers(storedUsers);
       }
     } catch (error) {
@@ -29,116 +32,63 @@ function Pokematos() {
     }
   }, []);
 
-  const onPressAddUser = () => {
-    dataBase.createTable()
-    dataBase
-      .addUser('Atest', 'Btest', 'adresse test', '0671495592', 'azerty@azerty.com', '')
-      .then(async () => {
-        const storedUsers = await dataBase.getUsers();
-        console.log('store', storedUsers);
-        if (storedUsers.length) {
-          setUsers(storedUsers);
-        }
-      });
-  };
 
   useEffect(() => {
+    dataBase.createTable();
     loadDataCallback();
-    //onPressAddUser();
+    // onPressAddUser();
   }, [loadDataCallback]);
 
-  /*function Item({title}) {
-    return (
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() => setAfficheContact(!afficheContact)}>
-        <Text style={styles.title}>{title}</Text>
-      </TouchableOpacity>
-    );
-  }*/
-  if (afficheContact == true) {
+  if (afficheContact) {
     return (
       <>
         <FicheContact
-        contact = {users[selectedId - 1]}
-        afficheContact={afficheContact}
-        setAfficheContact={setAfficheContact}
+          contact={users[selectedId]}
+          afficheContact={afficheContact}
+          setAfficheContact={setAffichageContact}
+          setUsers={loadDataCallback}
         />
       </>
     );
+  } else if (ajouterContact) {
+    return (
+      <CreerContact
+      ajouterContact={ajouterContact}
+      setAjouterContact={setAjouterContact}
+      setUsers={loadDataCallback}
+      />
+    );
   } else {
     return (
-      <View style={styles.background}>
-        <View>
-          <StatusBar style="auto" />
-          <FlatList
-            style={styles.flatlist}
-            numColumns={2}
-            data={users}
-            renderItem={({item}) => (
-              <ItemUser id={item.id} nom={item.name} prenom={item.first_Name} img={item.avatar} adresse={item.adress} mail={item.mail} phone={item.phone_number} setSelectedId={setSelectedId} afficheContact={afficheContact} setAfficheContact={setAfficheContact} />
-            )}
-            keyExtractor={item => item.id}
-          />
-        </View>
-      </View>
+      <>
+        <PokematosFlatlist
+          users={users}
+          setAfficheContact={setAffichageContact}
+          setSelectedId={idSelectedValue}
+          afficheContact={afficheContact}
+        />
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => setAjouterContact(!ajouterContact)}>
+          <Icon name="plus" size={50} color={'#000000'} />
+        </TouchableOpacity>
+      </>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: '#F7F7F7',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  topTitle: {
-    flexDirection: 'row',
-    height: '10%',
+  addButton: {
+    backgroundColor: '#D90D4395',
+    height: 70,
+    width: 70,
     alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 99,
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
   },
-  logo: {
-    resizeMode: 'contain',
-    height: '80%',
-    width: '20%',
-    marginLeft: 20,
-  },
-  nameSection: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#212121',
-  },
-
-  header: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    // backgroundColor: 'black',
-  },
-
-  topButton: {
-    flexDirection: 'row',
-  },
-
-  contact: {
-    flexDirection: 'row',
-    flex: 9,
-  },
-
-  image: {
-    flex: 4,
-  },
-
-  info: {
-    flexDirection: 'column',
-    flex: 6,
-  },
-})
+});
 
 export default Pokematos;

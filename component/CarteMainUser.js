@@ -1,54 +1,70 @@
-import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar, Button } from "react-native";
-import React, {useState} from 'react';
-import QRCode from 'react-native-qrcode-svg';
-import ModifContact from './ModifContact';
+import React, {useState, useEffect, useCallback} from 'react';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 
-function IdCard() {
-  const [afficheQrCode, setAfficheQrCode] = useState(false);
-  const [modifierContact, setModifierContact] = useState(false);
+import * as dataBase from '../db/db-service';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-  let profil = "https://google.com";
-    /*{
-    "name": userName,
-    "first_name": firstName,
-    "adress": adress,
-    "phone_number": phoneNumber,
-    "mail": mail,
-    "avatar": avatar,
-}*/
+function CarteMainUser(props) {
+  const modifierContact = props.modifierContact;
+  const setModifierContact = props.setModifierContact;
+  const afficheQrCode = props.afficheQrCode;
+  const setAfficheQrCode = props.setAfficheQrCode;
+  const [user, setUser] = useState();
 
-  if (afficheQrCode) {
-    return (
-      <>
-        <StatusBar />
-        <View>
-          <Text>GOTTA FLASH THEM ALL</Text>
-          <QRCode
-            value={profil}
-            size={250}
-            color="black"
-            logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
-            logoSize={90}
-            logoMargin={2}
-            logoBorderRadius={15}
-          />
-        </View>
-        <Button title="❌" onPress={() => setAfficheQrCode(!afficheQrCode)} />
-        <StatusBar />
-      </>
-    );
-  } else {
-    if (modifierContact) {
-      return (
-        <ModifContact
-          modifierContact={modifierContact}
-          setModifierContact={setModifierContact}
-        />
-      );
-    } else {
-      return (
+  console.log(user);
+
+    //Méthode permettant d'ajouter un utilisateur en base de donnée
+    const onPressAddUser = () => {
+        dataBase.createTable();
+        dataBase
+          .addContact(
+            'Houessou',
+            'Agenor',
+            'test',
+            '0606060606',
+            'test@test.com',
+            '',
+            '1',
+          )
+          .then(async () => {
+            const mainUser = await dataBase.getMainUser();
+            if (mainUser) {
+                setUser(mainUser);
+            //   setAjouterContact(!ajouterContact);
+            }
+          });
+      };
+    
+
+//   const loadUserCallback = useCallback(async () => {
+//     try {
+//       const mainUser = await dataBase.getMainUser(); //Appel à la fonction mainUser pour récupérer l'utilisateur de l'appli
+
+//       if (mainUser.length) {
+//         //Si nous avons un utilisateur, on le stock dans la variable d'état User
+//         console.log(mainUser);
+//         // setUser(mainUser);
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }, []);
+
+  useEffect(() => {
+    // loadUserCallback();
+    // onPressAddUser();
+  }, [/*loadUserCallback*/]);
+
+  return (
     <View style={styles.body}>
-      <StatusBar style="auto"/>
+      <StatusBar style="auto" />
       <View style={styles.image}>
         <Image
           style={styles.pic}
@@ -56,22 +72,26 @@ function IdCard() {
         />
       </View>
       <View style={styles.info}>
-        <Text style={styles.titre}>
-          PRENOM NOM
-        </Text>
+        <Text style={styles.titre}>PRENOM NOM</Text>
         <View style={styles.detail}>
           <View style={styles.option}>
             <TouchableOpacity
-              /*</View>onPress={() => setAfficheContact(!afficheContact)}*/>
-              <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
+              style={styles.optionTouchable}
+              onPress={() => setAfficheContact(!afficheContact)}>
+              <Icon name="phone" size={40} color="#000000" />
+              <Text style={styles.textTouchable}>Appel</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              style={styles.optionTouchable}
               onPress={() => setModifierContact(!modifierContact)}>
-              <Text style={{color: 'black', fontSize: 15}}>Modifier</Text>
+              <Icon name="pencil" size={35} color="#000000" />
+              <Text style={styles.textTouchable}>Modifier</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              style={styles.optionTouchable}
               onPress={() => setAfficheQrCode(!afficheQrCode)}>
-              <Text style={{color: 'black', fontSize: 15}}>Partager</Text>
+              <Icon name="share" size={35} color="#000000" />
+              <Text style={styles.textTouchable}>Partager</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.coordonnees}>
@@ -91,7 +111,7 @@ function IdCard() {
       </View>
     </View>
   );
-}}}
+}
 
 const styles = StyleSheet.create({
   //FICHE POKEMON
@@ -143,11 +163,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '85%',
-    paddingVertical: 25,
+    paddingVertical: 15,
     borderTopWidth: 1,
     borderTopColor: 'black',
     borderBottomWidth: 1,
     borderBottomColor: 'black',
+  },
+  optionTouchable: {
+    alignItems: 'center',
+    width: 90,
+  },
+  textTouchable: {
+    color: 'black',
+    fontSize: 15,
+    marginTop: 5,
   },
   coordonnees: {
     flex: 2,
@@ -208,7 +237,7 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: '#212121',
     fontWeight: 'bold',
-  }
-})
+  },
+});
 
-export default IdCard;
+export default CarteMainUser;

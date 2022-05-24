@@ -7,28 +7,23 @@ function ItemUser(props) {
   const setAfficheContact = props.setAfficheContact;
   const setSelectedId = props.setSelectedId;
 
-  console.log('props items', props);
-
   const id = props.id;
+  const rowId = props.rowId;
   const nom = props.nom;
   const prenom = props.prenom;
-  const adresse = props.adresse;
-  const mail = props.mail;
-  const phone = props.phone;
 
   return (
     <TouchableOpacity
       style={[styles.card, {borderColor: 'black'}]}
-      onPress={() => {setSelectedId(id); setAfficheContact(!afficheContact)} }>
+      onPress={() => { setSelectedId(rowId); setAfficheContact(!afficheContact)} }>
       <View style={styles.head}>
-        <Text style={[styles.num, {color: 'black'}]}>#{id}</Text>
+        {/* <Text style={[styles.num, {color: 'black'}]}>#{id}</Text> */}
       </View>
       <View style={styles.body}>
-        {/* <Text>{type}</Text> */}
         <Image style={styles.imgList} source={require('../assets/Red_profile.webp')} />
       </View>
       <View style={[styles.buttom, {backgroundColor: 'black'}]}>
-        <Text style={styles.title}>{nom}</Text>
+        <Text style={styles.title}> {prenom} {nom}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -72,9 +67,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'white',
     borderColor: 'black',
+    textAlign: 'center'
   },
 
   num: {
