@@ -6,9 +6,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import PokematosFlatlist from './PokematosFlatlist';
 import CreerContact from './CreerContact';
 
-function Pokematos(props) {
-  const [users, setUsers] = useState();
+function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre à jour la liste des contacts rentrés dans pokestack
+  const [users, setUsers] = useState(); //Variable d'état permettant de définir un tableau d'utilisateur à afficher
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant de l'utilisateur sélectionner pour afficher les bonnes données dans la fiche
+  
+  //Props permettant d'afficher et définir l'état de la fiche contact et l'ajout de contact
   const afficheContact = props.afficheContact;
   const setAffichageContact = props.setAffichageContact;
   const [ajouterContact, setAjouterContact] = useState(false);
@@ -34,11 +36,11 @@ function Pokematos(props) {
 
 
   useEffect(() => {
-    dataBase.createTable();
-    loadDataCallback();
+    dataBase.createTable(); //On créé la table Users si elle n'existe pas
+    loadDataCallback(); //On charge la liste de contact
   }, [loadDataCallback]);
 
-  if (afficheContact) {
+  if (afficheContact) { //La fiche du contact s'affiche lorsque l'on clique sur un item de contact
     return (
       <>
         <FicheContact
@@ -49,7 +51,7 @@ function Pokematos(props) {
         />
       </>
     );
-  } else if (ajouterContact) {
+  } else if (ajouterContact) { //La fiche de création de contact s'affiche si l'on appuye sur le bouton '+'
     return (
       <CreerContact
       ajouterContact={ajouterContact}
@@ -58,7 +60,7 @@ function Pokematos(props) {
       />
     );
   } else {
-    return (
+    return ( //Sinon on affiche la liste des contacts
       <>
         <PokematosFlatlist
           users={users}

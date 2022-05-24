@@ -3,18 +3,16 @@ import Pokematos from './Pokematos';
 import CarteDresseur from './CarteDresseur';
 import Carte from './Carte';
 
-import {StatusBar, StyleSheet} from 'react-native';
+import {StatusBar} from 'react-native';
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-//const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Navigation() {
+function Navigation() { //Composant permettant de définir la barre de navigation dans l'application
   const [afficheContact, setAfficheContact] = useState(false);
 
 
@@ -24,7 +22,7 @@ function Navigation() {
   };
 
 
-  return (
+  return ( //Affichage de la Tab de navigation
     <NavigationContainer>
       <StatusBar style="auto" />
       <Tab.Navigator
@@ -66,15 +64,5 @@ function Navigation() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  addButton: {
-    right: 20,
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default Navigation;

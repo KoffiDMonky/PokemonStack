@@ -11,7 +11,7 @@ import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function ModifUser(props) {
+function ModifUser(props) { //Composant permettant de modifier l'utilisateur
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
   const backgroundColor = props.backgroundColor;
@@ -26,11 +26,11 @@ function ModifUser(props) {
   const [email, setEmail] = useState(user.mail);
   const [avatar, setAvatar] = useState(user.avatar);
 
-  const onPressUpdateContact = () => {
+  const onPressUpdateContact = () => { //Méthode permettant de mettre à jour l'utilisateur
     dataBase
       .updateContact(idUser, nom, prenom, address, phone, email, avatar)
       .then(async () => {
-        const mainUser = await dataBase.getMainUser();
+        const mainUser = await dataBase.getMainUser(); //Mise à jour de la liste de contact avec les dernières informations rentrées
         if (mainUser) {
           setUser(mainUser);
           setModifierContact(!modifierContact);
@@ -38,7 +38,7 @@ function ModifUser(props) {
       });
   };
 
-  return (
+  return ( //Définition du formulaire de modification de l'utilisateur
     <View style={[styles.body, {backgroundColor: backgroundColor}]}>
       <View style={styles.top}>
         <TouchableOpacity

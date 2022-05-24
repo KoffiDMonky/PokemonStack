@@ -11,15 +11,12 @@ import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function ModifContact(props) {
+function ModifContact(props) { //Composant permettant de modifier un contact
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
   const backgroundColor = props.backgroundColor;
   const arrayContact = props.contact;
   const setUsers = props.setUsers
-
-
-  console.log(arrayContact);
 
   const idContact = arrayContact[0];
   const [nom, setNom] = useState(arrayContact[1]);
@@ -29,13 +26,11 @@ function ModifContact(props) {
   const [email, setEmail] = useState(arrayContact[4]);
   const [avatar, setAvatar] = useState(arrayContact[5]);
 
-  console.log(props.contact);
-
-  const onPressUpdateContact = () => {
+  const onPressUpdateContact = () => { //Méthode permettant de mettre à jour un contact
     dataBase
-      .updateContact(idContact, nom, prenom, address, phone, email, avatar)
+      .updateContact(idContact, nom, prenom, address, phone, email, avatar) //Méthode update avec en paramètres les informations du contact
       .then(async () => {
-        const storedUsers = await dataBase.getUsers();
+        const storedUsers = await dataBase.getUsers(); //Mise à jour de la liste de contact avec les dernières informations rentrées
         if (storedUsers.length) {
           setUsers(storedUsers);
           setModifierContact(!modifierContact)
@@ -43,7 +38,7 @@ function ModifContact(props) {
       });
   };
 
-  return (
+  return ( //Définition du formulaire de modification du contact
     <View style={[styles.body, {backgroundColor: backgroundColor}]}>
       <View style={styles.top}>
         <TouchableOpacity

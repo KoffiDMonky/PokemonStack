@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-function LoaderPage() {
+function LoaderPage() { //Composant Loader qui s'affiche pendant le chargement de la liste de pokémon
   return (
     <View style={styles.background}>
       <StatusBar style="auto" />
