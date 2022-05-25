@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -33,7 +33,6 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
       console.error(error);
     }
   }, []);
-
 
   useEffect(() => {
     dataBase.createTable(); //On créé la table Users si elle n'existe pas

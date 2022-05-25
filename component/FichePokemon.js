@@ -112,7 +112,7 @@ function FichePokemon(props) { //Composant qui affiche les informations détaill
         <TouchableOpacity
           style={styles.topTouchable}
           onPress={() => setAffichePokemon(!affichePokemon)}>
-          <Icon name="arrow-left" size={20} color={'#000000'} />
+          <Icon name="arrow-left" size={20} color={'#F6F6F698'} />
           <Text style={styles.name}> {pokemon.name}</Text>
         </TouchableOpacity>
         <Text style={styles.id}>#{pokemon.id}</Text>

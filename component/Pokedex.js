@@ -5,7 +5,7 @@ import {
   StatusBar,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import ItemPokemon from './itemPokemon';
+import ItemPokemon from './ItemPokemon';
 import FichePokemon from './FichePokemon';
 import LoaderPage from './LoaderPage';
 

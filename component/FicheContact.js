@@ -27,7 +27,11 @@ function FicheContact(props) { //Composant définissant la fiche contact
   const adresse = contact.adress;
   const mail = contact.mail;
   const phone = contact.phone_number;
-  const avatar = contact.avatar;
+  const avatarContact = contact.avatar;
+
+  const uriAvatar = JSON.parse(avatarContact);
+
+  // console.log('fiche contact',avatarContact);
 
   const showConfirmDialog = () => { //Méthode permettant d'afficher une alerte avant la suppression d'un contact
     
@@ -69,8 +73,9 @@ function FicheContact(props) { //Composant définissant la fiche contact
           modifierContact={modifierContact}
           setModifierContact={setModifierContact}
           setUsers={setUsers}
+          currentAvatar = {uriAvatar}
           backgroundColor={'#D90D43'}
-          contact={[id, nom, prenom, adresse, mail, phone, avatar]}
+          contact={[id, nom, prenom, adresse, mail, phone, avatarContact]}
         />
       </>
     );
@@ -81,13 +86,13 @@ function FicheContact(props) { //Composant définissant la fiche contact
           <TouchableOpacity
             style={styles.topTouchable}
             onPress={() => setAfficheContact(!afficheContact)}>
-            <Icon name="arrow-left" size={20} color={'dark'} />
+            <Icon name="arrow-left" size={20} color={'#000000'} />
           </TouchableOpacity>
         </View>
         <View style={styles.image}>
           <Image
             style={styles.pic}
-            source={require('../assets/Red_profile.webp')}
+            source={uriAvatar}
           />
         </View>
         <View style={styles.info}>
@@ -205,8 +210,10 @@ const styles = StyleSheet.create({
   },
   pic: {
     height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    width: '50%',
+    backgroundColor: '#F6F6F6',
+    borderRadius: 99,
+    marginBottom: 30
   },
 });
 

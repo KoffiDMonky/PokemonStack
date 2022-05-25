@@ -1,9 +1,11 @@
 import { View, StyleSheet } from "react-native";
-import * as React from "react";
+import React, {useEffect} from "react";
 import CustomMarker from './CustomMarker';
 import MapView, {Marker} from 'react-native-maps';
 
 function Carte() { //Composant permettant d'afficher la carte via l'api GoogleMap
+
+  var geocoder;
 
   //Coordonnées de Tokyo
   const tokyoRegion = {
@@ -12,6 +14,8 @@ function Carte() { //Composant permettant d'afficher la carte via l'api GoogleMa
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   };
+
+  console.log(tokyoRegion);
 
   return (
     <View style={styles.container}>
@@ -22,7 +26,9 @@ function Carte() { //Composant permettant d'afficher la carte via l'api GoogleMa
           longitude: 139.6503,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
-        }}>
+        }}
+        showsUserLocation={true}
+        >
         <Marker coordinate={tokyoRegion}>
           <CustomMarker />
         </Marker>

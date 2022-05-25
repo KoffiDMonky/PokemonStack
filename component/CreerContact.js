@@ -10,6 +10,7 @@ import {
 import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ImagePicker from './ImagePickerUpdate'
 
 function CreerContact(props) { //Composant permettant la création de contact
   const ajouterContact = props.ajouterContact;
@@ -24,6 +25,9 @@ function CreerContact(props) { //Composant permettant la création de contact
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
 
+  const loadImage = uri => { //Méthode permettant de charger l'avatar dans le composant imagePicker
+    setAvatar(uri)
+  }
 
   //Méthode permettant d'ajouter un contact en base de donnée 
   const onPressAddUser = () => {
@@ -35,7 +39,7 @@ function CreerContact(props) { //Composant permettant la création de contact
         address,
         phone,
         email,
-        '',
+        avatar,
         '0',
       )
       .then(async () => { //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
@@ -57,12 +61,8 @@ function CreerContact(props) { //Composant permettant la création de contact
           <Icon name="arrow-left" size={20} color={'#000000'} />
         </TouchableOpacity>
       </View>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
+      <ImagePicker loadImage={loadImage} />
+
       <ScrollView style={styles.infoScrollView}>
         <View style={styles.info}>
           <Text style={styles.titre}>Modifications</Text>

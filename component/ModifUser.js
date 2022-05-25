@@ -10,6 +10,7 @@ import {
 import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ImagePicker from './ImagePickerUpdate'
 
 function ModifUser(props) { //Composant permettant de modifier l'utilisateur
   const modifierContact = props.modifierContact;
@@ -25,6 +26,12 @@ function ModifUser(props) { //Composant permettant de modifier l'utilisateur
   const [phone, setPhone] = useState(user.phone_number);
   const [email, setEmail] = useState(user.mail);
   const [avatar, setAvatar] = useState(user.avatar);
+
+  const uriAvatar = JSON.parse(user.avatar)
+
+  const loadImage = uri => { //Méthode permettant de charger l'avatar dans le composant imagePicker
+    setAvatar(uri)
+  }
 
   const onPressUpdateContact = () => { //Méthode permettant de mettre à jour l'utilisateur
     dataBase
@@ -47,12 +54,7 @@ function ModifUser(props) { //Composant permettant de modifier l'utilisateur
           <Icon name="arrow-left" size={20} color={'#000000'} />
         </TouchableOpacity>
       </View>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
+      <ImagePicker currentAvatar={uriAvatar} loadImage={loadImage} />
       <ScrollView style={styles.infoScrollView}>
         <View style={styles.info}>
           <Text style={styles.titre}>Modifications</Text>

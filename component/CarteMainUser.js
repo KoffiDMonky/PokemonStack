@@ -21,6 +21,9 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
   const objetUser = user[0];
   const [ajouterUser, setAjouterUser] = useState(false);
 
+  const uriAvatar = JSON.parse(objetUser.avatar)
+
+
   //Méthode pour passer stateCreateUser en props au composant ajouterUser
   const stateCreateUser = value => {
     setAjouterUser(value);
@@ -32,7 +35,7 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
         <View style={styles.image}>
           <Image
             style={styles.pic}
-            source={require('../assets/Red_profile.webp')}
+            source={uriAvatar}
           />
         </View>
         <View style={styles.info}>
@@ -129,8 +132,11 @@ const styles = StyleSheet.create({
   },
   pic: {
     height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    width: '50%',
+    backgroundColor: '#F6F6F6',
+    borderRadius: 99,
+    marginBottom: 30,
+    top: 50
   },
   info: {
     flex: 6,
@@ -173,6 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
+
   },
   add: {
     flexDirection: 'row',

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-function itemContact(props) { //Composant permettant de définir les items de la liste de contact
+function ItemContact(props) { //Composant permettant de définir les items de la liste de contact
 
   const afficheContact = props.afficheContact;
   const setAfficheContact = props.setAfficheContact;
@@ -9,6 +9,11 @@ function itemContact(props) { //Composant permettant de définir les items de la
   const rowId = props.rowId;
   const nom = props.nom;
   const prenom = props.prenom;
+  const avatar = props.avatar;
+  const uriAvatar = JSON.parse(avatar)
+
+
+  console.log('item contact',uriAvatar);
 
   return ( //Définition de l'itemContact
     <TouchableOpacity
@@ -17,12 +22,10 @@ function itemContact(props) { //Composant permettant de définir les items de la
         setSelectedId(rowId);
         setAfficheContact(!afficheContact);
       }}>
-      <View style={styles.head}>
-      </View>
       <View style={styles.body}>
         <Image
           style={styles.imgList}
-          source={require('../assets/Red_profile.webp')}
+          source={uriAvatar}
         />
       </View>
       <View style={[styles.buttom, {backgroundColor: 'black'}]}>
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 170,
     borderWidth: 2,
-    borderRadius: 15,
+    borderRadius: 15
   },
 
   head: {
@@ -79,10 +82,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   imgList: {
-    height: '95%',
-    width: '95%',
-    resizeMode: 'contain',
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'yellow',
+    borderTopLeftRadius: 13,
+    borderTopRightRadius: 13,
   },
 });
 
-export default itemContact;
+export default ItemContact;
