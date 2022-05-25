@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import itemContact from './itemContact';
+import ItemContact from './itemContact';
 
 function PokematosFlatlist(props) { //Composant enfant de Pokematos qui permet de constituer la liste de contact
   const users = props.users;
@@ -15,7 +15,7 @@ function PokematosFlatlist(props) { //Composant enfant de Pokematos qui permet d
           numColumns={2}
           data={users}
           renderItem={({item, index}) => (
-            <itemContact
+            <ItemContact
               rowId={index}
               id={item.id}
               nom={item.name}

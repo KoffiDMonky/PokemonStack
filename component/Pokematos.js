@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PokematosFlatlist from './PokematosFlatlist';
 import CreerContact from './CreerContact';
+import ScanScreen from './ScanScreen';
 
 function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre à jour la liste des contacts rentrés dans pokestack
   const [users, setUsers] = useState(); //Variable d'état permettant de définir un tableau d'utilisateur à afficher
@@ -12,13 +13,12 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
   
   //Props permettant d'afficher et définir l'état de la fiche contact et l'ajout de contact
   const afficheContact = props.afficheContact;
-  //const setAffichageContact = props.setAffichageContact;
+  const setAffichageContact = props.setAffichageContact;
   const [ajouterContact, setAjouterContact] = useState(false);
 
-  //Méthode pour passer setAfficheContact en props au composant FicheContact
-  const setAffichageContact = bool => {
-    setAfficheContact(bool);
-  };
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+  const [afficheScan, setAfficheScan] = useState(false);
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Méthode pour passer setSelectedId en props au composant PokematosFlatlist
   const idSelectedValue = value => {
@@ -64,8 +64,14 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
       />
     );
   } else {
+    if(afficheScan){
+      return(
+      <ScanScreen />
+      );
+    } else {
     return ( //Sinon on affiche la liste des contacts
       <>
+      <Button title='scan' onPress={() => setAfficheScan(!afficheScan)} />
         <PokematosFlatlist
           users={users}
           setAfficheContact={setAffichageContact}
@@ -80,7 +86,7 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
       </>
     );
   }
-}
+}}
 
 const styles = StyleSheet.create({
   addButton: {
