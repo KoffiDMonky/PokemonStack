@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {CallModule} = NativeModules;
 
-function LaunchCall({phone}) {
+function LaunchCall({phone}) { //COmposant permettant d'utiliser la fonctionnalité native appel du téléphone
   const requestCallPermission = async () => {
     if (Platform.OS === 'android') {
       try {

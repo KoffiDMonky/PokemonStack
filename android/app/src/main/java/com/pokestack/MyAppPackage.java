@@ -20,7 +20,7 @@ public class MyAppPackage implements ReactPackage {
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new QrScanModule(reactContext));
+        //modules.add(new QrScanModule(reactContext));
         modules.add(new CallModule(reactContext));
 
         return modules;

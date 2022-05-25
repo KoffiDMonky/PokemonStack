@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-function QrCode(props) {
+function QrCode(props) { //Composant permettant de générer un QRCode pour partager ses coordonnées
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
 
