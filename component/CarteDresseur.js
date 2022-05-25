@@ -42,7 +42,7 @@ function CarteDresseur() {
 
   if (afficheQrCode) {
     return (
-      <QrCode afficheQrCode={afficheQrCode} setAfficheQrCode={stateQrCode} /> //Composant QrCode que l'on affiche lorsque l'on appuye sur le bouton Partager
+      <QrCode afficheQrCode={afficheQrCode} setAfficheQrCode={stateQrCode} user={user} /> //Composant QrCode que l'on affiche lorsque l'on appuye sur le bouton Partager
     );
   } else {
     if (modifierContact) {

@@ -1,12 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 function QrCode(props) { //Composant permettant de générer un QRCode pour partager ses coordonnées
+  const user = props.user;
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
-
-  let profil = 'https://google.com';
 
   return (
     <View style={styles.body}>
@@ -15,7 +14,7 @@ function QrCode(props) { //Composant permettant de générer un QRCode pour part
       </View>
       <View style={styles.qrcode}>
         <QRCode
-          value={profil}
+          value={user}
           size={350}
           color="black"
           logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
