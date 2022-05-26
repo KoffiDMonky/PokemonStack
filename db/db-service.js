@@ -53,6 +53,11 @@ export const getMainUser = async () => {
   var rows = selectQuery.rows;
   return rows.raw();
 };
+export const getContactAddress = async () => {
+  let selectQuery = await executeQuery('SELECT name, adress FROM users WHERE mainUser = 0', []);
+  var rows = selectQuery.rows;
+  return rows.raw();
+};
 
 export const addContact = async (
   nameUser,

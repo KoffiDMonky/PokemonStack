@@ -13,8 +13,6 @@ function ItemContact(props) { //Composant permettant de définir les items de la
   const uriAvatar = JSON.parse(avatar)
 
 
-  console.log('item contact',uriAvatar);
-
   return ( //Définition de l'itemContact
     <TouchableOpacity
       style={[styles.card, {borderColor: 'black'}]}

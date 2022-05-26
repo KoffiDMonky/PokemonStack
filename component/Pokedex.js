@@ -11,7 +11,6 @@ import LoaderPage from './LoaderPage';
 
 function ListePokemon() {
   let allPokemon = []; //Tableau dans lequel nous allons stocker nos 151 pokémons
-  // let tableauFin = [];
   const [affichePokemon, setAffichePokemon] = useState(false); //Variable d'état permettant d'afficher ou non la fiche d'un pokemon
   const [listePokemon, setListePokemon] = useState([]); //Variable d'état contenant notre liste de pokémon
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant du pokémon sélectionner pour afficher les bonnes données dans la fiche
