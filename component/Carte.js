@@ -5,21 +5,22 @@ import MapView, {Marker} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import LoaderPage from './LoaderPage';
 import * as dataBase from '../db/db-service';
+import { REACT_APP_GOOGLEMAP_API_KEY } from "@env"
 
 function Carte() {
   //Composant permettant d'afficher les contact sur la carte via l'api GoogleMap et Geocoding (récupération des coordonnees d'une adresse)
   const [isLoading, setLoading] = useState(true); //Variable d'état permettant de définir si la liste de pokémon est chargé pour l'afficher
   const [locationContact, setLocationContact] = useState([]);
-  const [address, setaddress] = useState([]);
 
   const loadAdressCallback = useCallback(async () => {
     //Méthode permettant de récupérer les contacts et leurs adresses pour les stocker dans un tableau
     try {
       const address = await dataBase.getContactAddress(); //Appel à la fonction mainUser pour récupérer l'utilisateur de l'appli
 
+
       //Si nous avons un utilisateur, on le stock dans la variable d'état address sous forme de tableau
       if (address) {
-        setaddress(address);
+
         coord(address, address.length);
       }
     } catch (error) {
@@ -28,17 +29,15 @@ function Carte() {
   }, []);
 
 
-  Geocoder.init('AIzaSyDaO034bGYtTQgzhxNKMDjiwFENA427lBA'); // Initialisation de Geocoder
+  Geocoder.init( REACT_APP_GOOGLEMAP_API_KEY ); // Initialisation de Geocoder
 
   const coord = async (address, length) => {
     //Méthode permettant de récupérer les coordonées d'une adresse + créer un nouveau tableau avec les adresses traduite en coordonnées GPS
 
     let arrayLocation = []; //Tableau dans lequel sera stocké nos nouveaux objet contenant nom du contact et ses coordonées GPS
-
-    console.log('coord', length);
     
       for (let i = 0; i < length; i++) {
-        console.log('cozucou' + i);
+
         //Boucle pour parcourir notre tableau address (contact + adresse)
         const addressParam = address[i].adress;
 
@@ -88,8 +87,7 @@ function Carte() {
 
   useEffect(() => {
     loadAdressCallback();
-
-  }, []);
+  }, [loadAdressCallback]);
 
   return (
     <View style={styles.container}>
