@@ -7,18 +7,16 @@ import PokematosFlatlist from './PokematosFlatlist';
 import CreerContact from './CreerContact';
 import ScanScreen from './ScanScreen';
 
-function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre à jour la liste des contacts rentrés dans pokestack
+function Pokematos(props) {
+  //Ce composant permet d'affiche / ajouter / mettre à jour la liste des contacts rentrés dans pokestack
   const [users, setUsers] = useState(); //Variable d'état permettant de définir un tableau d'utilisateur à afficher
   const [selectedId, setSelectedId] = useState(); //Variable d'état permettant de définir l'identifiant de l'utilisateur sélectionner pour afficher les bonnes données dans la fiche
-  
+
   //Props permettant d'afficher et définir l'état de la fiche contact et l'ajout de contact
   const afficheContact = props.afficheContact;
   const setAffichageContact = props.setAffichageContact;
   const [ajouterContact, setAjouterContact] = useState(false);
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////
   const [afficheScan, setAfficheScan] = useState(false);
-  //////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Méthode pour passer setSelectedId en props au composant PokematosFlatlist
   const idSelectedValue = value => {
@@ -44,7 +42,8 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
     loadDataCallback(); //On charge la liste de contact
   }, [loadDataCallback]);
 
-  if (afficheContact) { //La fiche du contact s'affiche lorsque l'on clique sur un item de contact
+  if (afficheContact) {
+    //La fiche du contact s'affiche lorsque l'on clique sur un item de contact
     return (
       <>
         <FicheContact
@@ -55,7 +54,8 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
         />
       </>
     );
-  } else if (ajouterContact) { //La fiche de création de contact s'affiche si l'on appuye sur le bouton '+'
+  } else if (ajouterContact) {
+    //La fiche de création de contact s'affiche si l'on appuye sur le bouton '+'
     return (
       <CreerContact
         ajouterContact={ajouterContact}
@@ -64,29 +64,35 @@ function Pokematos(props) { //Ce composant permet d'affiche / ajouter / mettre �
       />
     );
   } else {
-    if(afficheScan){
-      return(
-      <ScanScreen />
+    if (afficheScan) {
+      return (
+        <ScanScreen
+          afficheScan={afficheScan}
+          setAfficheScan={setAfficheScan}
+          setUsers={loadDataCallback}
+        />
       );
     } else {
-    return ( //Sinon on affiche la liste des contacts
-      <>
-      <Button title='scan' onPress={() => setAfficheScan(!afficheScan)} />
-        <PokematosFlatlist
-          users={users}
-          setAfficheContact={setAffichageContact}
-          setSelectedId={idSelectedValue}
-          afficheContact={afficheContact}
-        />
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => setAjouterContact(!ajouterContact)}>
-          <Icon name="plus" size={50} color={'#000000'} />
-        </TouchableOpacity>
-      </>
-    );
+      return (
+        //Sinon on affiche la liste des contacts
+        <>
+          <Button title="scan" onPress={() => setAfficheScan(!afficheScan)} />
+          <PokematosFlatlist
+            users={users}
+            setAfficheContact={setAffichageContact}
+            setSelectedId={idSelectedValue}
+            afficheContact={afficheContact}
+          />
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => setAjouterContact(!ajouterContact)}>
+            <Icon name="plus" size={50} color={'#000000'} />
+          </TouchableOpacity>
+        </>
+      );
+    }
   }
-}}
+}
 
 const styles = StyleSheet.create({
   addButton: {
