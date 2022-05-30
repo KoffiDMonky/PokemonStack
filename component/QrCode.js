@@ -45,8 +45,6 @@ function QrCode(props) {
   );
 }
 
-export default QrCode;
-
 const styles = StyleSheet.create({
   body: {
     height: '100%',
@@ -75,3 +73,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default QrCode;
