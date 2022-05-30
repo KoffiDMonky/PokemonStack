@@ -15,7 +15,6 @@ const Tab = createBottomTabNavigator();
 function Navigation() { //Composant permettant de définir la barre de navigation dans l'application
   const [afficheContact, setAfficheContact] = useState(false);
 
-
   //Méthode pour passer setAfficheContact en props au composant FicheContact
   const setAffichageContact = bool => {
     setAfficheContact(bool);

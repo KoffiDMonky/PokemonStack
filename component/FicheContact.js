@@ -72,6 +72,8 @@ function FicheContact(props) { //Composant définissant la fiche contact
         <ModifContact
           modifierContact={modifierContact}
           setModifierContact={setModifierContact}
+          afficheContact={afficheContact}
+          setAfficheContact={setAfficheContact}
           setUsers={setUsers}
           currentAvatar = {uriAvatar}
           backgroundColor={'#D90D43'}

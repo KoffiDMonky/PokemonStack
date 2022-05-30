@@ -14,7 +14,6 @@ function CarteDresseur() {
   const [isLoading, setLoading] = useState(true); //Variable d'état permettant de définir si la liste de pokémon est chargé pour l'afficher
   const [user, setUser] = useState([]);
 
-  // console.log(user[0].avatar);
 
   //Méthode pour passer setAfficheQrCode en props au composant QrCode
   const stateQrCode = bool => {
@@ -47,7 +46,7 @@ function CarteDresseur() {
 
   if (afficheQrCode) {
     return (
-      <QrCode afficheQrCode={afficheQrCode} setAfficheQrCode={stateQrCode} /> //Composant QrCode que l'on affiche lorsque l'on appuye sur le bouton Partager
+      <QrCode afficheQrCode={afficheQrCode} setAfficheQrCode={stateQrCode} user={user} /> //Composant QrCode que l'on affiche lorsque l'on appuye sur le bouton Partager
     );
   } else {
     if (modifierContact) {

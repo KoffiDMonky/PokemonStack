@@ -3,10 +3,23 @@ import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 function QrCode(props) { //Composant permettant de générer un QRCode pour partager ses coordonnées
+  
+  const user = props.user;
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
 
+  const objUser = user[0];
+
   let profil = 'https://google.com';
+
+  //passe mainUser à 0 pour qu'il soit enregistrer en tant que contact
+  //et ne pas faire de conflit avec la carte de dresseur, on rend aussi l'id null par soucis de sécurité
+  if (objUser.mainUser == 1 || objUser.id != null) {
+    objUser.mainUser = 0;
+    objUser.id = null;
+  }
+
+  let strUser = JSON.stringify(objUser);
 
   return (
     <View style={styles.body}>
@@ -15,10 +28,10 @@ function QrCode(props) { //Composant permettant de générer un QRCode pour part
       </View>
       <View style={styles.qrcode}>
         <QRCode
-          value={profil}
+          value={strUser}
           size={350}
-          color="black"
-          logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
+          color="red"
+          logo={require('../assets/logo_qrcode_ball.jpg')}
           logoSize={90}
           logoMargin={2}
           logoBorderRadius={15}

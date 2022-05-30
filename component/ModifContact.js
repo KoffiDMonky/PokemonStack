@@ -16,6 +16,8 @@ import ImagePicker from './ImagePickerUpdate'
 function ModifContact(props) { //Composant permettant de modifier un contact
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
+  const afficheContact = props.afficheContact;
+  const setAfficheContact = props.setAfficheContact;
   const backgroundColor = props.backgroundColor;
   const arrayContact = props.contact;
   const setUsers = props.setUsers
@@ -41,6 +43,7 @@ function ModifContact(props) { //Composant permettant de modifier un contact
         if (storedUsers.length) {
           setUsers(storedUsers);
           setModifierContact(!modifierContact)
+          setAfficheContact(!afficheContact)
         }
       });
   };

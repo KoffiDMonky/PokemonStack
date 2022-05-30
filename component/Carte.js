@@ -1,11 +1,12 @@
 import {View, StyleSheet} from 'react-native';
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useCallback } from 'react';
 import CustomMarker from './CustomMarker';
 import MapView, {Marker} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import LoaderPage from './LoaderPage';
 import * as dataBase from '../db/db-service';
 import { REACT_APP_GOOGLEMAP_API_KEY } from "@env"
+import { useFocusEffect } from '@react-navigation/native';
 
 function Carte() {
   //Composant permettant d'afficher les contact sur la carte via l'api GoogleMap et Geocoding (récupération des coordonnees d'une adresse)
@@ -85,9 +86,10 @@ function Carte() {
     ),
   );
 
-  useEffect(() => {
+
+  useFocusEffect(useCallback(()=>{ //Permet de charger et mettre à jour la carte
     loadAdressCallback();
-  }, [loadAdressCallback]);
+  }, [locationContact]))
 
   return (
     <View style={styles.container}>

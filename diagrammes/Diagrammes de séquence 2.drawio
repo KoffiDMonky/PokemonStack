@@ -1,0 +1,98 @@
+<mxfile host="65bd71144e">
+    <diagram id="RzKq9KF5NWwgLoKb3BY6" name="Page-1">
+        <mxGraphModel dx="289" dy="336" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="46" value="Créer un contact" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" parent="1" vertex="1">
+                    <mxGeometry x="392" y="354" width="728" height="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;u&gt;: utilisateur&lt;/u&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="456" y="416" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&amp;lt;&amp;lt;boundary&amp;gt;&amp;gt;&lt;br&gt;Pokematos" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="579" y="416" width="100" height="338" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="" style="endArrow=classic;html=1;entryX=-0.053;entryY=-0.005;entryDx=0;entryDy=0;entryPerimeter=0;" parent="3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-109" y="198" as="sourcePoint"/>
+                        <mxPoint x="272.47" y="197.79999999999995" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="51" value="3 : appuie sur &quot;+&quot; : setAjouterContact(!ajouterContact)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="50" vertex="1" connectable="0">
+                    <mxGeometry x="-0.5904" y="-1" relative="1" as="geometry">
+                        <mxPoint x="103" y="-9" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="63" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="3" vertex="1">
+                    <mxGeometry x="45" y="104" width="10" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="471" y="754" as="sourcePoint"/>
+                        <mxPoint x="471" y="506" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="&amp;lt;&amp;lt;Control&amp;gt;&amp;gt;&lt;br&gt;PokestackDataBase" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="953" y="416" width="115" height="338" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="15" vertex="1">
+                    <mxGeometry x="52" y="255" width="10" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="15" vertex="1">
+                    <mxGeometry x="52.5" y="120" width="10" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="&amp;lt;&amp;lt;boundary&amp;gt;&amp;gt;&lt;br&gt;CréerContact" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="807" y="416" width="100" height="338" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="48">
+                    <mxGeometry x="45" y="198" width="10" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="endArrow=classic;html=1;entryX=0.001;entryY=0.002;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="470" y="671" as="sourcePoint"/>
+                        <mxPoint x="1005.01" y="671.0800000000002" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="&lt;font style=&quot;font-size: 11px&quot;&gt;4 : appuie sur &quot;sauvegarder&quot; : onPressAddUser()&amp;nbsp;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="19" vertex="1" connectable="0">
+                    <mxGeometry x="-0.5904" y="-1" relative="1" as="geometry">
+                        <mxPoint x="122" y="-9" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="56" value="" style="endArrow=classic;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1005" y="711" as="sourcePoint"/>
+                        <mxPoint x="628.2500000000002" y="711" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="57" value="5: setUsers(storedUsers) + setAjouterContact(!ajouterContact)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="56" vertex="1" connectable="0">
+                    <mxGeometry x="0.7641" relative="1" as="geometry">
+                        <mxPoint x="153" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="58" value="" style="endArrow=classic;html=1;entryX=-0.039;entryY=-0.01;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="63" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="471" y="520" as="sourcePoint"/>
+                        <mxPoint x="620" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="59" value="1 : appuie sur &quot;Pokematos&quot;&amp;nbsp;&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="58" vertex="1" connectable="0">
+                    <mxGeometry x="-0.5904" y="-1" relative="1" as="geometry">
+                        <mxPoint x="40" y="-9" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="64" value="" style="endArrow=classic;html=1;exitX=0.971;exitY=1.025;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.184;entryY=0.003;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="63" target="60" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="740" y="370" as="sourcePoint"/>
+                        <mxPoint x="790" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="65" value="2 : dataBase.createTable()" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="64" vertex="1" connectable="0">
+                    <mxGeometry x="-0.1521" y="-1" relative="1" as="geometry">
+                        <mxPoint y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

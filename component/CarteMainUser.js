@@ -21,7 +21,10 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
   const objetUser = user[0];
   const [ajouterUser, setAjouterUser] = useState(false);
 
-  const uriAvatar = JSON.parse(objetUser.avatar)
+    
+  
+
+ 
 
 
   //Méthode pour passer stateCreateUser en props au composant ajouterUser
@@ -30,6 +33,9 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
   };
 
   if (objetUser) { //Si nous avons un objet contenant les informations de notre utilisateur, on les affiche
+
+    const uriAvatar = JSON.parse(objetUser.avatar)
+        
     return (
       <View style={styles.body}>
         <View style={styles.image}>
@@ -136,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F6',
     borderRadius: 99,
     marginBottom: 30,
-    top: 50
+    top: 50,
   },
   info: {
     flex: 6,
