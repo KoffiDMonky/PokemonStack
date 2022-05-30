@@ -32,7 +32,7 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
     setAjouterUser(value);
   };
 
-  if (objetUser) { //Si nous avons un objet contenant les informations de notre utilisateur, on les affiche
+  if (objetUser.avatargit ) { //Si nous avons un objet contenant les informations de notre utilisateur, on les affiche
 
     const uriAvatar = JSON.parse(objetUser.avatar)
         
