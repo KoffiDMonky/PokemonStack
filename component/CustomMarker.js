@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 function CustomMarker(props) {
   const nom = props.nom;
 
-  return (
+  return ( //Affiche des markers sur la map pour localiser l'habitat des contact
     <View style={styles.body}>
         <Text style={styles.text}>{nom}</Text>
       <View style={styles.marker}>

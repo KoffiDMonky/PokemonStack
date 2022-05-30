@@ -183,17 +183,6 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: 'center',
   },
-  image: {
-    flex: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 5,
-  },
-  pic: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
-  },
   save: {
     marginTop: 10,
     alignItems: 'center',

@@ -37,8 +37,6 @@ function ImagePickerUpdate(props) { //Composant permettant de charger une photo 
     });
   };
 
-
-
   return ( //Affiche du composant donnant accès à la galerie
     <TouchableOpacity style={styles.image} onPress={launchImage}>
       {avatar ? <Image style={styles.pic} source={avatar} />

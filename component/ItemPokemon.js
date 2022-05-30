@@ -34,7 +34,7 @@ function ItemPokemon(props) { //Composant permettant de définir les items de la
     steel: '#B7B9D0',
   };
 
-    //Définition dynamique de la couleurs en fonction du type
+  //Définition dynamique de la couleurs en fonction du type
   const color = typesColor[type.name];
 
   return ( //Affichage de l'item
@@ -47,7 +47,7 @@ function ItemPokemon(props) { //Composant permettant de définir les items de la
       <View style={styles.body}>
         <Image style={styles.imgList} source={{uri: img}} />
       </View>
-      <View style={[styles.buttom, {backgroundColor: color}]}>
+      <View style={[styles.bottom, {backgroundColor: color}]}>
         <Text style={styles.title}>{nom}</Text>
       </View>
     </TouchableOpacity>
@@ -55,7 +55,6 @@ function ItemPokemon(props) { //Composant permettant de définir les items de la
 }
 
 const styles = StyleSheet.create({
-
   card: {
     flex: 1,
     backgroundColor: '#F6F6F6',
@@ -78,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  buttom: {
+  bottom: {
     flex: 1.5,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,

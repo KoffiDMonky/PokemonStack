@@ -36,9 +36,7 @@ function ItemContact(props) { //Composant permettant de définir les items de la
 }
 
 const styles = StyleSheet.create({
-  flatlist: {
-    flex: 1,
-  },
+
   card: {
     flex: 1,
     backgroundColor: '#F6F6F6',
@@ -48,13 +46,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15
   },
-
-  head: {
-    flex: 0.8,
-    alignItems: 'flex-end',
-    paddingRight: 10,
-  },
-
   body: {
     flex: 3,
     alignItems: 'center',
@@ -74,10 +65,6 @@ const styles = StyleSheet.create({
     color: 'white',
     borderColor: 'black',
     textAlign: 'center',
-  },
-
-  num: {
-    fontSize: 20,
   },
   imgList: {
     height: '100%',
