@@ -48,8 +48,10 @@ function Carte() {
             let objLoc = {};
             let objNom = {};
             let objGlobal = {};
+
             const loc = json.results[0].geometry.location;
             const nom = address[i].name;
+
             objLoc.latitude = loc.lat;
             objLoc.longitude = loc.lng;
             objLoc.latitudeDelta = 4;
@@ -61,6 +63,7 @@ function Carte() {
             objGlobal.contact = objNom;
 
             arrayLocation.push(objGlobal); //On envoie notre nouvel objet global dans notre tableau
+
           })
 
           .catch(error => console.warn(error));
@@ -68,10 +71,11 @@ function Carte() {
     
 
     if (arrayLocation) {
-      //Si nous avons un tableau de localisation, on l'envoie à la variable d'état locationContact
 
+      //Si nous avons un tableau de localisation, on l'envoie à la variable d'état locationContact
       setLocationContact(arrayLocation);
       setLoading(false);
+
     }
   };
 
@@ -93,10 +97,10 @@ function Carte() {
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
+      {isLoading ? ( //On affiche un loader le temps de chargement des données
         <LoaderPage />
       ) : (
-        <MapView
+        <MapView //Sinon on affiche la carte avec la position des lieux d'habitations des contacts
           style={styles.map}
           initialRegion={{
             latitude: 48.1,
