@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 function ItemPokemon(props) { //Composant permettant de définir les items de la liste des pokémons

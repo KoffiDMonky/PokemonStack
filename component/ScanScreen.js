@@ -12,7 +12,7 @@ function ScanScreen(props) {
 
 
   const onSuccess = e => {
-console.log('success');
+
     const strUserShare = e.data; //On recupère la donnée en string
     const objUserShare = JSON.parse(strUserShare); //On re-transforme le string en objet
 

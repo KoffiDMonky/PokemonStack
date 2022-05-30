@@ -1,11 +1,8 @@
 import React from 'react';
 import {
   PermissionsAndroid,
-  TouchableNativeFeedback,
   TouchableOpacity,
-  View,
   NativeModules,
-  PlatformColor,
   Text,
   StyleSheet,
 } from 'react-native';

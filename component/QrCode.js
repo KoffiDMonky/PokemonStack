@@ -10,8 +10,6 @@ function QrCode(props) { //Composant permettant de générer un QRCode pour part
 
   const objUser = user[0];
 
-  let profil = 'https://google.com';
-
   //passe mainUser à 0 pour qu'il soit enregistrer en tant que contact
   //et ne pas faire de conflit avec la carte de dresseur, on rend aussi l'id null par soucis de sécurité
   if (objUser.mainUser == 1 || objUser.id != null) {
