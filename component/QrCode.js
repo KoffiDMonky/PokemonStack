@@ -8,9 +8,7 @@ function QrCode(props) { //Composant permettant de générer un QRCode pour part
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
 
-  const objUser = user[0];
-
-  let profil = 'https://google.com';
+  const objUser = user[0]; //Récupérer l'objet user depuis le script
 
   //passe mainUser à 0 pour qu'il soit enregistrer en tant que contact
   //et ne pas faire de conflit avec la carte de dresseur, on rend aussi l'id null par soucis de sécurité
@@ -19,7 +17,7 @@ function QrCode(props) { //Composant permettant de générer un QRCode pour part
     objUser.id = null;
   }
 
-  let strUser = JSON.stringify(objUser);
+  let strUser = JSON.stringify(objUser); //transforme objUser en string car value de <QRCode> n'accepte que les strings
 
   return (
     <View style={styles.body}>
@@ -28,7 +26,7 @@ function QrCode(props) { //Composant permettant de générer un QRCode pour part
       </View>
       <View style={styles.qrcode}>
         <QRCode
-          value={strUser}
+          value={strUser} //Valeur à partager
           size={350}
           color="red"
           logo={require('../assets/logo_qrcode_ball.jpg')}

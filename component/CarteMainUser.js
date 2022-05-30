@@ -21,12 +21,6 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
   const objetUser = user[0];
   const [ajouterUser, setAjouterUser] = useState(false);
 
-    
-  
-
- 
-
-
   //Méthode pour passer stateCreateUser en props au composant ajouterUser
   const stateCreateUser = value => {
     setAjouterUser(value);

@@ -31,8 +31,6 @@ function FicheContact(props) { //Composant définissant la fiche contact
 
   const uriAvatar = JSON.parse(avatarContact);
 
-  // console.log('fiche contact',avatarContact);
-
   const showConfirmDialog = () => { //Méthode permettant d'afficher une alerte avant la suppression d'un contact
     
     Alert.alert(

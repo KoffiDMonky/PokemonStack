@@ -1,11 +1,8 @@
 import React from 'react';
 import {
   PermissionsAndroid,
-  TouchableNativeFeedback,
   TouchableOpacity,
-  View,
   NativeModules,
-  PlatformColor,
   Text,
   StyleSheet,
 } from 'react-native';
@@ -13,11 +10,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {CallModule} = NativeModules;
 
-function LaunchCall({phone}) { //COmposant permettant d'utiliser la fonctionnalité native appel du téléphone
+function LaunchCall({phone}) { //Composant permettant d'utiliser la fonctionnalité native appel du téléphone
   const requestCallPermission = async () => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android') { //Vérifie si l'appareil à un OS Android
       try {
         const granted = await PermissionsAndroid.request(
+          //Demande la permissionpour que l'appli ait accès à la fonction native Appel
           PermissionsAndroid.PERMISSIONS.CALL_PHONE,
           {
             title: 'Phone call Permission',
@@ -34,7 +32,7 @@ function LaunchCall({phone}) { //COmposant permettant d'utiliser la fonctionnali
   
   const call = async () => {
     if (await requestCallPermission()) {
-      CallModule.call(phone);
+      CallModule.call(phone); //Lance le module CallModule qui lancera l'appel
     }
   };
 
