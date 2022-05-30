@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: 20
+    bottom: -150
   },
   titreText: {
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#F6F6F670',
+    color: '#00000070',
     width: '40%',
   },
 })
