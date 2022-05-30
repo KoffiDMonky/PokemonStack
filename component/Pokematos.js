@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {View, StyleSheet, TouchableOpacity, Button} from 'react-native';
+import {StyleSheet, TouchableOpacity, Button} from 'react-native';
 import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -88,6 +88,12 @@ function Pokematos(props) {
             onPress={() => setAjouterContact(!ajouterContact)}>
             <Icon name="plus" size={50} color={'#000000'} />
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.qrCodeButton}
+            onPress={() => setAfficheScan(!afficheScan)}>
+            <Icon name="qrcode" size={50} color={'#000000'} />
+          </TouchableOpacity>
         </>
       );
     }
@@ -105,6 +111,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     bottom: 20,
+  },
+
+  qrCodeButton: {
+    backgroundColor: '#D90D4395',
+    height: 70,
+    width: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 99,
+    position: 'absolute',
+    right: 20,
+    bottom: 100,
   },
 });
 

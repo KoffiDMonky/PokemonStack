@@ -69,8 +69,12 @@ export const addContact = async (
   avatar,
   mainUser,
 ) => {
+  console.log("avant alert" + nameUser);
   if (!nameUser) {
+    console.log("avant alert" + nameUser);
     alert('Entrer un Nom !');
+    console.log("après alert" + nameUser);
+
     return false;
   }
   if (!firstName) {

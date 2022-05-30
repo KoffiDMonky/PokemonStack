@@ -8,22 +8,16 @@ function QrCode(props) {
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
 
-  const objUser = user[0];
-
-  let profil = 'https://google.com';
+  const objUser = user[0]; //On met l'objet user[0] dans une objUser
 
   //passe mainUser à 0 pour qu'il soit enregistrer en tant que contact
-  //et ne pas faire de conflit avec la carte de dresseur
+  //et ne pas faire de conflit avec la carte de dresseur, on rend aussi l'id null par soucis de sécurité
   if (objUser.mainUser == 1 || objUser.id != null) {
     objUser.mainUser = 0;
     objUser.id = null;
   }
 
-  console.log('1: ' + objUser);
-  let strUser = JSON.stringify(objUser);
-  console.log('2: ' + strUser);
-  const reObjUser = JSON.parse(strUser);
-  console.log('3: ' + reObjUser.name);
+  let strUser = JSON.stringify(objUser); // On transforme l'objet en string car value de QRCode n'accepte que les string
 
   return (
     <View style={styles.body}>
@@ -35,7 +29,7 @@ function QrCode(props) {
           value={strUser}
           size={350}
           color="red"
-          logo={require('../assets/logo_qrcode_ball.jpg')} // Enlever le fond du logo
+          logo={require('../assets/logo_qrcode_ball.jpg')}
           logoSize={90}
           logoMargin={2}
           logoBorderRadius={15}
