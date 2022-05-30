@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import Toast from 'react-native-simple-toast';
 import * as dataBase from '../db/db-service';
 
 function ScanScreen(props) {
@@ -20,9 +21,9 @@ console.log('success');
       //On charge la liste de contact pour la mettre à jour et on l'affiche et ferme le Scan
       const storedUsers = await dataBase.getUsers();
       if (storedUsers.length) {
-        console.log('coucou',storedUsers);
         setUsers(storedUsers);
         setAfficheScan(!afficheScan);
+        Toast.show('Contact correctement ajouté !');
       }
     });
   };

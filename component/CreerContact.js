@@ -10,6 +10,7 @@ import {
 import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Toast from 'react-native-simple-toast';
 import ImagePicker from './ImagePickerUpdate'
 
 function CreerContact(props) { //Composant permettant la création de contact
@@ -47,6 +48,7 @@ function CreerContact(props) { //Composant permettant la création de contact
         if (storedUsers.length) {
           setUsers(storedUsers);
           setAjouterContact(!ajouterContact);
+          Toast.show('Contact correctement ajouté !');
         }
       });
   };
