@@ -4,13 +4,16 @@ import * as dataBase from '../db/db-service';
 import ModifUser from './ModifUser';
 import QrCode from './QrCode';
 import CarteMainUser from './CarteMainUser';
+import LoaderPage from './LoaderPage';
 
 function CarteDresseur() {
   //Composant principal de l'onglet "Carte Dresseur", on l'on va afficher / modifier / partager les informations de l'utilisateur de l'application
 
   const [afficheQrCode, setAfficheQrCode] = useState(false);
   const [modifierContact, setModifierContact] = useState(false);
+  const [isLoading, setLoading] = useState(true); //Variable d'état permettant de définir si la liste de pokémon est chargé pour l'afficher
   const [user, setUser] = useState([]);
+
 
   //Méthode pour passer setAfficheQrCode en props au composant QrCode
   const stateQrCode = bool => {
@@ -29,6 +32,7 @@ function CarteDresseur() {
       //Si nous avons un utilisateur, on le stock dans la variable d'état User
       if (mainUser) {
         setUser(mainUser);
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -59,14 +63,20 @@ function CarteDresseur() {
     } else {
       return (
         //... Sinon on affiche la carte de l'utilisateur de l'application
-        <CarteMainUser
-          modifierContact={modifierContact}
-          setModifierContact={setModifierContact}
-          afficheQrCode={afficheQrCode}
-          setAfficheQrCode={stateQrCode}
-          user={user}
-          setUser={stateUser}
-        />
+        <>
+          {isLoading ? (
+            <LoaderPage />
+          ) : (
+            <CarteMainUser
+              modifierContact={modifierContact}
+              setModifierContact={setModifierContact}
+              afficheQrCode={afficheQrCode}
+              setAfficheQrCode={stateQrCode}
+              user={user}
+              setUser={stateUser}
+            />
+          )}
+        </>
       );
     }
   }

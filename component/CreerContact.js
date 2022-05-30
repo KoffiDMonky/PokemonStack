@@ -10,9 +10,9 @@ import {
 import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ImagePicker from './ImagePickerUpdate'
 
-function CreerContact(props) {
-  //Composant permettant la création de contact
+function CreerContact(props) { //Composant permettant la création de contact
   const ajouterContact = props.ajouterContact;
   const setAjouterContact = props.setAjouterContact;
   const backgroundColor = props.backgroundColor;
@@ -25,22 +25,24 @@ function CreerContact(props) {
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
 
-  //Méthode permettant d'ajouter un contact en base de donnée
+  const loadImage = uri => { //Méthode permettant de charger l'avatar dans le composant imagePicker
+    setAvatar(uri)
+  }
+
+  //Méthode permettant d'ajouter un contact en base de donnée 
   const onPressAddUser = () => {
     dataBase.createTable(); //On créé une table Users si elle n'existe pas
     dataBase
-      .addContact(
-        //On lance la méthode de création de contact (le dernier paramètre est à 0 car ce sont des contacts et non l'utilisateur de l'application)
+      .addContact( //On lance la méthode de création de contact (le dernier paramètre est à 0 car ce sont des contacts et non l'utilisateur de l'application)
         nom,
         prenom,
         address,
         phone,
         email,
-        '',
+        avatar,
         '0',
       )
-      .then(async () => {
-        //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
+      .then(async () => { //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
         const storedUsers = await dataBase.getUsers();
         if (storedUsers.length) {
           setUsers(storedUsers);
@@ -48,6 +50,7 @@ function CreerContact(props) {
         }
       });
   };
+
 
   return (
     <View style={[styles.body, {backgroundColor: backgroundColor}]}>
@@ -58,12 +61,8 @@ function CreerContact(props) {
           <Icon name="arrow-left" size={20} color={'#000000'} />
         </TouchableOpacity>
       </View>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
+      <ImagePicker loadImage={loadImage} />
+
       <ScrollView style={styles.infoScrollView}>
         <View style={styles.info}>
           <Text style={styles.titre}>Modifications</Text>
@@ -168,7 +167,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#D90D43',
     textTransform: 'uppercase',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   infoScrollView: {
     height: '75%',
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     color: 'black',
     padding: 15,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   image: {
     flex: 3,
@@ -214,7 +213,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00000070',
     width: 230,
-    height: 40,
+    height: 40
   },
 });
 

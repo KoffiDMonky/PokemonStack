@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {StyleSheet, TouchableOpacity, Button} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import FicheContact from './FicheContact';
 import * as dataBase from '../db/db-service';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -63,40 +63,37 @@ function Pokematos(props) {
         setUsers={loadDataCallback}
       />
     );
+  } else if (afficheScan) {
+    return (
+      <ScanScreen
+        afficheScan={afficheScan}
+        setAfficheScan={setAfficheScan}
+        setUsers={loadDataCallback}
+      />
+    );
   } else {
-    if (afficheScan) {
-      return (
-        <ScanScreen
-          afficheScan={afficheScan}
-          setAfficheScan={setAfficheScan}
-          setUsers={loadDataCallback}
+    return (
+      //Sinon on affiche la liste des contacts
+      <>
+        <PokematosFlatlist
+          users={users}
+          setAfficheContact={setAffichageContact}
+          setSelectedId={idSelectedValue}
+          afficheContact={afficheContact}
         />
-      );
-    } else {
-      return (
-        //Sinon on affiche la liste des contacts
-        <>
-          <Button title="scan" onPress={() => setAfficheScan(!afficheScan)} />
-          <PokematosFlatlist
-            users={users}
-            setAfficheContact={setAffichageContact}
-            setSelectedId={idSelectedValue}
-            afficheContact={afficheContact}
-          />
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => setAjouterContact(!ajouterContact)}>
-            <Icon name="plus" size={50} color={'#000000'} />
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => setAjouterContact(!ajouterContact)}>
+          <Icon name="plus" size={50} color={'#000000'} />
+        </TouchableOpacity>
 
-          <TouchableOpacity
+        <TouchableOpacity
             style={styles.qrCodeButton}
             onPress={() => setAfficheScan(!afficheScan)}>
             <Icon name="qrcode" size={50} color={'#000000'} />
           </TouchableOpacity>
-        </>
-      );
-    }
+      </>
+    );
   }
 }
 
@@ -112,7 +109,6 @@ const styles = StyleSheet.create({
     right: 20,
     bottom: 20,
   },
-
   qrCodeButton: {
     backgroundColor: '#D90D4395',
     height: 70,

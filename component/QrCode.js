@@ -1,14 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-function QrCode(props) {
-  //Composant permettant de générer un QRCode pour partager ses coordonnées
+function QrCode(props) { //Composant permettant de générer un QRCode pour partager ses coordonnées
+  
   const user = props.user;
   const afficheQrCode = props.afficheQrCode;
   const setAfficheQrCode = props.setAfficheQrCode;
 
-  const objUser = user[0]; //On met l'objet user[0] dans une objUser
+  const objUser = user[0];
+
+  let profil = 'https://google.com';
 
   //passe mainUser à 0 pour qu'il soit enregistrer en tant que contact
   //et ne pas faire de conflit avec la carte de dresseur, on rend aussi l'id null par soucis de sécurité
@@ -17,7 +19,7 @@ function QrCode(props) {
     objUser.id = null;
   }
 
-  let strUser = JSON.stringify(objUser); // On transforme l'objet en string car value de QRCode n'accepte que les string
+  let strUser = JSON.stringify(objUser);
 
   return (
     <View style={styles.body}>
@@ -44,6 +46,8 @@ function QrCode(props) {
     </View>
   );
 }
+
+export default QrCode;
 
 const styles = StyleSheet.create({
   body: {
@@ -73,5 +77,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export default QrCode;

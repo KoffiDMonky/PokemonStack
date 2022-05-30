@@ -31,7 +31,7 @@ function LaunchCall({phone}) { //COmposant permettant d'utiliser la fonctionnali
       }
     }
   };
-
+  
   const call = async () => {
     if (await requestCallPermission()) {
       CallModule.call(phone);
@@ -39,6 +39,7 @@ function LaunchCall({phone}) { //COmposant permettant d'utiliser la fonctionnali
   };
 
   return (
+
     <TouchableOpacity style={styles.optionTouchable} onPress={() => call()}>
       <Icon name="phone" size={40} color="#000000" />
       <Text style={{color: 'black', fontSize: 15}}>Appel</Text>
@@ -49,8 +50,8 @@ function LaunchCall({phone}) { //COmposant permettant d'utiliser la fonctionnali
 const styles = StyleSheet.create({
   optionTouchable: {
     alignItems: 'center',
-    width: 90,
-  },
-});
+    width: 90
+  }
+})
 
 export default LaunchCall;

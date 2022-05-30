@@ -12,9 +12,8 @@ import ModifContact from './ModifContact';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LaunchCall from './LaunchCall';
 
-function FicheContact(props) {
-  //Composant définissant la fiche contact
-
+function FicheContact(props) { //Composant définissant la fiche contact
+  
   const [modifierContact, setModifierContact] = useState(false); //Variable d'état permettant de gérer l'affichage du composant ModifContact
 
   //Props provenant du composant parent
@@ -28,11 +27,14 @@ function FicheContact(props) {
   const adresse = contact.adress;
   const mail = contact.mail;
   const phone = contact.phone_number;
-  const avatar = contact.avatar;
+  const avatarContact = contact.avatar;
 
-  const showConfirmDialog = () => {
-    //Méthode permettant d'afficher une alerte avant la suppression d'un contact
+  const uriAvatar = JSON.parse(avatarContact);
 
+  // console.log('fiche contact',avatarContact);
+
+  const showConfirmDialog = () => { //Méthode permettant d'afficher une alerte avant la suppression d'un contact
+    
     Alert.alert(
       'Êtes vous sur de vouloir supprimer le contact ?',
       'message de confirmation',
@@ -64,16 +66,18 @@ function FicheContact(props) {
     });
   };
 
-  if (modifierContact) {
-    //On affiche le composant de modification de contact si l'on appuye sur le buton modifier
+  if (modifierContact) { //On affiche le composant de modification de contact si l'on appuye sur le buton modifier
     return (
       <>
         <ModifContact
           modifierContact={modifierContact}
           setModifierContact={setModifierContact}
+          afficheContact={afficheContact}
+          setAfficheContact={setAfficheContact}
           setUsers={setUsers}
+          currentAvatar = {uriAvatar}
           backgroundColor={'#D90D43'}
-          contact={[id, nom, prenom, adresse, mail, phone, avatar]}
+          contact={[id, nom, prenom, adresse, mail, phone, avatarContact]}
         />
       </>
     );
@@ -84,13 +88,13 @@ function FicheContact(props) {
           <TouchableOpacity
             style={styles.topTouchable}
             onPress={() => setAfficheContact(!afficheContact)}>
-            <Icon name="arrow-left" size={20} color={'dark'} />
+            <Icon name="arrow-left" size={20} color={'#000000'} />
           </TouchableOpacity>
         </View>
         <View style={styles.image}>
           <Image
             style={styles.pic}
-            source={require('../assets/Red_profile.webp')}
+            source={uriAvatar}
           />
         </View>
         <View style={styles.info}>
@@ -100,6 +104,7 @@ function FicheContact(props) {
           <View style={styles.detail}>
             <View style={styles.option}>
               <LaunchCall phone={phone} />
+
               <TouchableOpacity
                 style={styles.optionTouchable}
                 onPress={() => setModifierContact(!modifierContact)}>
@@ -134,6 +139,7 @@ function FicheContact(props) {
 }
 
 const styles = StyleSheet.create({
+
   body: {
     height: '100%',
     backgroundColor: '#D90D43',
@@ -206,8 +212,10 @@ const styles = StyleSheet.create({
   },
   pic: {
     height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    width: '50%',
+    backgroundColor: '#F6F6F6',
+    borderRadius: 99,
+    marginBottom: 30
   },
 });
 

@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function FichePokemon(props) {
-  //Composant qui affiche les informations détaillés sur un Pokémon
-
+function FichePokemon(props) { //Composant qui affiche les informations détaillés sur un Pokémon
+ 
   //Props provenant du composant parent
   const pokemon = props.pokemon;
   const affichePokemon = props.affichePokemon;
@@ -42,7 +41,7 @@ function FichePokemon(props) {
   //Définition dynamique de la couleurs en fonction du type
   const color = typesColor[pokemon.types.name];
 
-  //Défini un alias aux labels
+  //Défini un alias aux labels 
   const aliasStat = {
     hp: 'HP',
     attack: 'ATK',
@@ -52,77 +51,68 @@ function FichePokemon(props) {
     speed: 'SPD',
   };
 
+  
+
   const abilities = pokemon.abilities; //On stock les abilités du pokémon
-  const abilitiesList = abilities.map(
-    (
-      ability,
-      index, //On parcours le tableau d'abilité pour les afficher sous forme de liste
-    ) => (
-      <Text key={index} style={styles.darkText}>
-        {ability.ability.name}
-      </Text>
-    ),
-  );
+  const abilitiesList = abilities.map((ability, index) => ( //On parcours le tableau d'abilité pour les afficher sous forme de liste
+    <Text key={index} style={styles.darkText}>
+      {ability.ability.name}
+    </Text>
+  ));
 
   const stats = pokemon.stats; //On stock les statistiques du pokémon
-  const statsList = stats.map(
-    (
-      stat,
-      index, //On parcours le tableau de statistiques pour les afficher sous forme de liste
-    ) => (
+  const statsList = stats.map((stat, index) => ( //On parcours le tableau de statistiques pour les afficher sous forme de liste
+    <View
+      key={index}
+      style={{width: '95%', flexDirection: 'row', justifyContent: 'center'}}>
       <View
-        key={index}
-        style={{width: '95%', flexDirection: 'row', justifyContent: 'center'}}>
-        <View
-          style={{
-            flex: 1,
-            borderRightColor: 'black',
-            borderRightWidth: 2,
-            paddingRight: 10,
-          }}>
-          <Text style={[styles.darkText, {textAlign: 'right'}]}>
-            {aliasStat[stat.stat.name]}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 4,
-            paddingLeft: 10,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <Text style={[styles.darkText, {flex: 1}]}>{stat.base_stat}</Text>
-          <View style={{flex: 5}}>
+        style={{
+          flex: 1,
+          borderRightColor: 'black',
+          borderRightWidth: 2,
+          paddingRight: 10,
+        }}>
+        <Text style={[styles.darkText, {textAlign: 'right'}]}>
+          {aliasStat[stat.stat.name]}
+        </Text>
+      </View>
+      <View
+        style={{
+          flex: 4,
+          paddingLeft: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Text style={[styles.darkText, {flex: 1}]}>{stat.base_stat}</Text>
+        <View style={{flex: 5}}>
+          <View
+            style={{
+              backgroundColor: `${color}50`,
+              width: '100%',
+              height: 8,
+              borderRadius: 99,
+            }}>
             <View
               style={{
-                backgroundColor: `${color}50`,
-                width: '100%',
+                backgroundColor: color,
+                width: stat.base_stat,
                 height: 8,
                 borderRadius: 99,
-              }}>
-              <View
-                style={{
-                  backgroundColor: color,
-                  width: stat.base_stat,
-                  height: 8,
-                  borderRadius: 99,
-                }}></View>
-            </View>
+              }}></View>
           </View>
         </View>
       </View>
-    ),
-  );
+    </View>
+  ));
 
-  return (
-    //Affichage de la fiche du pokemon
+  return ( //Affichage de la fiche du pokemon
     <View style={[styles.body, {backgroundColor: color}]}>
       <StatusBar />
       <View style={styles.top}>
         <TouchableOpacity
           style={styles.topTouchable}
           onPress={() => setAffichePokemon(!affichePokemon)}>
-          <Icon name="arrow-left" size={20} color={'#000000'} />
+          <Icon name="arrow-left" size={20} color={'#F6F6F698'} />
           <Text style={styles.name}> {pokemon.name}</Text>
         </TouchableOpacity>
         <Text style={styles.id}>#{pokemon.id}</Text>
@@ -268,7 +258,7 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: '#212121',
-    fontSize: 11,
+    fontSize: 11
   },
   darkTitle: {
     color: '#212121',

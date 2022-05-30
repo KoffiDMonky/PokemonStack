@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CreerUser from './CreerUser';
 
-function CarteMainUser(props) {
-  //Sous composant de CarteDresseur, permettant d'ajouter les informations de l'utilisateur et de les afficher
+function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'ajouter les informations de l'utilisateur et de les afficher
 
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
@@ -16,19 +21,27 @@ function CarteMainUser(props) {
   const objetUser = user[0];
   const [ajouterUser, setAjouterUser] = useState(false);
 
+    
+  
+
+ 
+
+
   //Méthode pour passer stateCreateUser en props au composant ajouterUser
   const stateCreateUser = value => {
     setAjouterUser(value);
   };
 
-  if (objetUser) {
-    //Si nous avons un objet contenant les informations de notre utilisateur, on les affiche
+  if (objetUser) { //Si nous avons un objet contenant les informations de notre utilisateur, on les affiche
+
+    const uriAvatar = JSON.parse(objetUser.avatar)
+        
     return (
       <View style={styles.body}>
         <View style={styles.image}>
           <Image
             style={styles.pic}
-            source={require('../assets/Red_profile.webp')}
+            source={uriAvatar}
           />
         </View>
         <View style={styles.info}>
@@ -70,18 +83,11 @@ function CarteMainUser(props) {
       </View>
     );
   } else {
-    if (ajouterUser) {
-      //Si l'on appuye sur le bouton "+ ajouter , on affiche le composant de création de l'utilisateur
+    if (ajouterUser) { //Si l'on appuye sur le bouton "+ ajouter , on affiche le composant de création de l'utilisateur
 
-      return (
-        <CreerUser
-          ajouterUser={ajouterUser}
-          setAjouterUser={stateCreateUser}
-          setUser={setUser}
-        />
-      );
-    } else {
-      //Sinon on affiche la page d'accueil lors de la première connexion qui invite à créer son profil utilisateur
+      return <CreerUser ajouterUser={ajouterUser} setAjouterUser={stateCreateUser} setUser={setUser} />;
+
+    } else { //Sinon on affiche la page d'accueil lors de la première connexion qui invite à créer son profil utilisateur
       return (
         <View
           style={[
@@ -132,8 +138,11 @@ const styles = StyleSheet.create({
   },
   pic: {
     height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    width: '50%',
+    backgroundColor: '#F6F6F6',
+    borderRadius: 99,
+    marginBottom: 30,
+    top: 50,
   },
   info: {
     flex: 6,
@@ -176,6 +185,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
+
   },
   add: {
     flexDirection: 'row',

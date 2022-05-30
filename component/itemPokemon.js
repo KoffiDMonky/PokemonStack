@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-function ItemPokemon(props) {
-  //Composant permettant de définir les items de la liste des pokémons
+function ItemPokemon(props) { //Composant permettant de définir les items de la liste des pokémons
 
   const affichePokemon = props.affichePokemon;
   const setAffichePokemon = props.setAffichePokemon;
   const setSelectedId = props.setSelectedId;
-
+  
   const id = props.id;
   const nom = props.nom;
   const img = props.img;
@@ -35,17 +34,13 @@ function ItemPokemon(props) {
     steel: '#B7B9D0',
   };
 
-  //Définition dynamique de la couleurs en fonction du type
+    //Définition dynamique de la couleurs en fonction du type
   const color = typesColor[type.name];
 
-  return (
-    //Affichage de l'item
+  return ( //Affichage de l'item
     <TouchableOpacity
       style={[styles.card, {borderColor: color}]}
-      onPress={() => {
-        setSelectedId(id);
-        setAffichePokemon(!affichePokemon);
-      }}>
+      onPress={() => {setSelectedId(id); setAffichePokemon(!affichePokemon)} }>
       <View style={styles.head}>
         <Text style={[styles.num, {color: color}]}>#{id}</Text>
       </View>
@@ -60,6 +55,7 @@ function ItemPokemon(props) {
 }
 
 const styles = StyleSheet.create({
+
   card: {
     flex: 1,
     backgroundColor: '#F6F6F6',
@@ -97,7 +93,7 @@ const styles = StyleSheet.create({
   },
 
   num: {
-    fontSize: 20,
+    fontSize: 20
   },
   imgList: {
     height: '95%',

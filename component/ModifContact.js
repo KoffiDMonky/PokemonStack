@@ -10,13 +10,18 @@ import {
 import * as dataBase from '../db/db-service';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ImagePicker from './ImagePickerUpdate'
+
 
 function ModifContact(props) { //Composant permettant de modifier un contact
   const modifierContact = props.modifierContact;
   const setModifierContact = props.setModifierContact;
+  const afficheContact = props.afficheContact;
+  const setAfficheContact = props.setAfficheContact;
   const backgroundColor = props.backgroundColor;
   const arrayContact = props.contact;
   const setUsers = props.setUsers
+  const currentAvatar = props.currentAvatar;
 
   const idContact = arrayContact[0];
   const [nom, setNom] = useState(arrayContact[1]);
@@ -24,7 +29,11 @@ function ModifContact(props) { //Composant permettant de modifier un contact
   const [address, setAddress] = useState(arrayContact[3]);
   const [phone, setPhone] = useState(arrayContact[5]);
   const [email, setEmail] = useState(arrayContact[4]);
-  const [avatar, setAvatar] = useState(arrayContact[5]);
+  const [avatar, setAvatar] = useState(arrayContact[6]);
+
+  const loadImage = uri => { //Méthode permettant de charger l'avatar dans le composant imagePicker
+    setAvatar(uri)
+  }
 
   const onPressUpdateContact = () => { //Méthode permettant de mettre à jour un contact
     dataBase
@@ -33,7 +42,8 @@ function ModifContact(props) { //Composant permettant de modifier un contact
         const storedUsers = await dataBase.getUsers(); //Mise à jour de la liste de contact avec les dernières informations rentrées
         if (storedUsers.length) {
           setUsers(storedUsers);
-          setModifierContact(!modifierContact);
+          setModifierContact(!modifierContact)
+          setAfficheContact(!afficheContact)
         }
       });
   };
@@ -47,12 +57,7 @@ function ModifContact(props) { //Composant permettant de modifier un contact
           <Icon name="arrow-left" size={20} color={'#000000'} />
         </TouchableOpacity>
       </View>
-      <View style={styles.image}>
-        <Image
-          style={styles.pic}
-          source={require('../assets/Red_profile.webp')}
-        />
-      </View>
+      <ImagePicker currentAvatar={currentAvatar} loadImage={loadImage} />
       <ScrollView style={styles.infoScrollView}>
         <View style={styles.info}>
           <Text style={styles.titre}>Modifications</Text>
@@ -157,7 +162,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#D90D43',
     textTransform: 'uppercase',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   infoScrollView: {
     height: '75%',
@@ -180,19 +185,9 @@ const styles = StyleSheet.create({
     zIndex: 2,
     color: 'black',
     padding: 15,
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  image: {
-    flex: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 5,
-  },
-  pic: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
-  },
+
   save: {
     marginTop: 10,
     alignItems: 'center',
@@ -203,12 +198,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00000070',
     width: 230,
-    height: 40,
-  },
-  pic: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    height: 40
   },
 });
 

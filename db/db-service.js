@@ -23,13 +23,13 @@ const executeQuery = (sql, params = []) =>
     });
   });
 
-var db = openDatabase({name: 'pokestackDataBase.db'});
+var db = openDatabase({ name: 'pokestackDataBase.db' });
 
 export const createTable = () => {
   db.transaction(txn => {
     txn.executeSql(
       `CREATE TABLE IF NOT EXISTS users(
-      id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30), first_name VARCHAR(30), adress VARCHAR(120), phone_number VARCHAR(10), mail VARCHAR(120), avatar BLOB, mainUser NUMERIC
+      id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30), first_name VARCHAR(30), adress VARCHAR(120), phone_number VARCHAR(10), mail VARCHAR(120), avatar VARCHAR(300), mainUser NUMERIC
       );`,
       [],
       (sqlTxn, res) => {
@@ -43,19 +43,18 @@ export const createTable = () => {
 };
 
 export const getUsers = async () => {
-  let selectQuery = await executeQuery(
-    'SELECT * FROM users WHERE mainUser = 0 ORDER BY first_name',
-    [],
-  );
+  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 0 ORDER BY first_name', []);
   var rows = selectQuery.rows;
   return rows.raw();
 };
 
 export const getMainUser = async () => {
-  let selectQuery = await executeQuery(
-    'SELECT * FROM users WHERE mainUser = 1',
-    [],
-  );
+  let selectQuery = await executeQuery('SELECT * FROM users WHERE mainUser = 1', []);
+  var rows = selectQuery.rows;
+  return rows.raw();
+};
+export const getContactAddress = async () => {
+  let selectQuery = await executeQuery('SELECT name, adress FROM users WHERE mainUser = 0 ', []);
   var rows = selectQuery.rows;
   return rows.raw();
 };
@@ -67,14 +66,10 @@ export const addContact = async (
   phone,
   email,
   avatar,
-  mainUser,
+  mainUser
 ) => {
-  console.log("avant alert" + nameUser);
   if (!nameUser) {
-    console.log("avant alert" + nameUser);
     alert('Entrer un Nom !');
-    console.log("après alert" + nameUser);
-
     return false;
   }
   if (!firstName) {
@@ -109,7 +104,7 @@ export const updateContact = async (
   adress,
   phone,
   email,
-  avatar,
+  avatar
 ) => {
   if (!nameUser) {
     alert('Entrer un Nom !');
@@ -140,8 +135,14 @@ export const updateContact = async (
   return rows.raw();
 };
 
-export const deleteContact = async id => {
-  let selectQuery = await executeQuery(`DELETE FROM users where id=?`, [id]);
+
+export const deleteContact = async (id) => {
+
+   let selectQuery = await executeQuery(
+    `DELETE FROM users where id=?`, [id]
+  );
   var rows = selectQuery.rows;
   return rows.raw();
+
 };
+
