@@ -147,7 +147,7 @@ export const updateContact = async ( //Mise à jour des données d'un contact
   var rows = selectQuery.rows;
   return rows.raw();
 };
-
+//
 export const deleteContact = async id => { //suppression d'un contact
   let selectQuery = await executeQuery(`DELETE FROM users where id=?`, [id]);
   var rows = selectQuery.rows;

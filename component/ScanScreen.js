@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, Button} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Toast from 'react-native-simple-toast';
@@ -31,11 +31,8 @@ function ScanScreen(props) {
   return (
     <>
       <QRCodeScanner onRead={onSuccess} showMarker={true} />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setAfficheScan(!afficheScan)}>
-        <Text style={styles.titreText}>Retour</Text>
-      </TouchableOpacity>
+
+      <Button onPress={() => setAfficheScan(!afficheScan)} title="Retour" color="#D90D43" accessibilityLabel="Bouton permettant de faire retour"></Button>
     </>
   );
 }
