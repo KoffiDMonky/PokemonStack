@@ -37,9 +37,9 @@ function ModifContact(props) { //Composant permettant de modifier un contact
   const onPressUpdateContact = () => { //Méthode permettant de mettre à jour un contact
     dataBase
       .updateContact(idContact, nom, prenom, address, phone, email, avatar) //Méthode update avec en paramètres les informations du contact
-      .then(async () => {
+      .then(async (res) => {
         const storedUsers = await dataBase.getUsers(); //Mise à jour de la liste de contact avec les dernières informations rentrées
-        if (storedUsers.length) {
+        if (storedUsers.length && res) {
           setUsers(storedUsers);
           setModifierContact(!modifierContact)
           setAfficheContact(!afficheContact)
@@ -85,6 +85,7 @@ function ModifContact(props) { //Composant permettant de modifier un contact
               placeholder="0123456789"
               onChangeText={setPhone}
               value={phone}
+              keyboardType="numeric"
             />
           </View>
           <View style={styles.ligne}>
@@ -94,6 +95,7 @@ function ModifContact(props) { //Composant permettant de modifier un contact
               placeholder="sacha.ktcm@kanto.com"
               onChangeText={setEmail}
               value={email}
+              keyboardType="email-address"
             />
           </View>
           <View style={styles.ligne}>

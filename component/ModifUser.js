@@ -35,9 +35,9 @@ function ModifUser(props) { //Composant permettant de modifier l'utilisateur
   const onPressUpdateContact = () => { //Méthode permettant de mettre à jour l'utilisateur
     dataBase
       .updateContact(idUser, nom, prenom, address, phone, email, avatar)
-      .then(async () => {
+      .then(async (res) => {
         const mainUser = await dataBase.getMainUser(); //Mise à jour de la liste de contact avec les dernières informations rentrées
-        if (mainUser) {
+        if (mainUser && res) {
           setUser(mainUser);
           setModifierContact(!modifierContact);
         }
@@ -82,6 +82,7 @@ function ModifUser(props) { //Composant permettant de modifier l'utilisateur
               placeholder="0123456789"
               onChangeText={setPhone}
               value={phone}
+              keyboardType="numeric"
             />
           </View>
           <View style={styles.ligne}>
@@ -91,6 +92,7 @@ function ModifUser(props) { //Composant permettant de modifier l'utilisateur
               placeholder="sacha.ktcm@kanto.com"
               onChangeText={setEmail}
               value={email}
+              keyboardType="email-address"
             />
           </View>
           <View style={styles.ligne}>

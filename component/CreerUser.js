@@ -42,9 +42,10 @@ function CreerUser(props) { //Composant permettant la création de la "carte dre
         avatar,
         '1',
       )
-      .then(async () => { //Ensuite on charge notre utilisateur pour afficher ses informations
+      .then(async (res) => { //Ensuite on charge notre utilisateur pour afficher ses informations
+
         const mainUser = await dataBase.getMainUser();
-        if (mainUser) {
+        if (mainUser && res) {
           setUser(mainUser);
             setAjouterUser(!ajouterUser);
         }
@@ -91,6 +92,7 @@ function CreerUser(props) { //Composant permettant la création de la "carte dre
               placeholder="0123456789"
               onChangeText={setPhone}
               value={phone}
+              keyboardType="numeric"
             />
           </View>
           <View style={styles.ligne}>
@@ -100,6 +102,7 @@ function CreerUser(props) { //Composant permettant la création de la "carte dre
               placeholder="sacha.ktcm@kanto.com"
               onChangeText={setEmail}
               value={email}
+              keyboardType="email-address"
             />
           </View>
           <View style={styles.ligne}>

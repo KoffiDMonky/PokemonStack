@@ -42,9 +42,9 @@ function CreerContact(props) { //Composant permettant la création de contact
         avatar,
         '0',
       )
-      .then(async () => { //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
+      .then(async (res) => { //Ensuite on charge la liste de contact pour la mettre à jour et on l'affiche
         const storedUsers = await dataBase.getUsers();
-        if (storedUsers.length) {
+        if (storedUsers.length && res) {
           setUsers(storedUsers);
           setAjouterContact(!ajouterContact);
           Toast.show('Contact correctement ajouté !');
@@ -92,6 +92,7 @@ function CreerContact(props) { //Composant permettant la création de contact
               placeholder="0123456789"
               onChangeText={setPhone}
               value={phone}
+              keyboardType="numeric"
             />
           </View>
           <View style={styles.ligne}>
@@ -101,6 +102,7 @@ function CreerContact(props) { //Composant permettant la création de contact
               placeholder="sacha.ktcm@kanto.com"
               onChangeText={setEmail}
               value={email}
+              keyboardType="email-address"
             />
           </View>
           <View style={styles.ligne}>

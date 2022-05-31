@@ -18,8 +18,9 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
   const setAfficheQrCode = props.setAfficheQrCode;
   const user = props.user;
   const setUser = props.setUser;
-  const objetUser = user[0];
   const [ajouterUser, setAjouterUser] = useState(false);
+
+
 
   
   //Méthode pour passer stateCreateUser en props au composant ajouterUser
@@ -27,8 +28,11 @@ function CarteMainUser(props) { //Sous composant de CarteDresseur, permettant d'
     setAjouterUser(value);
   };
 
-  if (objetUser.avatar) { //Si nous avons un avatar dans l'objet de notre utilisateur, on affiche les informations
+  console.log('user', user.length);
 
+  if (user.length > 0) { //Si nous avons un avatar dans l'objet de notre utilisateur, on affiche les informations
+
+    const objetUser = user[0];
     const uriAvatar = JSON.parse(objetUser.avatar)
         
     return (
