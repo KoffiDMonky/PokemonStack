@@ -66,7 +66,7 @@ function CreerUser(props) { //Composant permettant la création de la "carte dre
 
       <ScrollView style={styles.infoScrollView}>
         <View style={styles.info}>
-          <Text style={styles.titre}>Modifications</Text>
+          <Text style={styles.titre}>Création</Text>
           <View style={styles.ligne}>
             <Text style={styles.label}>Nom: </Text>
             <TextInput

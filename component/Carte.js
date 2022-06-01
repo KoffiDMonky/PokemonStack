@@ -51,6 +51,8 @@ function Carte() {
 
             const loc = json.results[0].geometry.location;
             const nom = address[i].name;
+            const prenom = address[i].first_name;
+            const userType = address[i].mainUser;
 
             objLoc.latitude = loc.lat;
             objLoc.longitude = loc.lng;
@@ -58,6 +60,8 @@ function Carte() {
             objLoc.longitudeDelta = 4;
 
             objNom.nom = nom;
+            objNom.prenom = prenom;
+            objNom.userType = userType;
 
             objGlobal.loc = objLoc;
             objGlobal.contact = objNom;
@@ -85,7 +89,7 @@ function Carte() {
       index, //Définition des marqueurs à afficher sur la carte
     ) => (
       <Marker coordinate={loc.loc} key={index}>
-        <CustomMarker nom={loc.contact.nom} />
+        <CustomMarker nom={loc.contact.nom} prenom={loc.contact.prenom} userType={loc.contact.userType} />
       </Marker>
     ),
   );

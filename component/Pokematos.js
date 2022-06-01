@@ -88,10 +88,10 @@ function Pokematos(props) {
         </TouchableOpacity>
 
         <TouchableOpacity
-            style={styles.qrCodeButton}
-            onPress={() => setAfficheScan(!afficheScan)}>
-            <Icon name="qrcode" size={50} color={'#000000'} />
-          </TouchableOpacity>
+          style={styles.qrCodeButton}
+          onPress={() => setAfficheScan(!afficheScan)}>
+          <Icon name="qrcode" size={50} color={'#000000'} />
+        </TouchableOpacity>
       </>
     );
   }

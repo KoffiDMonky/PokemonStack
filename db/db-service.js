@@ -65,7 +65,7 @@ export const getMainUser = async () => { //Récupération de l'utilisateur princ
 
 export const getContactAddress = async () => { //Récupération du nom et l'adresse d'un contact
   let selectQuery = await executeQuery(
-    'SELECT name, adress FROM users WHERE mainUser = 0 ',
+    'SELECT name, first_name, adress, mainUser FROM users ',
     [],
   );
   var rows = selectQuery.rows;
@@ -99,6 +99,10 @@ export const addContact = async ( //Ajout d'un contact
   }
   if (!email) {
     alert('Entrer une adresse mail !');
+    return false;
+  }
+  if (!avatar) {
+    alert('Ajouter une photo !');
     return false;
   }
 

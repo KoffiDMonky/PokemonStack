@@ -4,12 +4,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 function CustomMarker(props) {
   const nom = props.nom;
+  const prenom = props.prenom;
+  const userType = props.userType;
 
   return ( //Affiche des markers sur la map pour localiser l'habitat des contact
     <View style={styles.body}>
         <Text style={styles.text}>{nom}</Text>
+        <Text style={styles.text}>{prenom}</Text>
       <View style={styles.marker}>
-        <Icon name="map-pin" size={20} color={'#D90D43'} />
+      { userType ? <Icon name="map-pin" size={20} color={'#F9CF30'} />:<Icon name="map-pin" size={20} color={'#D90D43'} />}
       </View>
     </View>
   );
